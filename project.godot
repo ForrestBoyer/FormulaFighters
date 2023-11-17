@@ -11,10 +11,14 @@ config_version=5
 [application]
 
 config/name="Team7Project"
-run/main_scene="res://Resources/World/world.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+run/main_scene="res://Resources/Menus/start_menu.tscn"
+config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="Team7Project"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
