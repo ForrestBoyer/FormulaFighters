@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dbyxunwqiog54"]
 
 [ext_resource type="Script" path="res://Resources/Menus/reward_menu.cs" id="1_2c8f7"]
-[ext_resource type="PackedScene" uid="uid://v8lsbr1t6t38" path="res://Resources/card.tscn" id="1_xi88u"]
+[ext_resource type="PackedScene" uid="uid://v8lsbr1t6t38" path="res://Resources/Cards/card.tscn" id="1_xi88u"]
 [ext_resource type="FontFile" uid="uid://ch8f7fuhthw1n" path="res://Resources/Fonts/rainyhearts.ttf" id="2_bj0rx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2ltls"]

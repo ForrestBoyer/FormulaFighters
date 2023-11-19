@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://o6hr2iluhbok"]
 
-[ext_resource type="PackedScene" uid="uid://v8lsbr1t6t38" path="res://Resources/card.tscn" id="1_63pcj"]
+[ext_resource type="PackedScene" uid="uid://v8lsbr1t6t38" path="res://Resources/Cards/card.tscn" id="1_63pcj"]
 [ext_resource type="Script" path="res://Resources/Menus/inventory_menu.cs" id="1_tfp6c"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_18ckc"]

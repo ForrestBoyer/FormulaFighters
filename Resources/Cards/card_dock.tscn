@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqdnsmei2cq35"]
+
+[ext_resource type="Script" path="res://Resources/Cards/card_dock.cs" id="1_7ex1m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4uul"]
+size = Vector2(46, 68)
+
+[node name="CardDock" type="StaticBody2D" groups=["dropable"]]
+script = ExtResource("1_7ex1m")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -21.0
+offset_top = -28.0
+offset_right = 21.0
+offset_bottom = 36.0
+mouse_filter = 2
+color = Color(0.729412, 0.560784, 0.388235, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_d4uul")
