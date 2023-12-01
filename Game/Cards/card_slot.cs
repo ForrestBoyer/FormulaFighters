@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 public partial class card_slot : StaticBody2D
-{
+{ 
 	// private StaticBody2D cardSlot;
 	// private CollisionShape2D cardCollider;
 	private ColorRect slotColor;

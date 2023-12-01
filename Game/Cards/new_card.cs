@@ -13,10 +13,12 @@ public partial class new_card : Node2D
 	private bool _dragging = false;
 	// Is card inside card slot
 	private bool is_inside_slot = false;
+	// private CollisionShape2D cardCollision;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		initialPos = Position;
+		// cardCollision = GetNode<CollisionShape2D>("Collider/CollisionShape2D");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,25 +59,44 @@ public partial class new_card : Node2D
 			// Card is not dragging
 			_dragging = false;
 			if (is_inside_slot) {
+				// cardCollision.Disabled = true;
 				// Move card into card slot
 				Position = slotPos.Lerp(Position, 0.0f);
+				// cardCollision.Disabled = false;
 			} else {
+				// cardCollision.Disabled = true;
 				// Move card back to initial position before drag
 				Position = initialPos.Lerp(Position, 0.0f);
+				// cardCollision.Disabled = false;
 			}
 		}
 	}
 
 	// When card is dragged over a card slot
 	public void _on_collider_body_entered(Node2D body) {
-		// Card is inside slot
-		is_inside_slot = true;
-		// Slot position = Global position of card slot detected
-		slotPos = body.Position;
+		// If slot is available
+		if (body.IsInGroup("Available")) {
+			// Card is inside slot
+			is_inside_slot = true;
+			// Slot position = Global position of card slot detected
+			slotPos = body.Position;
+			// Slot is now unavailable
+			body.RemoveFromGroup("Available");
+			body.AddToGroup("Unavailable");
+			GD.Print("Slot was just filled!");
+		} else {
+			// Card is not inside an available card slot
+			is_inside_slot = false;
+		}
 	}
 	// When card is dragged past a card slot
 	public void _on_collider_body_exited(Node2D body) {
-		// Card is no longer inside card slot
-		is_inside_slot = false;
+		if (body.IsInGroup("Unavailable") && is_inside_slot == true) {
+			body.RemoveFromGroup("Unavailable");
+			body.AddToGroup("Available");
+		} else {
+			// Card is no longer inside card slot
+			is_inside_slot = false;
+		}
 	}
 }
