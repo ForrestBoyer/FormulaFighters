@@ -1,0 +1,112 @@
+[gd_scene load_steps=10 format=3 uid="uid://dbyxunwqiog54"]
+
+[ext_resource type="Script" path="res://Resources/Menus/reward_menu.cs" id="1_2c8f7"]
+[ext_resource type="PackedScene" uid="uid://v8lsbr1t6t38" path="res://Resources/Cards/card.tscn" id="1_xi88u"]
+[ext_resource type="FontFile" uid="uid://ch8f7fuhthw1n" path="res://Resources/Fonts/rainyhearts.ttf" id="2_bj0rx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ltls"]
+font_size = 32
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u0elq"]
+line_spacing = 5.0
+font = ExtResource("2_bj0rx")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53md0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_a1j14"]
+line_spacing = 5.0
+font = ExtResource("2_bj0rx")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_somk1"]
+size = Vector2(99, 119)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_365p3"]
+size = Vector2(95, 115)
+
+[node name="RewardMenu" type="Node2D"]
+script = ExtResource("1_2c8f7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -9.0
+offset_top = -6.0
+offset_right = 1141.0
+offset_bottom = 638.0
+mouse_filter = 2
+color = Color(0.227451, 0.227451, 0.227451, 1)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 416.0
+offset_top = 12.0
+offset_right = 724.0
+offset_bottom = 60.0
+grow_horizontal = 2
+text = "Choose a New Card!"
+label_settings = SubResource("LabelSettings_2ltls")
+
+[node name="Card" parent="." instance=ExtResource("1_xi88u")]
+position = Vector2(252, 286)
+scale = Vector2(6, 6)
+
+[node name="Label" parent="Card" index="1"]
+offset_left = -13.0
+offset_top = 4.83333
+offset_right = 13.0
+offset_bottom = 24.8333
+text = "Item"
+label_settings = SubResource("LabelSettings_u0elq")
+
+[node name="cardCollider" type="Area2D" parent="."]
+position = Vector2(252, 286)
+scale = Vector2(6, 6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cardCollider"]
+shape = SubResource("RectangleShape2D_53md0")
+
+[node name="Card2" parent="." instance=ExtResource("1_xi88u")]
+position = Vector2(559, 287)
+scale = Vector2(6, 6)
+
+[node name="Label" parent="Card2" index="1"]
+offset_left = -20.1667
+offset_top = 4.66666
+offset_right = 25.8333
+offset_bottom = 24.6667
+text = "Number"
+label_settings = SubResource("LabelSettings_a1j14")
+
+[node name="cardCollider2" type="Area2D" parent="."]
+position = Vector2(560, 289)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cardCollider2"]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_somk1")
+
+[node name="Card3" parent="." instance=ExtResource("1_xi88u")]
+position = Vector2(841, 288)
+scale = Vector2(6, 6)
+
+[node name="Label" parent="Card3" index="1"]
+offset_left = -9.0
+offset_top = 6.0
+offset_bottom = 26.0
+text = "Op"
+
+[node name="cardCollider3" type="Area2D" parent="."]
+position = Vector2(843, 298)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cardCollider3"]
+position = Vector2(-3, -9)
+shape = SubResource("RectangleShape2D_365p3")
+
+[connection signal="input_event" from="cardCollider" to="." method="_on_card_collider_input_event"]
+[connection signal="input_event" from="cardCollider2" to="." method="_on_card_collider_input_event"]
+[connection signal="input_event" from="cardCollider3" to="." method="_on_card_collider_input_event"]
+
+[editable path="Card"]
+[editable path="Card2"]
+[editable path="Card3"]

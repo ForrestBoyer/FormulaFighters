@@ -1,0 +1,288 @@
+[gd_scene load_steps=15 format=3 uid="uid://bear8d2t3pq36"]
+
+[ext_resource type="Texture2D" uid="uid://o0rkcc88hqcg" path="res://Resources/Levels/brownBricksRoom.png" id="1_7q0ww"]
+[ext_resource type="Script" path="res://Resources/Levels/level_one.cs" id="1_452ry"]
+[ext_resource type="PackedScene" uid="uid://dtpyi8vypn140" path="res://Resources/Enemy/enemy.tscn" id="2_7u5ge"]
+[ext_resource type="PackedScene" uid="uid://dogber2ljj1ov" path="res://Resources/Player/player.tscn" id="3_yy8b4"]
+[ext_resource type="PackedScene" uid="uid://v8lsbr1t6t38" path="res://Resources/Cards/card.tscn" id="4_gt4n8"]
+[ext_resource type="PackedScene" uid="uid://dqdnsmei2cq35" path="res://Resources/Cards/card_dock.tscn" id="7_yoj0b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2mlc2"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42j6w"]
+size = Vector2(91, 105)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7gq73"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36uyr"]
+size = Vector2(90, 104)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hudhx"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6c8ok"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ende"]
+size = Vector2(42, 42)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pjfln"]
+font_size = 32
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+
+[node name="LevelOne" type="Node2D"]
+script = ExtResource("1_452ry")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_top = -1.0
+offset_right = 1152.0
+offset_bottom = 692.0
+texture = ExtResource("1_7q0ww")
+
+[node name="Discard" type="ColorRect" parent="."]
+offset_left = 842.0
+offset_top = 554.0
+offset_right = 910.0
+offset_bottom = 638.0
+mouse_filter = 2
+color = Color(0.32549, 0.32549, 0.32549, 1)
+
+[node name="Label3" type="Label" parent="Discard"]
+layout_mode = 0
+offset_left = -12.0
+offset_top = -23.0
+offset_right = 79.0
+offset_bottom = 3.0
+text = "Discard Pile"
+label_settings = SubResource("LabelSettings_2mlc2")
+
+[node name="discardCollider" type="Area2D" parent="Discard"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Discard/discardCollider"]
+position = Vector2(35.5, 42.5)
+shape = SubResource("RectangleShape2D_42j6w")
+
+[node name="Deck" type="ColorRect" parent="."]
+offset_left = 253.0
+offset_top = 554.0
+offset_right = 321.0
+offset_bottom = 638.0
+mouse_filter = 2
+color = Color(0.32549, 0.32549, 0.32549, 1)
+
+[node name="Label4" type="Label" parent="Deck"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = -21.0
+offset_right = 106.0
+offset_bottom = 5.0
+text = "Deck"
+label_settings = SubResource("LabelSettings_7gq73")
+
+[node name="deckCollider" type="Area2D" parent="Deck"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deck/deckCollider"]
+position = Vector2(35, 42)
+shape = SubResource("RectangleShape2D_36uyr")
+
+[node name="Equation" type="Node2D" parent="."]
+
+[node name="EqLabel" type="Label" parent="Equation"]
+offset_left = 541.0
+offset_top = 380.0
+offset_right = 615.0
+offset_bottom = 406.0
+text = "Equation:"
+label_settings = SubResource("LabelSettings_hudhx")
+
+[node name="EqBackground" type="ColorRect" parent="Equation"]
+offset_left = 472.0
+offset_top = 402.0
+offset_right = 677.0
+offset_bottom = 470.0
+mouse_filter = 2
+color = Color(0.0705882, 0.270588, 0.403922, 1)
+
+[node name="AttackDefend" type="ColorRect" parent="."]
+offset_left = 694.0
+offset_top = 436.0
+offset_right = 734.0
+offset_bottom = 476.0
+mouse_filter = 2
+color = Color(0, 1, 0, 1)
+
+[node name="Label6" type="Label" parent="AttackDefend"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 5.0
+offset_right = 45.0
+offset_bottom = 31.0
+text = "Attack"
+label_settings = SubResource("LabelSettings_6c8ok")
+
+[node name="attackDefendCollider" type="Area2D" parent="AttackDefend"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDefend/attackDefendCollider"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_3ende")
+
+[node name="Player" parent="." instance=ExtResource("3_yy8b4")]
+position = Vector2(142, 405)
+scale = Vector2(3, 3)
+
+[node name="HpBarPlayer" type="ColorRect" parent="."]
+offset_left = 56.0
+offset_top = 260.0
+offset_right = 267.0
+offset_bottom = 277.0
+color = Color(0.192157, 0.498039, 0.356863, 1)
+
+[node name="Label" type="Label" parent="HpBarPlayer"]
+layout_mode = 0
+offset_left = -53.0
+offset_top = -19.0
+offset_bottom = 29.0
+text = "HP:"
+label_settings = SubResource("LabelSettings_pjfln")
+
+[node name="Enemy" parent="." instance=ExtResource("2_7u5ge")]
+position = Vector2(933, 334)
+scale = Vector2(5, 5)
+
+[node name="HpBarEnemy" type="ColorRect" parent="."]
+offset_left = 868.0
+offset_top = 208.0
+offset_right = 1079.0
+offset_bottom = 225.0
+color = Color(0.192157, 0.498039, 0.356863, 1)
+
+[node name="Label2" type="Label" parent="HpBarEnemy"]
+layout_mode = 0
+offset_left = -55.0
+offset_top = -18.0
+offset_right = -2.0
+offset_bottom = 30.0
+text = "HP:"
+label_settings = SubResource("LabelSettings_pjfln")
+
+[node name="WinCombat" type="Button" parent="."]
+offset_left = 1035.0
+offset_top = 7.0
+offset_right = 1138.0
+offset_bottom = 38.0
+text = "Win Combat"
+
+[node name="LoseCombat" type="Button" parent="."]
+offset_left = 1032.0
+offset_top = 52.0
+offset_right = 1141.0
+offset_bottom = 83.0
+text = "Lose Combat
+"
+
+[node name="CardDock" parent="." instance=ExtResource("7_yoj0b")]
+position = Vector2(495, 431)
+
+[node name="CardDock6" parent="." instance=ExtResource("7_yoj0b")]
+position = Vector2(589, 601)
+
+[node name="CardDock10" parent="." instance=ExtResource("7_yoj0b")]
+position = Vector2(661, 601)
+
+[node name="CardDock7" parent="." instance=ExtResource("7_yoj0b")]
+position = Vector2(519, 601)
+
+[node name="CardDock8" parent="." instance=ExtResource("7_yoj0b")]
+position = Vector2(450, 601)
+
+[node name="CardDock9" parent="." instance=ExtResource("7_yoj0b")]
+position = Vector2(385, 601)
+
+[node name="CardDock3" parent="." instance=ExtResource("7_yoj0b")]
+position = Vector2(577, 432)
+
+[node name="CardDock4" parent="." instance=ExtResource("7_yoj0b")]
+position = Vector2(653, 432)
+
+[node name="CardDock2" parent="." instance=ExtResource("7_yoj0b")]
+position = Vector2(732, 600)
+
+[node name="CardDock5" parent="." instance=ExtResource("7_yoj0b")]
+position = Vector2(795, 600)
+
+[node name="Card2" parent="." instance=ExtResource("4_gt4n8")]
+position = Vector2(795, 604)
+
+[node name="Label" parent="Card2" index="1"]
+offset_left = -3.5
+offset_top = -9.25
+offset_right = 8.5
+offset_bottom = 10.75
+text = "x"
+
+[node name="Card" parent="." instance=ExtResource("4_gt4n8")]
+position = Vector2(732, 604)
+
+[node name="Label" parent="Card" index="1"]
+offset_left = -2.25
+offset_top = -8.25
+offset_right = 9.75
+offset_bottom = 11.75
+text = "-"
+
+[node name="Card3" parent="." instance=ExtResource("4_gt4n8")]
+position = Vector2(661, 605)
+
+[node name="Label" parent="Card3" index="1"]
+offset_left = -3.75
+offset_right = 8.25
+text = "+"
+
+[node name="Card4" parent="." instance=ExtResource("4_gt4n8")]
+position = Vector2(589, 605)
+
+[node name="Label" parent="Card4" index="1"]
+offset_left = -3.0
+offset_top = -6.75
+offset_right = 9.0
+offset_bottom = 13.25
+text = "1"
+
+[node name="Card5" parent="." instance=ExtResource("4_gt4n8")]
+position = Vector2(519, 605)
+
+[node name="Label" parent="Card5" index="1"]
+text = "2"
+
+[node name="Card6" parent="." instance=ExtResource("4_gt4n8")]
+position = Vector2(450, 605)
+
+[node name="Label" parent="Card6" index="1"]
+text = "0"
+
+[node name="Card7" parent="." instance=ExtResource("4_gt4n8")]
+position = Vector2(385, 605)
+
+[node name="Label" parent="Card7" index="1"]
+text = "3"
+
+[connection signal="input_event" from="Discard/discardCollider" to="." method="_on_discard_collider_input_event"]
+[connection signal="input_event" from="Deck/deckCollider" to="." method="_on_deck_collider_input_event"]
+[connection signal="input_event" from="AttackDefend/attackDefendCollider" to="." method="_on_attack_defend_collider_input_event"]
+[connection signal="pressed" from="WinCombat" to="." method="_on_win_combat_pressed"]
+[connection signal="pressed" from="LoseCombat" to="." method="_on_lose_combat_pressed"]
+
+[editable path="Card2"]
+[editable path="Card"]
+[editable path="Card3"]
+[editable path="Card4"]
+[editable path="Card5"]
+[editable path="Card6"]
+[editable path="Card7"]
