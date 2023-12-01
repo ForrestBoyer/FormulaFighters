@@ -16,6 +16,7 @@ public partial class new_card : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		initialPos = Position;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,7 +25,7 @@ public partial class new_card : Node2D
 		// If card is dragging
 		if (_dragging) {
 			// Card position = mouse position
-			GlobalPosition = GetGlobalMousePosition() - offset;
+			Position = GetGlobalMousePosition() - offset;
 		}
 	}
 
@@ -47,7 +48,7 @@ public partial class new_card : Node2D
 			// Card is dragging
 			_dragging = true;
 			// Initial position current position
-			initialPos = GlobalPosition;
+			initialPos = Position;
 			// Offset to center card on mouse cursor
 			offset = GetGlobalMousePosition() - GlobalPosition;
 		}
@@ -57,10 +58,10 @@ public partial class new_card : Node2D
 			_dragging = false;
 			if (is_inside_slot) {
 				// Move card into card slot
-				GlobalPosition = slotPos.Lerp(GlobalPosition, 0.001f);
+				Position = slotPos.Lerp(Position, 0.0f);
 			} else {
 				// Move card back to initial position before drag
-				GlobalPosition = initialPos.Lerp(GlobalPosition, 0.001f);
+				Position = initialPos.Lerp(Position, 0.0f);
 			}
 		}
 	}
