@@ -12,6 +12,8 @@ public partial class Entity : Node2D
 	[Export]
 	public int CurrentHealth { get; set; } = 10;
 
+	[Signal]
+	public delegate void DamageTakenEventHandler();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -40,6 +42,7 @@ public partial class Entity : Node2D
 		}
 		
 		UpdateHealthBar();
+		EmitSignal(SignalName.DamageTaken);
 	}
 
 	public void UpdateHealthBar()
