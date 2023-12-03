@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddr6f4rlkncgu"]
+
+[ext_resource type="Script" path="res://Game/Map/Map.cs" id="1_uc35v"]
+[ext_resource type="Texture2D" uid="uid://4fx4at3vaibf" path="res://Resources/Testing/temp_butt.png" id="2_dhiyi"]
+[ext_resource type="PackedScene" uid="uid://dmw7hwcd0gx2w" path="res://Game/Levels/level.tscn" id="2_j1fwd"]
+[ext_resource type="Script" path="res://Game/Map/LevelMarker.cs" id="2_yjj8d"]
+[ext_resource type="Script" path="res://Game/Map/MapGenerator.cs" id="3_07owp"]
+[ext_resource type="Texture2D" uid="uid://dhectir5yetxy" path="res://Resources/Testing/Throw.jpg" id="3_gkieb"]
+
+[node name="World" type="Node2D"]
+position = Vector2(74, 14)
+
+[node name="Map" type="CanvasLayer" parent="."]
+script = ExtResource("1_uc35v")
+
+[node name="LevelMarker" type="TextureButton" parent="Map"]
+visible = false
+offset_left = -35.0
+offset_top = -35.0
+offset_right = 100.0
+offset_bottom = 100.0
+scale = Vector2(0.5, 0.5)
+action_mode = 0
+texture_normal = ExtResource("2_dhiyi")
+texture_hover = ExtResource("3_gkieb")
+script = ExtResource("2_yjj8d")
+
+[node name="MapGenerator" type="Node" parent="."]
+script = ExtResource("3_07owp")
+
+[node name="Inventory" type="Node" parent="."]
+
+[node name="Level" parent="." instance=ExtResource("2_j1fwd")]
+visible = false
