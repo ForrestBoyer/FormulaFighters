@@ -13,11 +13,14 @@ position = Vector2(660, 354)
 [node name="NewCard2" parent="." instance=ExtResource("1_hh5cx")]
 position = Vector2(563, 354)
 
+[node name="NewCard3" parent="." instance=ExtResource("1_hh5cx")]
+position = Vector2(757, 354)
+
 [node name="CardSlot2" parent="." instance=ExtResource("2_ahlfa")]
-position = Vector2(535, 194)
+position = Vector2(472, 194)
 
 [node name="CardSlot" parent="." instance=ExtResource("2_ahlfa")]
-position = Vector2(618, 194)
+position = Vector2(595, 194)
 
 [node name="CardSlot3" parent="." instance=ExtResource("2_ahlfa")]
 position = Vector2(711, 194)

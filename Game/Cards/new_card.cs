@@ -5,6 +5,8 @@ public partial class new_card : Node2D
 {
 	// Initial card position when clicked
 	private Vector2 initialPos;
+	// Reset position for card when "reset equation" is pressed
+	private Vector2 resetPos;
 	// Global position of card slot
 	private Vector2 slotPos;
 	// Offset between card and mouse when dragging
@@ -13,12 +15,11 @@ public partial class new_card : Node2D
 	private bool _dragging = false;
 	// Is card inside card slot
 	private bool is_inside_slot = false;
-	// private CollisionShape2D cardCollision;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		initialPos = Position;
-		// cardCollision = GetNode<CollisionShape2D>("Collider/CollisionShape2D");
+		resetPos = Position;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,7 +27,7 @@ public partial class new_card : Node2D
 	{
 		// If card is dragging
 		if (_dragging) {
-			// Card position = mouse position
+			// Card follows mouse position
 			Position = GetGlobalMousePosition() - offset;
 		}
 	}
@@ -45,29 +46,26 @@ public partial class new_card : Node2D
 
 	// When mouse left clicks on card
 	public void _on_collider_input_event(Node viewport, InputEvent @event, int shape_idx) {
-		// If click is pressed
+		// If left click is pressed
 		if (@event.IsActionPressed("click")) {
-			// Card is dragging
-			_dragging = true;
 			// Initial position current position
 			initialPos = Position;
 			// Offset to center card on mouse cursor
 			offset = GetGlobalMousePosition() - GlobalPosition;
+			// Card is dragging
+			_dragging = true;
 		}
 		// If left click is released
 		if (@event.IsActionReleased("click")) {
-			// Card is not dragging
+			// Card is no longer dragging
 			_dragging = false;
+
 			if (is_inside_slot) {
-				// cardCollision.Disabled = true;
 				// Move card into card slot
 				Position = slotPos.Lerp(Position, 0.0f);
-				// cardCollision.Disabled = false;
 			} else {
-				// cardCollision.Disabled = true;
 				// Move card back to initial position before drag
 				Position = initialPos.Lerp(Position, 0.0f);
-				// cardCollision.Disabled = false;
 			}
 		}
 	}
@@ -83,19 +81,19 @@ public partial class new_card : Node2D
 			// Slot is now unavailable
 			body.RemoveFromGroup("Available");
 			body.AddToGroup("Unavailable");
-			GD.Print("Slot was just filled!");
 		} else {
 			// Card is not inside an available card slot
 			is_inside_slot = false;
 		}
 	}
-	// When card is dragged past a card slot
+	// When card exits a card slot
 	public void _on_collider_body_exited(Node2D body) {
+		// If slot is unavailable and card is inside another valid slot
 		if (body.IsInGroup("Unavailable") && is_inside_slot == true) {
+			// Slot is now available
 			body.RemoveFromGroup("Unavailable");
 			body.AddToGroup("Available");
-		} else {
-			// Card is no longer inside card slot
+			// Card is not inside a slot
 			is_inside_slot = false;
 		}
 	}
