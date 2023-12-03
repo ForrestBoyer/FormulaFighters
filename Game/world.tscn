@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dmw7hwcd0gx2w" path="res://Game/Levels/level.tscn" id="2_j1fwd"]
 [ext_resource type="Script" path="res://Game/Map/LevelMarker.cs" id="2_yjj8d"]
 [ext_resource type="Script" path="res://Game/Map/MapGenerator.cs" id="3_07owp"]
-[ext_resource type="Texture2D" uid="uid://dhectir5yetxy" path="res://Resources/Testing/Throw.jpg" id="3_gkieb"]
+[ext_resource type="Texture2D" uid="uid://b5ry7le2of6ly" path="res://Resources/Testing/temp_hover.png" id="3_apu78"]
 
 [node name="World" type="Node2D"]
 position = Vector2(74, 14)
@@ -22,7 +22,7 @@ offset_bottom = 100.0
 scale = Vector2(0.5, 0.5)
 action_mode = 0
 texture_normal = ExtResource("2_dhiyi")
-texture_hover = ExtResource("3_gkieb")
+texture_hover = ExtResource("3_apu78")
 script = ExtResource("2_yjj8d")
 
 [node name="MapGenerator" type="Node" parent="."]

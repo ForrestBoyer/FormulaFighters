@@ -5,10 +5,10 @@ public partial class Map : CanvasLayer
 {
     // An array to hold all of the levels
     // <Level, Level_number> (to support branches paths)
-    public Node[] Levels = new Node[0];
+    public Level[] Levels = new Level[0];
 
     // Index of current level in Levels array
-    public int Current_Level = 0;
+    public int Current_Level = -1;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
