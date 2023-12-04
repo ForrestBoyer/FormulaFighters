@@ -11,13 +11,20 @@ config_version=5
 [application]
 
 config/name="Team7Project"
-run/main_scene="res://Resources/Menus/start_menu.tscn"
+run/main_scene="res://Game/Levels/level.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 drag="*res://Resources/drag.cs"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/mode=2
+window/stretch/mode="viewport"
 
 [dotnet]
 

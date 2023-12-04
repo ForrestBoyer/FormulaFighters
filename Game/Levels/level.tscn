@@ -1,7 +1,10 @@
-[gd_scene format=3 uid="uid://dmw7hwcd0gx2w"]
+[gd_scene load_steps=2 format=3 uid="uid://dmw7hwcd0gx2w"]
+
+[ext_resource type="Script" path="res://Game/Levels/Level.cs" id="1_ja7sf"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_ja7sf")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
