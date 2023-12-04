@@ -6,6 +6,9 @@ public partial class Level : Node2D
 	public TextureRect Background { get; set; }
 	public Random rand = new Random();
 
+	public Enemy[] LevelEnemies;
+    // TODO: public Card[] Rewards;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
