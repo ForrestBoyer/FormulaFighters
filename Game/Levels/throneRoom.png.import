@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l7vi8hn4t67j"
-path="res://.godot/imported/fish.png-49eeac3db32865ddf3e5ca9f7a1cb809.ctex"
+uid="uid://c3rngd8tr7dl6"
+path="res://.godot/imported/throneRoom.png-c2ffae4990bdccbe1daab12fb318b483.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Testing/SeaCreatures/Fish/fish.png"
-dest_files=["res://.godot/imported/fish.png-49eeac3db32865ddf3e5ca9f7a1cb809.ctex"]
+source_file="res://Game/Levels/throneRoom.png"
+dest_files=["res://.godot/imported/throneRoom.png-c2ffae4990bdccbe1daab12fb318b483.ctex"]
 
 [params]
 
