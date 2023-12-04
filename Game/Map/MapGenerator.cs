@@ -55,8 +55,8 @@ public partial class MapGenerator : Node
                 // new_level2.enemy = enemy2;
                 // TODO: CONSTRUCT CARD REWARDS
                 // new_level2.rewards = rewards2;
-                _Map.Levels = _Map.Levels.Append(new_level1).ToArray();
-                _Map.Levels = _Map.Levels.Append(new_level2).ToArray();
+                _Map.Levels.Add(new_level1);
+                _Map.Levels.Add(new_level2);
 
                 // Create new markers on the map
                 LevelMarker new_marker1 = (LevelMarker)marker.Duplicate();
@@ -74,7 +74,7 @@ public partial class MapGenerator : Node
                 Level new_level = (Level)level.Duplicate();
                 new_level.Visible = true;
                 GetNode("/root/World/Map").AddChild(new_level);
-                _Map.Levels = _Map.Levels.Append(new_level).ToArray();
+                _Map.Levels.Add(new_level);
                 // TODO: CONSTRUCT ENEMY
                 // new_level.enemy = enemy;
                 // TODO: CONSTRUCT CARD REWARDS
@@ -93,7 +93,7 @@ public partial class MapGenerator : Node
             Level new_level = (Level)level.Duplicate();
             new_level.Visible = true;
             GetNode("/root/World/Map").AddChild(new_level);
-            _Map.Levels = _Map.Levels.Append(new_level).ToArray();
+            _Map.Levels.Add(new_level);
             // TODO: CONSTRUCT ENEMY
             // new_level.enemy = enemy;
             // TODO: CONSTRUCT CARD REWARDS
@@ -102,7 +102,7 @@ public partial class MapGenerator : Node
             // Create new marker on the map
             LevelMarker new_marker = (LevelMarker)marker.Duplicate();
             new_marker.Position = new Vector2(30 + 100 * (NUM_LEVELS - 1), 450);
-            new_marker.Level_number = _Map.Levels.Length - 1;
+            new_marker.Level_number = _Map.Levels.Count - 1;
             Image image = Image.LoadFromFile("res://Resources/Testing/temp_boss.png");
             ImageTexture texture = ImageTexture.CreateFromImage(image);
             Image image_hov = Image.LoadFromFile("res://Resources/Testing/temp_boss_hover.png");

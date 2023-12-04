@@ -1,12 +1,13 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Level : Node2D
 {
 	public TextureRect Background { get; set; }
 	public Random rand = new Random();
 
-	public Enemy[] LevelEnemies;
+	public List<Enemy> LevelEnemies = new List<Enemy>();
     // TODO: public Card[] Rewards;
 
 	// Called when the node enters the scene tree for the first time.

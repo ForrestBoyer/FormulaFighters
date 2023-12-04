@@ -1,11 +1,12 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Map : CanvasLayer
 {
     // An array to hold all of the levels
     // <Level, Level_number> (to support branches paths)
-    public Level[] Levels = new Level[0];
+    public List<Level> Levels = new List<Level>();
 
     // Index of current level in Levels array
     public int Current_Level = -1;
