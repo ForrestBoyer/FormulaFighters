@@ -1,41 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://bspxrrcwihwx0"]
+[gd_scene load_steps=5 format=3 uid="uid://bspxrrcwihwx0"]
 
 [ext_resource type="PackedScene" uid="uid://dmw7hwcd0gx2w" path="res://Game/Levels/level.tscn" id="1_t7cns"]
-[ext_resource type="Texture2D" uid="uid://c36qbamwa3xvc" path="res://Game/Levels/redBricksBackground.png" id="2_otf7j"]
+[ext_resource type="Texture2D" uid="uid://dgnblnby477s4" path="res://Game/Levels/NormalLevel/brownBricksRoom.png" id="2_hdrrt"]
 [ext_resource type="PackedScene" uid="uid://bmh0medtqmrob" path="res://Game/Entities/Player/player.tscn" id="3_hf5of"]
 [ext_resource type="PackedScene" uid="uid://jnbq18s3shy0" path="res://Game/Entities/Enemy/enemy.tscn" id="4_ffu1n"]
-[ext_resource type="PackedScene" uid="uid://u1hoxb5hs8ep" path="res://Game/Cards/card.tscn" id="5_qr4ef"]
-[ext_resource type="PackedScene" uid="uid://dhx3e6gph2awh" path="res://Game/Cards/card_slot.tscn" id="6_iqofx"]
 
 [node name="Level" instance=ExtResource("1_t7cns")]
 
 [node name="TextureRect" parent="." index="0"]
-offset_right = 1280.0
-offset_bottom = 720.0
-texture = ExtResource("2_otf7j")
+offset_right = 1152.0
+offset_bottom = 693.0
+texture = ExtResource("2_hdrrt")
 
 [node name="Player" parent="." index="1" instance=ExtResource("3_hf5of")]
-position = Vector2(283, 458)
+position = Vector2(256, 464)
 scale = Vector2(1.5, 1.5)
 
 [node name="Enemy" parent="." index="2" instance=ExtResource("4_ffu1n")]
-position = Vector2(1059, 404)
+position = Vector2(872, 368)
 scale = Vector2(3, 3)
-
-[node name="CardSlot" parent="." index="3" instance=ExtResource("6_iqofx")]
-position = Vector2(535, 401)
-
-[node name="CardSlot2" parent="." index="4" instance=ExtResource("6_iqofx")]
-position = Vector2(679, 396)
-
-[node name="CardSlot3" parent="." index="5" instance=ExtResource("6_iqofx")]
-position = Vector2(827, 404)
-
-[node name="Card" parent="." index="6" instance=ExtResource("5_qr4ef")]
-position = Vector2(529, 640)
-
-[node name="Card2" parent="." index="7" instance=ExtResource("5_qr4ef")]
-position = Vector2(674, 628)
-
-[node name="Card3" parent="." index="8" instance=ExtResource("5_qr4ef")]
-position = Vector2(818, 636)

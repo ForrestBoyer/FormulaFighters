@@ -11,19 +11,13 @@ config_version=5
 [application]
 
 config/name="Team7Project"
-<<<<<<< Updated upstream
 run/main_scene="res://Game/Levels/test_level.tscn"
-=======
-run/main_scene="res://Game/Levels/NormalLevel/normal_level.tscn"
->>>>>>> Stashed changes
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
-[display]
+[autoload]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
-window/stretch/mode="viewport"
+drag="*res://Resources/drag.cs"
 
 [display]
 
