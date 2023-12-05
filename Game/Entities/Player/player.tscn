@@ -5,18 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://rpjky6a8eiy5" path="res://Game/Entities/Player/Knight.png" id="2_iya0m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uad4n"]
-size = Vector2(53.5, 63.5)
+size = Vector2(88.75, 95.75)
 
 [node name="Player" instance=ExtResource("1_35g3k")]
 script = ExtResource("2_7q8q1")
 
 [node name="Sprite2D" parent="." index="0"]
-position = Vector2(0, 3)
+position = Vector2(0, 1.90735e-06)
+scale = Vector2(1.54688, 1.51563)
 texture = ExtResource("2_iya0m")
 
 [node name="HealthBar" parent="." index="1"]
+offset_top = -64.0
+offset_bottom = -56.0
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_uad4n")

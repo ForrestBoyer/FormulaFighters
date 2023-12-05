@@ -6,8 +6,6 @@ public partial class LevelMarker : TextureButton
 {
     // Corresponding level number
     public int Level_number;
-    // Corresponding Level
-    Level _Level;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -24,4 +22,12 @@ public partial class LevelMarker : TextureButton
 	public override void _Process(double delta)
 	{
 	}
+
+    public void _on_level_marker_pressed()
+    {
+        PackedScene levelScene = GD.Load<PackedScene>("res://Game/Levels/level.tscn");
+        Level level = levelScene.Instantiate<Level>();
+
+        GetNode("/root/World/Map").AddChild(level);
+    }
 }

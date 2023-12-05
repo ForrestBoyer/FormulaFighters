@@ -6,14 +6,28 @@ public partial class Level : Node2D
 {
 	public TextureRect Background { get; set; }
 	public Random rand = new Random();
+	public Enemy Enemy { get; set; }
+	public Player Player { get; set; }
+	public int LevelNumber { get; set; }
 
-	public List<Enemy> LevelEnemies = new List<Enemy>();
     // TODO: public Card[] Rewards;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		Background = GetNode<TextureRect>("Background");
+
+		PackedScene enemyScene = GD.Load<PackedScene>("res://Game/Entities/Enemy/enemy.tscn");
+		PackedScene playerScene = GD.Load<PackedScene>("res://Game//Entities/Player/player.tscn");
+
+		Player = playerScene.Instantiate<Player>();
+		Player.Position = new Vector2(360f, 480f);
+		AddChild(Player);
+
+		Enemy = enemyScene.Instantiate<Enemy>();
+		Enemy.Position = new Vector2(920f, 450f);
+		AddChild(Enemy);
+
 
 		string[] texturePaths = 
 		{
@@ -24,8 +38,6 @@ public partial class Level : Node2D
 
 		int index = rand.Next(texturePaths.Length);
 		var texture = (Texture2D)GD.Load(texturePaths[index]);
-
-		GD.Print(texture.ResourcePath);
 
 		if (texture != null)
 		{
