@@ -3,6 +3,9 @@ using System;
 
 public partial class Player : Entity
 {
+	[Signal]
+	public delegate void DeathEventHandler();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -14,4 +17,10 @@ public partial class Player : Entity
 	{
 
 	}
+
+    public override void Die()
+    {
+        base.Die();
+		EmitSignal(SignalName.Death);
+    }
 }

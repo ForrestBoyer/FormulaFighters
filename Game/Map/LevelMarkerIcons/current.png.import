@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ujyg3amij21n"
-path="res://.godot/imported/linkedin_icon.png-fb9e3803119355828e385d20071b4833.ctex"
+uid="uid://bhn5xkjigph6r"
+path="res://.godot/imported/current.png-4d19c4b7a4d0cf81794b568ba5dc4ce7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://docs/Images/linkedin_icon.png"
-dest_files=["res://.godot/imported/linkedin_icon.png-fb9e3803119355828e385d20071b4833.ctex"]
+source_file="res://Game/Map/LevelMarkerIcons/current.png"
+dest_files=["res://.godot/imported/current.png-4d19c4b7a4d0cf81794b568ba5dc4ce7.ctex"]
 
 [params]
 

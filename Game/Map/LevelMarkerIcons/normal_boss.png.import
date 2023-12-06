@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgnblnby477s4"
-path="res://.godot/imported/brownBricksRoom.png-b91d57305d94dfb9b267613007450a73.ctex"
+uid="uid://bror4cbf0u23k"
+path="res://.godot/imported/normal_boss.png-4baec88dae78350b6144e441a9ea4436.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Levels/NormalLevel/brownBricksRoom.png"
-dest_files=["res://.godot/imported/brownBricksRoom.png-b91d57305d94dfb9b267613007450a73.ctex"]
+source_file="res://Game/Map/LevelMarkerIcons/normal_boss.png"
+dest_files=["res://.godot/imported/normal_boss.png-4baec88dae78350b6144e441a9ea4436.ctex"]
 
 [params]
 

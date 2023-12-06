@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://l7vi8hn4t67j"
-path="res://.godot/imported/fish.png-49eeac3db32865ddf3e5ca9f7a1cb809.ctex"
+uid="uid://bpgp8e7jkyxhd"
+path="res://.godot/imported/current_boss.png-5d62783bb529edca292f6aa453d477e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Testing/SeaCreatures/Fish/fish.png"
-dest_files=["res://.godot/imported/fish.png-49eeac3db32865ddf3e5ca9f7a1cb809.ctex"]
+source_file="res://Game/Map/LevelMarkerIcons/current_boss.png"
+dest_files=["res://.godot/imported/current_boss.png-5d62783bb529edca292f6aa453d477e6.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc0eia55qknqs"
-path="res://.godot/imported/shark.png-58077f74d33c7dcc01fc3d89a28887fd.ctex"
+uid="uid://dh1o3ny2okywj"
+path="res://.godot/imported/normal.png-05a7f07d2f55bee3fa82833b3147f9a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Testing/SeaCreatures/Shark/shark.png"
-dest_files=["res://.godot/imported/shark.png-58077f74d33c7dcc01fc3d89a28887fd.ctex"]
+source_file="res://Game/Map/LevelMarkerIcons/normal.png"
+dest_files=["res://.godot/imported/normal.png-05a7f07d2f55bee3fa82833b3147f9a0.ctex"]
 
 [params]
 
