@@ -12,7 +12,6 @@ config_version=5
 
 config/name="Team7Project"
 run/main_scene="res://Game/world.tscn"
-run/main_scene="res://Game/Levels/test_level.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
