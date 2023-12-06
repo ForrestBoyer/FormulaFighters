@@ -40,6 +40,7 @@ public partial class Entity : Node2D
 		}
 		
 		UpdateHealthBar();
+		EmitSignal(SignalName.DamageTaken);
 	}
 
 	public void UpdateHealthBar()
