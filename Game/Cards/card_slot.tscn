@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://27tplfr6boch"]
+
+[ext_resource type="Script" path="res://Game/Cards/card_slot.cs" id="1_0cphb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ox7xn"]
+size = Vector2(32, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ybr1n"]
+size = Vector2(32, 48)
+
+[node name="CardSlot" type="StaticBody2D" groups=["Available"]]
+script = ExtResource("1_0cphb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_left = -16.0
+offset_top = -24.0
+offset_right = 16.0
+offset_bottom = 24.0
+mouse_filter = 2
+color = Color(0.74902, 0.631373, 0.356863, 0.788235)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ox7xn")
+
+[node name="CardDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardDetector"]
+shape = SubResource("RectangleShape2D_ybr1n")
+
+[connection signal="area_entered" from="CardDetector" to="." method="_on_card_detector_area_entered"]
+[connection signal="area_exited" from="CardDetector" to="." method="_on_card_detector_area_exited"]

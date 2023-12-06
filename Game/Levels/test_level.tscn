@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn1uyxhi24vfr"]
+
+[ext_resource type="PackedScene" uid="uid://cwiwx25o8iuia" path="res://Game/Cards/new_card.tscn" id="1_hh5cx"]
+[ext_resource type="Script" path="res://Game/Levels/test_level.cs" id="1_of06s"]
+[ext_resource type="PackedScene" uid="uid://27tplfr6boch" path="res://Game/Cards/card_slot.tscn" id="2_ahlfa"]
+
+[node name="testLevel" type="Node2D"]
+script = ExtResource("1_of06s")
+
+[node name="NewCard" parent="." instance=ExtResource("1_hh5cx")]
+position = Vector2(660, 354)
+
+[node name="NewCard2" parent="." instance=ExtResource("1_hh5cx")]
+position = Vector2(563, 354)
+
+[node name="NewCard3" parent="." instance=ExtResource("1_hh5cx")]
+position = Vector2(757, 354)
+
+[node name="CardSlot2" parent="." instance=ExtResource("2_ahlfa")]
+position = Vector2(472, 194)
+
+[node name="CardSlot" parent="." instance=ExtResource("2_ahlfa")]
+position = Vector2(595, 194)
+
+[node name="CardSlot3" parent="." instance=ExtResource("2_ahlfa")]
+position = Vector2(711, 194)
