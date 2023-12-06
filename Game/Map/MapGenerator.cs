@@ -22,7 +22,7 @@ public partial class MapGenerator : Node
 	}
 
     // Generates a new map
-    public void Generate(){
+    public void Generate() {
 
         int leftSideOffset = 50;
         int spaceHorizontal = 125;
@@ -33,7 +33,7 @@ public partial class MapGenerator : Node
         Random rng = new Random();
 
         // Get map node
-        Map _Map = GetNode<Map>("/root/World/Map");
+        Map map = GetNode<Map>("/root/World/Map");
 
         // Get marker and level nodes for duplicating
         LevelMarker marker = GetNode<LevelMarker>("/root/World/Map/LevelMarker");
@@ -47,15 +47,15 @@ public partial class MapGenerator : Node
                 // Bottom Marker
                 LevelMarker new_marker1 = (LevelMarker)marker.Duplicate();
                 new_marker1.Position = new Vector2(leftSideOffset + spaceHorizontal * i, centerScreen - spaceVertical);
-                new_marker1.Level_number = i;
                 new_marker1.Visible = true;
+                new_marker1.Depth = i;
                 GetNode("/root/World/Map").AddChild(new_marker1);
 
                 // Top Marker
                 LevelMarker new_marker2 = (LevelMarker)marker.Duplicate();
                 new_marker2.Position = new Vector2(leftSideOffset + spaceHorizontal * i, centerScreen + spaceVertical);
-                new_marker2.Level_number = i;
                 new_marker2.Visible = true;
+                new_marker2.Depth = i;
                 GetNode("/root/World/Map").AddChild(new_marker2);
             }
             // If path doesn't branch
@@ -64,8 +64,8 @@ public partial class MapGenerator : Node
                 // Create new marker on the map
                 LevelMarker new_marker = (LevelMarker)marker.Duplicate();
                 new_marker.Position = new Vector2(leftSideOffset + spaceHorizontal * i, centerScreen);
-                new_marker.Level_number = i;
                 new_marker.Visible = true;
+                new_marker.Depth = i;
                 GetNode("/root/World/Map").AddChild(new_marker);
             }
         }
@@ -74,7 +74,7 @@ public partial class MapGenerator : Node
             // Create new marker on the map
             LevelMarker new_marker = (LevelMarker)marker.Duplicate();
             new_marker.Position = new Vector2(leftSideOffset + spaceHorizontal * (NUM_LEVELS - 1), centerScreen);
-            new_marker.Level_number = _Map.Levels.Count - 1;
+            new_marker.Depth = map.Levels.Count - 1;
 
             // Boss texture stuff
             Image image = Image.LoadFromFile("res://Resources/Testing/temp_boss.png");

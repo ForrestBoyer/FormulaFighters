@@ -5,13 +5,13 @@ using System.Xml.Schema;
 public partial class LevelMarker : TextureButton
 {
     // Corresponding level number
-    public int Level_number;
+    public int Depth { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
         Map _Map = (Map)GetNode("/root/World/Map");
-        if(Level_number == _Map.Current_Level + 1){
+        if(Depth == _Map.Current_Depth){
             Disabled = false;
         } else {
             Disabled = true;
@@ -29,5 +29,8 @@ public partial class LevelMarker : TextureButton
         Level level = levelScene.Instantiate<Level>();
 
         GetNode("/root/World/Map").AddChild(level);
+        Map map = GetNode<Map>("/root/World/Map");
+
+        map.Current_Depth = Depth;
     }
 }

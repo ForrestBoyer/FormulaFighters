@@ -9,7 +9,7 @@ public partial class Map : CanvasLayer
     public List<Level> Levels = new List<Level>();
 
     // Index of current level in Levels array
-    public int Current_Level = -1;
+    public int Current_Depth = 0;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
