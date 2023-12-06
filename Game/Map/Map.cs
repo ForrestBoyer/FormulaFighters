@@ -4,10 +4,6 @@ using System.Collections.Generic;
 
 public partial class Map : CanvasLayer
 {
-    // An array to hold all of the levels
-    // <Level, Level_number> (to support branches paths)
-    public List<Level> Levels = new List<Level>();
-
     // Index of current level in Levels array
     public int Current_Depth = 0;
 
@@ -21,4 +17,35 @@ public partial class Map : CanvasLayer
 	{
 	}
 
+	public void UpdateMarkers()
+	{
+		foreach (Node child in GetChildren())
+		{
+			if (child is LevelMarker levelMarker)
+			{
+				if (levelMarker.Depth == Current_Depth)
+				{
+					if (levelMarker.IsBoss)
+					{
+						levelMarker.TextureNormal = (Texture2D)GD.Load("res://Game/Map/LevelMarkerIcons/current_boss.png");
+					}
+					else
+					{
+						levelMarker.TextureNormal = (Texture2D)GD.Load("res://Game/Map/LevelMarkerIcons/current.png");
+					}
+				}
+				else
+				{
+					if (levelMarker.IsBoss)
+					{
+						levelMarker.TextureNormal = (Texture2D)GD.Load("res://Game/Map/LevelMarkerIcons/normal_boss.png");
+					}
+					else
+					{
+						levelMarker.TextureNormal = (Texture2D)GD.Load("res://Game/Map/LevelMarkerIcons/normal.png");
+					}
+				}
+			}
+		}
+	}
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djw3rv6ghwogn"
-path="res://.godot/imported/temp_boss_hover.png-0b0ada0086c5a0c09caf8bd3ab04f5e5.ctex"
+uid="uid://dh1o3ny2okywj"
+path="res://.godot/imported/normal.png-05a7f07d2f55bee3fa82833b3147f9a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Testing/temp_boss_hover.png"
-dest_files=["res://.godot/imported/temp_boss_hover.png-0b0ada0086c5a0c09caf8bd3ab04f5e5.ctex"]
+source_file="res://Game/Map/LevelMarkerIcons/normal.png"
+dest_files=["res://.godot/imported/normal.png-05a7f07d2f55bee3fa82833b3147f9a0.ctex"]
 
 [params]
 

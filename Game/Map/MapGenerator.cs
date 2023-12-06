@@ -23,7 +23,6 @@ public partial class MapGenerator : Node
 
     // Generates a new map
     public void Generate() {
-
         int leftSideOffset = 50;
         int spaceHorizontal = 125;
         int spaceVertical = 50;
@@ -37,7 +36,6 @@ public partial class MapGenerator : Node
 
         // Get marker and level nodes for duplicating
         LevelMarker marker = GetNode<LevelMarker>("/root/World/Map/LevelMarker");
-        marker.Disabled = true;
 
         // Loop for the number of levels in the game
         for(int i = 0; i < NUM_LEVELS - 1; i++){
@@ -74,18 +72,13 @@ public partial class MapGenerator : Node
             // Create new marker on the map
             LevelMarker new_marker = (LevelMarker)marker.Duplicate();
             new_marker.Position = new Vector2(leftSideOffset + spaceHorizontal * (NUM_LEVELS - 1), centerScreen);
-            new_marker.Depth = map.Levels.Count - 1;
-
-            // Boss texture stuff
-            Image image = Image.LoadFromFile("res://Resources/Testing/temp_boss.png");
-            Image image_hov = Image.LoadFromFile("res://Resources/Testing/temp_boss_hover.png");
-            ImageTexture texture = ImageTexture.CreateFromImage(image);
-            ImageTexture texture_hov = ImageTexture.CreateFromImage(image_hov);
-            new_marker.TextureNormal = texture;
-            new_marker.TextureHover = texture_hov;
+            new_marker.Depth = NUM_LEVELS - 1;
+            new_marker.IsBoss = true;
 
             new_marker.Visible = true;
             GetNode("/root/World/Map").AddChild(new_marker);
         }
+
+        map.UpdateMarkers();
     }
 }

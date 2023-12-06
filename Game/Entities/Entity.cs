@@ -4,6 +4,7 @@ using System;
 public partial class Entity : Node2D
 {
 	protected ProgressBar _healthBar;
+
 	protected bool _alive { get; set; } = true;
 
 	[Export]
@@ -11,7 +12,6 @@ public partial class Entity : Node2D
 
 	[Export]
 	public int CurrentHealth { get; set; } = 10;
-
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -52,7 +52,7 @@ public partial class Entity : Node2D
 		return (float)CurrentHealth / (float)MaxHealth * 100;
 	}
 
-	public void Die()
+	public virtual void Die()
 	{
 		_alive = false;
 		Rotate(-Mathf.Pi / 2);
