@@ -30,26 +30,28 @@ public partial class new_card : Node2D
 	// Is card inside card slot
 	private bool is_inside_slot = false;
 
+	// Helper methods for initializing cards after they are instantiated
 	public void InitCard() {
 		intVal = -1;
 		opVal = "NULL";
 		cardType = "NULL";
 		cardID = -1;
 	}
-	public void InitCard(int IntVal, int ID, Vector2 Pos) {
+	public void InitCard(int IntVal, int ID) {
 		intVal = IntVal;
 		cardType = "Number";
 		cardID = ID;
-		initialPos = Pos;
 	}
-	public void InitCard(string OpVal, int ID, Vector2 Pos) {
+	public void InitCard(string OpVal, int ID) {
 		opVal = OpVal;
 		cardType = "Operator";
 		cardID = ID;
-		initialPos = Pos;
 	}
 	public int GetID() {
 		return cardID;
+	}
+	public void SetPos(Vector2 position) {
+		Position = position;
 	}
 
 	// Called when the node enters the scene tree for the first time.
@@ -61,7 +63,7 @@ public partial class new_card : Node2D
 		} else {
 			displayText.Text = opVal;
 		}
-		// initialPos = Position;
+
 		Position = initialPos;
 		resetPos = Position;
 	}

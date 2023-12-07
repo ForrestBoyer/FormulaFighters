@@ -5,12 +5,14 @@ using System.Runtime.CompilerServices;
 
 public partial class card_container : Node2D
 {
+	// Max size of card list / container
 	public int maxSize;
 	// Current size of card list
-	private int size;
+	protected int size;
 	// List of cards
-	private new_card[] cardList;
-	// Max size of card list / container
+	protected new_card[] cardList;
+	// List of cards returned by DrawCards()
+	protected new_card[] drawCards;
 	private Random rand;
 
 	// Initializer for card container with empty card list
@@ -78,6 +80,11 @@ public partial class card_container : Node2D
 		}
 		return null;
 	}
+	// Empty Container
+	public new_card[] EmptyContainer() {
+		size = 0;
+		return cardList;
+	}
 	// Shuffle
 	public void Shuffle(){
 		int i = cardList.Length;
@@ -89,6 +96,18 @@ public partial class card_container : Node2D
 			cardList[i] = cardList[index];
 			cardList[index] = temp;
 		}
+	}
+
+	// Draw
+	public new_card[] DrawCards(int Num){
+		if(Num <= size) {
+			drawCards = new new_card[Num];
+			Array.Copy(cardList, drawCards, Num);
+			Array.Reverse(cardList);
+			size -= Num;
+			return drawCards;
+		}
+		return null;
 	}
 
 
