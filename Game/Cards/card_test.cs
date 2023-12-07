@@ -95,7 +95,6 @@ public partial class card_test : Node2D
 			newHand.ReplaceCards(newDeck.DrawCards(HandSize));
 			// Update Hand
 			newHand.updateHand();
-			GD.Print("Update Hand In Process");
 			// combat = DuringTurn
 			combat = State.DuringTurn;
 		} else if (combat == State.DuringTurn) {
