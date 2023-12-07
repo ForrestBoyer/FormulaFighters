@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://jojx588uqkst"]
+
+[ext_resource type="Script" path="res://Game/Cards/card_container.cs" id="1_donfw"]
+
+[node name="CardContainer" type="Node2D"]
+script = ExtResource("1_donfw")

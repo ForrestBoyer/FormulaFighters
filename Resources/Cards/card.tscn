@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://v8lsbr1t6t38"]
 
-[ext_resource type="Texture2D" uid="uid://cdbd5ospo52t5" path="res://Resources/Cards/card.png" id="1_p7e7r"]
+[ext_resource type="Texture2D" uid="uid://cdbd5ospo52t5" path="res://Game/Cards/card.png" id="1_p7e7r"]
 [ext_resource type="Script" path="res://Resources/Cards/card.cs" id="1_yraed"]
 [ext_resource type="FontFile" uid="uid://ch8f7fuhthw1n" path="res://Resources/Fonts/rainyhearts.ttf" id="2_m6mhi"]
 

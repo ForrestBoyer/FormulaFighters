@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cwiwx25o8iuia"]
 
 [ext_resource type="Script" path="res://Game/Cards/new_card.cs" id="1_agruj"]
-[ext_resource type="Texture2D" uid="uid://cdbd5ospo52t5" path="res://Resources/Cards/card.png" id="2_0qqjs"]
+[ext_resource type="Texture2D" uid="uid://cdbd5ospo52t5" path="res://Game/Cards/card.png" id="2_islee"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ddt5g"]
 size = Vector2(48, 64)
@@ -16,7 +16,7 @@ script = ExtResource("1_agruj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
-texture = ExtResource("2_0qqjs")
+texture = ExtResource("2_islee")
 
 [node name="Collider" type="Area2D" parent="."]
 

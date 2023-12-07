@@ -1,8 +1,22 @@
 using Godot;
 using System;
+using System.Reflection.Emit;
 
 public partial class new_card : Node2D
 {
+	// Card int value
+	private int intVal;
+	// Card operator value
+	private string opVal;
+
+	// Card type: i.e. number, operator
+	private string cardType;
+	// ID number for card
+	private int cardID;
+
+
+	// Card display text
+	private Godot.Label displayText;
 	// Initial card position when clicked
 	private Vector2 initialPos;
 	// Reset position for card when "reset equation" is pressed
@@ -15,10 +29,40 @@ public partial class new_card : Node2D
 	private bool _dragging = false;
 	// Is card inside card slot
 	private bool is_inside_slot = false;
+
+	public void InitCard() {
+		intVal = -1;
+		opVal = "NULL";
+		cardType = "NULL";
+		cardID = -1;
+	}
+	public void InitCard(int IntVal, int ID, Vector2 Pos) {
+		intVal = IntVal;
+		cardType = "Number";
+		cardID = ID;
+		initialPos = Pos;
+	}
+	public void InitCard(string OpVal, int ID, Vector2 Pos) {
+		opVal = OpVal;
+		cardType = "Operator";
+		cardID = ID;
+		initialPos = Pos;
+	}
+	public int GetID() {
+		return cardID;
+	}
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		initialPos = Position;
+		displayText = (Godot.Label)FindChild("Label");
+		if (cardType == "Number") {
+			displayText.Text = intVal.ToString();
+		} else {
+			displayText.Text = opVal;
+		}
+		// initialPos = Position;
+		Position = initialPos;
 		resetPos = Position;
 	}
 
