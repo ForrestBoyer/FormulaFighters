@@ -40,7 +40,6 @@ public partial class card_test : Node2D
 				testInventory.Insert(i, testCard);
 			}
 		}
-		GD.Print("Inventory Size: ", testInventory.Count());
 
 		// ---------   Loading Card Deck, Hand, and Discard Pile ---------------
 		// Gets scenes for deck, hand, and discard pile
