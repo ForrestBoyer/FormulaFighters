@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgnblnby477s4"
-path="res://.godot/imported/brownBricksRoom.png-f6e0e5fcd0992b32f3505629d5a158f8.ctex"
+uid="uid://d2u308hx5gx8h"
+path="res://.godot/imported/redBricksBackground.png-788d7707632f0b17e9ad16842cbfa00e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Levels/Backgrounds/brownBricksRoom.png"
-dest_files=["res://.godot/imported/brownBricksRoom.png-f6e0e5fcd0992b32f3505629d5a158f8.ctex"]
+source_file="res://Game/Levels/Backgrounds/redBricksBackground.png"
+dest_files=["res://.godot/imported/redBricksBackground.png-788d7707632f0b17e9ad16842cbfa00e.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b13w7rhyvwv55"
-path="res://.godot/imported/darkBlueRoom.png-91e09f03cef8ce3154c9bbfeff272d94.ctex"
+uid="uid://crpodlyamp3gf"
+path="res://.godot/imported/skeleton.png-a79058bb92438379d66d8c44fc471aaf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Levels/Backgrounds/darkBlueRoom.png"
-dest_files=["res://.godot/imported/darkBlueRoom.png-91e09f03cef8ce3154c9bbfeff272d94.ctex"]
+source_file="res://Game/Entities/Enemy/skeleton.png"
+dest_files=["res://.godot/imported/skeleton.png-a79058bb92438379d66d8c44fc471aaf.ctex"]
 
 [params]
 

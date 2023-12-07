@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tdkfs2kgd6c3"
-path="res://.godot/imported/throneRoom.png-d91a54c367d6db742efabacde2d4a970.ctex"
+uid="uid://loeb62wf43bx"
+path="res://.godot/imported/darkBlueBackground.png-106b21dc509d044ea1bc269db5c142a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Levels/Backgrounds/throneRoom.png"
-dest_files=["res://.godot/imported/throneRoom.png-d91a54c367d6db742efabacde2d4a970.ctex"]
+source_file="res://Game/Levels/Backgrounds/darkBlueBackground.png"
+dest_files=["res://.godot/imported/darkBlueBackground.png-106b21dc509d044ea1bc269db5c142a8.ctex"]
 
 [params]
 
