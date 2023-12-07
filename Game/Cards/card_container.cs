@@ -1,113 +1,70 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
+using System.Data.Common;
+using System.Drawing;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 
 public partial class card_container : Node2D
 {
-	// Max size of card list / container
-	public int maxSize;
-	// Current size of card list
+	protected Godot.Collections.Array<new_card> cardList;
 	protected int size;
-	// List of cards
-	protected new_card[] cardList;
-	// List of cards returned by DrawCards()
-	protected new_card[] drawCards;
-	private Random rand;
 
 	// Initializer for card container with empty card list
-	public void InitCardContainer(int MaxSize){
-		maxSize = MaxSize;
-		cardList = new new_card[maxSize];
-		size = 0;
-		rand = new Random();
+	public void InitCardContainer(){
+		cardList = new Godot.Collections.Array<new_card>();
+		size = cardList.Count();
 	}
 	// Initializer for card container with list of cards
-	public void InitCardContainer(int MaxSize, new_card[] Cards){
-		maxSize = MaxSize;
-		if (Cards.Length <= maxSize) {
-			cardList = Cards;
-			size = Cards.Length;
-		}
-		rand = new Random();
+	public void InitCardContainer(Godot.Collections.Array<new_card> Cards){
+		cardList = new Godot.Collections.Array<new_card>();
+		cardList.AddRange(Cards);
+		size = cardList.Count();
 	}
 	// Add Card to End
 	public void AddCard(new_card Card){
-		if (size < maxSize) {
-			cardList[size] = Card;
-			size++;
-		}
+		cardList.Append(Card);
+		size = cardList.Count();
 	}
-	// Add Card at Index
-	public void AddCard(new_card Card, int Index){
-		if (Index < maxSize) {
-			cardList[Index] = Card;
-			size = cardList.Length;
-		}
-	}
-	// Add Multiple Cards
-	public void AddCard(new_card[] Cards){
-		if (Cards.Length <= maxSize) {
-			cardList = Cards;
-			size = Cards.Length;
-		}
+	// Replace Cards
+	public void ReplaceCards(Godot.Collections.Array<new_card> Cards){
+		cardList.Clear();
+		cardList = Cards;
+		size = cardList.Count();
 	}
 	// Remove Card from end
 	public new_card RemoveCard(){		
-		size--;
-		return cardList[cardList.Length];
-	}
-	// Remove Card with ID
-	public new_card RemoveCard(int CardID){
-		for(int i = 0; i < size; i++) {
-			if(cardList[i].GetID() == CardID) {
-				// swap card to end of list
-				new_card temp;
-				temp = cardList[size];
-				cardList[size] = cardList[i];
-				cardList[i] = temp;
-				size--;
-				return cardList[cardList.Length];
-			}
-		}
-		return null;
-	}
-	// Remove List of Cards
-	public new_card[] RemoveCard(new_card[] Cards){
-		if (Cards.Length == size) {
-			size -= Cards.Length;
-			return cardList;
-		}
-		return null;
+		new_card ret;
+		ret = cardList[cardList.Count() - 1];
+		cardList.RemoveAt(cardList.Count() - 1);
+		size = cardList.Count();
+		return ret;
 	}
 	// Empty Container
-	public new_card[] EmptyContainer() {
-		size = 0;
-		return cardList;
+	public void EmptyContainer() {
+		cardList.Clear();
+		size = cardList.Count();
 	}
 	// Shuffle
-	public void Shuffle(){
-		int i = cardList.Length;
-		while (i > 1) {
-			// generate random index
-			int index = rand.Next(i--);
-			// swap current pos (i) with random index
-			new_card temp = cardList[i];
-			cardList[i] = cardList[index];
-			cardList[index] = temp;
-		}
+	public void ShuffleCards(){
+		cardList.Shuffle();
 	}
 
 	// Draw
-	public new_card[] DrawCards(int Num){
-		if(Num <= size) {
-			drawCards = new new_card[Num];
-			Array.Copy(cardList, drawCards, Num);
-			Array.Reverse(cardList);
-			size -= Num;
-			return drawCards;
+	public Godot.Collections.Array<new_card> DrawCards(int Num){
+		Godot.Collections.Array<new_card> ret;
+		if (cardList.Count() < Num) {
+			return null;
 		}
-		return null;
+		ret = cardList.Slice(0, Num);
+		// for(int i = 0; i < Num; i++) {
+		// 	cardList.RemoveAt(0);
+		//  size = cardList.Count();
+		// }
+		
+		return ret;
 	}
 
 

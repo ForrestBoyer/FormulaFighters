@@ -5,12 +5,12 @@ using System.Reflection.Emit;
 public partial class new_card : Node2D
 {
 	// Card int value
-	private int intVal;
+	public int intVal;
 	// Card operator value
-	private string opVal;
+	public string opVal;
 
 	// Card type: i.e. number, operator
-	private string cardType;
+	public string cardType;
 	// ID number for card
 	private int cardID;
 
@@ -51,7 +51,7 @@ public partial class new_card : Node2D
 		return cardID;
 	}
 	public void SetPos(Vector2 position) {
-		Position = position;
+		initialPos = position;
 	}
 
 	// Called when the node enters the scene tree for the first time.
