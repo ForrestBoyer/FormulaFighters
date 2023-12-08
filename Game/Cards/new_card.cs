@@ -1,7 +1,4 @@
-using System.Globalization;
 using Godot;
-using System;
-using System.Reflection.Emit;
 
 public partial class new_card : Node2D
 {

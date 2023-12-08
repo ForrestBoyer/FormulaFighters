@@ -5,12 +5,15 @@ using System.Collections.Generic;
 public partial class Level : Node2D
 {
 	private int HealthScale = 10;
-	public TextureRect Background { get; set; }
 	public Random rand = new Random();
+	public int Depth { get; set; }
+
+	// Level Objects
+	public TextureRect Background { get; set; }
 	public Enemy Enemy { get; set; }
 	public Player Player { get; set; }
 	public deck Deck { get; set; }
-	public int Depth { get; set; }
+	public discard_pile DiscardPile { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -53,6 +56,12 @@ public partial class Level : Node2D
 		Deck.InitCardContainer(map.Inventory.Cards);
 		AddChild(Deck);
 
+		// Add discard pile
+		DiscardPile = discardPileScene.Instantiate<discard_pile>();
+		DiscardPile.Position = new Vector2(1180f, 600f);
+		DiscardPile.InitCardContainer();
+		AddChild(DiscardPile);
+
 		// --------------------------------------------------------
 
 		// ----------------- Setting Background -------------------
@@ -84,7 +93,10 @@ public partial class Level : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-
+		if (Input.IsActionJustPressed("right_click")) 
+		{
+			EndLevel(true);
+		}
 	}
 
 	public void EndLevel(bool win)
