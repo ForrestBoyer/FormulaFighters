@@ -1,8 +1,5 @@
 using Godot;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Timers;
+using System.Collections.Generic;
 
 public partial class card_test : Node2D
 {
@@ -20,21 +17,23 @@ public partial class card_test : Node2D
 	private hand_manager newHand;
 	private discard_pile newDiscard;
 	private State combat;
-	private Godot.Collections.Array<new_card> testInventory;
+	private List<new_card> testInventory = new List<new_card>();
 	private new_card testCard;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		PackedScene cardScene = GD.Load<PackedScene>("res://Game/Cards/new_card.tscn");
-		// Test inventory
-		testInventory = new Godot.Collections.Array<new_card>();
-		for(int i = 0; i < 21; i++) {
-			if(i % 2 == 0) {
+		for (int i = 0; i < 21; i++) 
+		{
+			if (i % 2 == 0) 
+			{
 				testCard = cardScene.Instantiate<new_card>();
 				testCard.InitCard(2, i);
 				testInventory.Insert(i, testCard);
-			} else {
+			} 
+			else 
+			{
 				testCard = cardScene.Instantiate<new_card>();
 				testCard.InitCard("+", i);
 				testInventory.Insert(i, testCard);
@@ -80,13 +79,16 @@ public partial class card_test : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionPressed("quit")) {
+		if (Input.IsActionPressed("quit")) 
+		{
 			GetTree().Quit();
 		}
-		if (Input.IsActionJustPressed("right_click")) {
+		if (Input.IsActionJustPressed("right_click")) 
+		{
 			combat = State.StartTurn;
 		}
-		if (combat == State.StartTurn) {
+		if (combat == State.StartTurn) 
+		{
 			// Discard Hand (to discard)
 			// newHand.EmptyContainer();
 			// Shuffle Deck
@@ -97,14 +99,18 @@ public partial class card_test : Node2D
 			newHand.updateHand();
 			// combat = DuringTurn
 			combat = State.DuringTurn;
-		} else if (combat == State.DuringTurn) {
+		} 
+		else if (combat == State.DuringTurn) 
+		{
 			// Building Equation
 			// Submit Equation
 			// Discard Equation (to discard)
 			// combat = EndTurn
 			// combat = State.EndTurn;
 
-		} else if (combat == State.EndTurn) {
+		} 
+		else if (combat == State.EndTurn) 
+		{
 			// Calculate Damage
 			// Update Entities Health
 			// Check For Win/Lose

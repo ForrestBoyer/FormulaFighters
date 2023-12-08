@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgjp5gpxlvrq0"]
+[gd_scene load_steps=4 format=3 uid="uid://c4k02tcd3ta1o"]
 
-[ext_resource type="Texture2D" uid="uid://loeb62wf43bx" path="res://Game/Levels/Backgrounds/darkBlueBackground.png" id="1_rkcvu"]
 [ext_resource type="Script" path="res://Game/Cards/card_test.cs" id="1_yfqs2"]
+[ext_resource type="Texture2D" uid="uid://tmbntny4aqib" path="res://Game/Levels/Backgrounds/darkBlueRoom.png" id="2_iox21"]
 [ext_resource type="PackedScene" uid="uid://27tplfr6boch" path="res://Game/Cards/card_slot.tscn" id="4_k1ait"]
 
 [node name="CardTest" type="Node2D"]
@@ -12,7 +12,7 @@ z_index = -1
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
-texture = ExtResource("1_rkcvu")
+texture = ExtResource("2_iox21")
 
 [node name="CardSlots" type="Node2D" parent="."]
 

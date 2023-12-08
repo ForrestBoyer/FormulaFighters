@@ -1,68 +1,96 @@
 using Godot;
-using Godot.NativeInterop;
-using System;
-using System.Data.Common;
-using System.Drawing;
+using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
-using System.Runtime.CompilerServices;
+using ExtensionMethods;
 
 public partial class card_container : Node2D
 {
-	protected Godot.Collections.Array<new_card> cardList;
+	protected List<new_card> cardList = new List<new_card>();
 	protected int size;
 
 	// Initializer for card container with empty card list
-	public void InitCardContainer(){
-		cardList = new Godot.Collections.Array<new_card>();
-		size = cardList.Count();
+	public void InitCardContainer()
+	{
+		size = cardList.Count;
 	}
+
 	// Initializer for card container with list of cards
-	public void InitCardContainer(Godot.Collections.Array<new_card> Cards){
-		cardList = new Godot.Collections.Array<new_card>();
+	public void InitCardContainer(List<new_card> Cards)
+	{
 		cardList.AddRange(Cards);
-		size = cardList.Count();
+		size = cardList.Count;
 	}
+
 	// Add Card to End
-	public void AddCard(new_card Card){
+	public void AddCard(new_card Card)
+	{
 		cardList.Append(Card);
-		size = cardList.Count();
+		size = cardList.Count;
 	}
+
 	// Replace Cards
-	public void ReplaceCards(Godot.Collections.Array<new_card> Cards){
+	public void ReplaceCards(List<new_card> Cards){
 		cardList.Clear();
 		cardList = Cards;
-		size = cardList.Count();
+		size = cardList.Count;
 	}
+
 	// Remove Card from end
-	public new_card RemoveCard(){		
+	public new_card RemoveCard()
+	{		
 		new_card ret;
-		ret = cardList[cardList.Count() - 1];
-		cardList.RemoveAt(cardList.Count() - 1);
-		size = cardList.Count();
+		ret = cardList[cardList.Count - 1];
+		cardList.RemoveAt(cardList.Count - 1);
+		size = cardList.Count;
 		return ret;
 	}
+
 	// Empty Container
-	public void EmptyContainer() {
+	public void EmptyContainer() 
+	{
 		cardList.Clear();
 		size = cardList.Count();
 	}
+
 	// Shuffle
-	public void ShuffleCards(){
+	public void ShuffleCards()
+	{
+		foreach (var card in cardList)
+		{
+			if (card.cardType == new_card.CardType.Number)
+			{
+				GD.Print(card.intVal);
+			}
+			else
+			{
+				GD.Print(card.opVal);
+			}
+		}
 		cardList.Shuffle();
+		foreach (var card in cardList)
+		{
+			if (card.cardType == new_card.CardType.Number)
+			{
+				GD.Print(card.intVal);
+			}
+			else
+			{
+				GD.Print(card.opVal);
+			}
+		}
 	}
 
 	// Draw
-	public Godot.Collections.Array<new_card> DrawCards(int Num){
-		Godot.Collections.Array<new_card> ret;
-		if (cardList.Count() < Num) {
+	public List<new_card> DrawCards(int Num)
+	{
+		List<new_card> ret;
+
+		if (cardList.Count < Num) 
+		{
 			return null;
 		}
-		ret = cardList.Slice(0, Num);
-		// for(int i = 0; i < Num; i++) {
-		// 	cardList.RemoveAt(0);
-		//  size = cardList.Count();
-		// }
+
+		ret = cardList.Take(Num).ToList();
 		
 		return ret;
 	}

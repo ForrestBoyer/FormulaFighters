@@ -1,3 +1,4 @@
+using System.Globalization;
 using Godot;
 using System;
 using System.Reflection.Emit;
@@ -6,14 +7,20 @@ public partial class new_card : Node2D
 {
 	// Card int value
 	public int intVal;
+
 	// Card operator value
 	public string opVal;
 
-	// Card type: i.e. number, operator
-	public string cardType;
+	public enum CardType
+	{
+		Number,
+		Operator
+	};
+
+	public CardType cardType;
+
 	// ID number for card
 	private int cardID;
-
 
 	// Card display text
 	private Godot.Label displayText;
@@ -31,26 +38,34 @@ public partial class new_card : Node2D
 	private bool is_inside_slot = false;
 
 	// Helper methods for initializing cards after they are instantiated
-	public void InitCard() {
+	public void InitCard() 
+	{
 		intVal = -1;
 		opVal = "NULL";
-		cardType = "NULL";
 		cardID = -1;
 	}
-	public void InitCard(int IntVal, int ID) {
+
+	public void InitCard(int IntVal, int ID) 
+	{
 		intVal = IntVal;
-		cardType = "Number";
+		cardType = CardType.Number;
 		cardID = ID;
 	}
-	public void InitCard(string OpVal, int ID) {
+
+	public void InitCard(string OpVal, int ID) 
+	{
 		opVal = OpVal;
-		cardType = "Operator";
+		cardType = CardType.Operator;
 		cardID = ID;
 	}
-	public int GetID() {
+
+	public int GetID() 
+	{
 		return cardID;
 	}
-	public void SetPos(Vector2 position) {
+
+	public void SetPos(Vector2 position) 
+	{
 		initialPos = position;
 	}
 
@@ -58,9 +73,12 @@ public partial class new_card : Node2D
 	public override void _Ready()
 	{
 		displayText = (Godot.Label)FindChild("Label");
-		if (cardType == "Number") {
+		if (cardType == CardType.Number) 
+		{
 			displayText.Text = intVal.ToString();
-		} else {
+		} 
+		else if (cardType == CardType.Operator) 
+		{
 			displayText.Text = opVal;
 		}
 
@@ -79,19 +97,22 @@ public partial class new_card : Node2D
 	}
 
 	// When mouse is hovering over card
-	public void _on_collider_mouse_entered() {
+	public void _on_collider_mouse_entered() 
+	{
 		// Increase size of card
 		Scale = new Vector2(1.1f, 1.1f);
 	}
 
 	// When mouse stops hovering over card
-	public void _on_collider_mouse_exited() {
+	public void _on_collider_mouse_exited() 
+	{
 		// Reset size of card
 		Scale = new Vector2(1.0f, 1.0f);
 	}
 
 	// When mouse left clicks on card
-	public void _on_collider_input_event(Node viewport, InputEvent @event, int shape_idx) {
+	public void _on_collider_input_event(Node viewport, InputEvent @event, int shape_idx) 
+	{
 		// If left click is pressed
 		if (@event.IsActionPressed("click")) {
 			// Initial position current position
@@ -117,9 +138,11 @@ public partial class new_card : Node2D
 	}
 
 	// When card is dragged over a card slot
-	public void _on_collider_body_entered(Node2D body) {
+	public void _on_collider_body_entered(Node2D body) 
+	{
 		// If slot is available
-		if (body.IsInGroup("Available")) {
+		if (body.IsInGroup("Available")) 
+		{
 			// Card is inside slot
 			is_inside_slot = true;
 			// Slot position = Global position of card slot detected
@@ -127,15 +150,20 @@ public partial class new_card : Node2D
 			// Slot is now unavailable
 			body.RemoveFromGroup("Available");
 			body.AddToGroup("Unavailable");
-		} else {
+		} 
+		else 
+		{
 			// Card is not inside an available card slot
 			is_inside_slot = false;
 		}
 	}
+
 	// When card exits a card slot
-	public void _on_collider_body_exited(Node2D body) {
+	public void _on_collider_body_exited(Node2D body) 
+	{
 		// If slot is unavailable and card is inside another valid slot
-		if (body.IsInGroup("Unavailable") && is_inside_slot == true) {
+		if (body.IsInGroup("Unavailable") && is_inside_slot == true) 
+		{
 			// Slot is now available
 			body.RemoveFromGroup("Unavailable");
 			body.AddToGroup("Available");

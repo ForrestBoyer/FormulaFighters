@@ -38,7 +38,8 @@ public partial class MapGenerator : Node
         LevelMarker marker = GetNode<LevelMarker>("/root/World/Map/LevelMarker");
 
         // Loop for the number of levels in the game
-        for(int i = 0; i < NUM_LEVELS - 1; i++){
+        for(int i = 0; i < NUM_LEVELS - 1; i++)
+        {
             // If path branches
             if(rng.Next(1, 4) == 1 && i != 0){
                 // ------------- Create new markers on the map ----------------

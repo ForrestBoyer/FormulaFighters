@@ -5,8 +5,10 @@ public partial class card_slot : StaticBody2D
 { 
 	// private StaticBody2D cardSlot;
 	// private CollisionShape2D cardCollider;
+
 	private ColorRect slotColor;
 	// Called when the node enters the scene tree for the first time.
+	
 	public override void _Ready()
 	{
 		// cardSlot = GetNode<StaticBody2D>("/root/testLevel/CardSlot");
@@ -21,13 +23,16 @@ public partial class card_slot : StaticBody2D
 	}
 
 	// When card is inside card slot
-	public void _on_card_detector_area_entered(Area2D area) {
+	public void _on_card_detector_area_entered(Area2D area) 
+	{
 		// cardSlot.Visible = false;
 		slotColor.Color = new Color("RED");
 		// cardCollider.Disabled = true;
 	}
+
 	// When card has left card slot
-	public void _on_card_detector_area_exited(Area2D area) {
+	public void _on_card_detector_area_exited(Area2D area) 
+	{
 		// cardSlot.Visible = true;
 		slotColor.Color = new Color("ORANGE");
 		// cardCollider.Disabled = false;

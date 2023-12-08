@@ -34,6 +34,23 @@ public partial class Level : Node2D
 		Enemy.Death += () => EndLevel(true);
 		// --------------------------------------------------------
 
+		// ------------ Loading Card Stuff ------------------------
+
+		PackedScene deckScene = GD.Load<PackedScene>("res://Game/Cards/deck.tscn");
+		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/hand_manager.tscn");
+		PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/discard_pile.tscn");
+		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/new_card.tscn");
+
+		for (int i = 0; i < 5; i++)
+		{
+			new_card card = cardScene.Instantiate<new_card>();
+			card.InitCard(rand.Next(5), i);
+			card.Position = new Vector2(480f, 480 + (i * 100));
+			AddChild(card);
+		}
+
+		// --------------------------------------------------------
+
 		// ----------------- Setting Background -------------------
 		Background = GetNode<TextureRect>("Background");
 
@@ -73,7 +90,7 @@ public partial class Level : Node2D
 		if (win)
 		{
 			GD.Print("Enemy Died");
-			// TODO: Enter rewards screen
+			// TODO: Open rewards screen
 
 			map.Current_Depth++;
 			map.UpdateMarkers();
