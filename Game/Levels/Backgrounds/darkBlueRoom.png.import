@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chqwycy2n2iqn"
-path="res://.godot/imported/hobgoblin.png-5440caf5869581b22ab151098997b1b5.ctex"
+uid="uid://tmbntny4aqib"
+path="res://.godot/imported/darkBlueRoom.png-91e09f03cef8ce3154c9bbfeff272d94.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Entities/Enemy/hobgoblin.png"
-dest_files=["res://.godot/imported/hobgoblin.png-5440caf5869581b22ab151098997b1b5.ctex"]
+source_file="res://Game/Levels/Backgrounds/darkBlueRoom.png"
+dest_files=["res://.godot/imported/darkBlueRoom.png-91e09f03cef8ce3154c9bbfeff272d94.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce85exim2uxwe"
-path="res://.godot/imported/slime.png-23891051e34bfc6d764482533fd95b49.ctex"
+uid="uid://cfs7urk764mv8"
+path="res://.godot/imported/redBricksRoom.png-711b9b58609e1b17f9c0137526d62872.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Entities/Enemy/slime.png"
-dest_files=["res://.godot/imported/slime.png-23891051e34bfc6d764482533fd95b49.ctex"]
+source_file="res://Game/Levels/Backgrounds/redBricksRoom.png"
+dest_files=["res://.godot/imported/redBricksRoom.png-711b9b58609e1b17f9c0137526d62872.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://loeb62wf43bx"
-path="res://.godot/imported/darkBlueBackground.png-106b21dc509d044ea1bc269db5c142a8.ctex"
+uid="uid://dbenih3853xem"
+path="res://.godot/imported/skeleton.png-c87c31acdf557776c5c9c54d6c2f5977.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Levels/Backgrounds/darkBlueBackground.png"
-dest_files=["res://.godot/imported/darkBlueBackground.png-106b21dc509d044ea1bc269db5c142a8.ctex"]
+source_file="res://Game/Entities/Enemy/Sprites/skeleton.png"
+dest_files=["res://.godot/imported/skeleton.png-c87c31acdf557776c5c9c54d6c2f5977.ctex"]
 
 [params]
 

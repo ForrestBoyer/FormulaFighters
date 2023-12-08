@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Team7Project"
-run/main_scene="res://Game/Cards/card_test.tscn"
+run/main_scene="res://Game/world.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

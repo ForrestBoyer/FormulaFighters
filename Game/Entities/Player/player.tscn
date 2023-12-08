@@ -1,11 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmh0medtqmrob"]
+[gd_scene load_steps=4 format=3 uid="uid://bmh0medtqmrob"]
 
 [ext_resource type="PackedScene" uid="uid://bvnfkg7yuqhcn" path="res://Game/Entities/entity.tscn" id="1_35g3k"]
 [ext_resource type="Script" path="res://Game/Entities/Player/Player.cs" id="2_7q8q1"]
 [ext_resource type="Texture2D" uid="uid://rpjky6a8eiy5" path="res://Game/Entities/Player/Knight.png" id="2_iya0m"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uad4n"]
-size = Vector2(88.75, 95.75)
 
 [node name="Player" instance=ExtResource("1_35g3k")]
 script = ExtResource("2_7q8q1")
@@ -19,6 +16,3 @@ texture = ExtResource("2_iya0m")
 offset_top = -64.0
 offset_bottom = -56.0
 metadata/_edit_use_anchors_ = true
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-shape = SubResource("RectangleShape2D_uad4n")

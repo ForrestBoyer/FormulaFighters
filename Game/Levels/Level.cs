@@ -21,7 +21,7 @@ public partial class Level : Node2D
 
 		// Create a player and set its position
 		Player = playerScene.Instantiate<Player>();
-		Player.Position = new Vector2(360f, 480f);
+		Player.Position = new Vector2(360f, 450f);
 		AddChild(Player);
 
 		// Create an enemy and set its position
@@ -40,7 +40,7 @@ public partial class Level : Node2D
 		// Paths to all possible backgrounds
 		string[] texturePaths = 
 		{
-			"res://Game/Levels/Backgrounds/brownBricksRoom.png",
+			"res://Game/Levels/Backgrounds/redBricksRoom.png",
 			"res://Game/Levels/Backgrounds/darkBlueRoom.png",
 			"res://Game/Levels/Backgrounds/throneRoom.png",
 		};
@@ -55,7 +55,7 @@ public partial class Level : Node2D
 		}
 		else
 		{
-			GD.Print("Faied to load texture");
+			GD.Print("Faied to load Level texture");
 		}
 		// ----------------------------------------------------------
 	}

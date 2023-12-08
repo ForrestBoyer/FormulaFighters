@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crpodlyamp3gf"
-path="res://.godot/imported/skeleton.png-a79058bb92438379d66d8c44fc471aaf.ctex"
+uid="uid://bqmo60d50vrer"
+path="res://.godot/imported/hobgoblin.png-7b0565fd98ef031d37e8741a98eb382d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Game/Entities/Enemy/skeleton.png"
-dest_files=["res://.godot/imported/skeleton.png-a79058bb92438379d66d8c44fc471aaf.ctex"]
+source_file="res://Game/Entities/Enemy/Sprites/hobgoblin.png"
+dest_files=["res://.godot/imported/hobgoblin.png-7b0565fd98ef031d37e8741a98eb382d.ctex"]
 
 [params]
 
