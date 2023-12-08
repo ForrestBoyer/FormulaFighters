@@ -12,6 +12,7 @@ outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Card" type="Node2D"]
+z_index = 3
 script = ExtResource("1_xeuka")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -19,6 +20,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_203de")
 
 [node name="Collider" type="Area2D" parent="."]
+z_index = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
 shape = SubResource("RectangleShape2D_ddt5g")

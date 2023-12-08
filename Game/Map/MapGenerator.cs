@@ -5,8 +5,7 @@ public partial class MapGenerator : Node
 {
     // The chance of levels branching (1/BRANCH_CHANCE)
     const int BRANCH_CHANCE = 4;
-    // The chance of a reward being an operator (1/OPERATOR_CHANCE)
-    const int OPERATOR_CHANCE = 3;
+
     // The number of levels in the game
     const int NUM_LEVELS = 10;
 
@@ -22,8 +21,9 @@ public partial class MapGenerator : Node
 	}
 
     // Generates a new map
-    public void Generate() {
-        int leftSideOffset = 50;
+    public void Generate() 
+    {
+        int leftSideOffset = 30;
         int spaceHorizontal = 125;
         int spaceVertical = 50;
         int centerScreen = 360;

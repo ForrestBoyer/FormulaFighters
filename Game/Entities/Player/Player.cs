@@ -21,6 +21,6 @@ public partial class Player : Entity
     public override void Die()
     {
         base.Die();
-		//EmitSignal(SignalName.Death);
+		EmitSignal(SignalName.Death);
     }
 }

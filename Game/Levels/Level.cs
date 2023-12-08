@@ -7,6 +7,7 @@ public partial class Level : Node2D
 {
 	private int HealthScale = 10;
 	private int HandSize = 7;
+	private int NumCardSlots = 5;
 	public Random rand = new Random();
 	public int Depth { get; set; }
 
@@ -17,6 +18,7 @@ public partial class Level : Node2D
 	public Deck Deck { get; set; }
 	public DiscardPile DiscardPile { get; set; }
 	public Hand Hand { get; set; }
+	public List<CardSlot> CardSlots = new List<CardSlot>();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -28,17 +30,17 @@ public partial class Level : Node2D
 
 		// Create a player and set its position
 		Player = playerScene.Instantiate<Player>();
-		Player.Position = new Vector2(360f, 450f);
+		Player.Position = new Vector2(240f, 450f);
 		AddChild(Player);
 
 		// Create an enemy and set its position
 		Enemy = enemyScene.Instantiate<Enemy>();
-		Enemy.Position = new Vector2(920f, 450f);
+		Enemy.Position = new Vector2(1040f, 450f);
 		AddChild(Enemy);
 
 		// Connect death signals
-		//Player.Death += () => EndLevel(false);
-		//Enemy.Death += () => EndLevel(true);
+		Player.Death += () => EndLevel(false);
+		Enemy.Death += () => EndLevel(true);
 		// --------------------------------------------------------
 
 		// ------------ Loading Card Stuff ------------------------
@@ -47,6 +49,7 @@ public partial class Level : Node2D
 		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/hand.tscn");
 		PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/discard_pile.tscn");
 		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/card.tscn");
+		PackedScene cardSlotScene = GD.Load<PackedScene>("res://Game//Cards/card_slot.tscn");
 
 		// Add Deck
 		Deck = deckScene.Instantiate<Deck>();
@@ -72,7 +75,17 @@ public partial class Level : Node2D
 		Hand.UpdateHand();
 		AddChild(Hand);
 
-		// 
+		Vector2 cardSlotPosition = new Vector2(450f, 450f);
+
+		// Create Card Slots
+		for (int i = 0; i < NumCardSlots; i++)
+		{
+			CardSlot slot = cardSlotScene.Instantiate<CardSlot>();
+			slot.Position = cardSlotPosition;
+			cardSlotPosition.X += 80f;
+			AddChild(slot);
+			GD.Print(slot.Name);
+		}
 
 		// --------------------------------------------------------
 

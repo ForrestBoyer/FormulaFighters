@@ -61,6 +61,7 @@ public partial class Map : CanvasLayer
 		{
 			if (child is LevelMarker levelMarker)
 			{
+				levelMarker.Scale = new Vector2(1.5f, 1.5f);
 				if (levelMarker.Depth == Current_Depth)
 				{
 					if (levelMarker.IsBoss)
