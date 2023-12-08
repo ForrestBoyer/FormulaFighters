@@ -14,6 +14,7 @@ public partial class Level : Node2D
 	public Player Player { get; set; }
 	public deck Deck { get; set; }
 	public discard_pile DiscardPile { get; set; }
+	public hand_manager Hand { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -54,6 +55,7 @@ public partial class Level : Node2D
 
 		// Initiate starting deck in level with what is in inventory
 		Deck.InitCardContainer(map.Inventory.Cards);
+		Deck.ShuffleCards();
 		AddChild(Deck);
 
 		// Add discard pile
@@ -61,6 +63,9 @@ public partial class Level : Node2D
 		DiscardPile.Position = new Vector2(1180f, 600f);
 		DiscardPile.InitCardContainer();
 		AddChild(DiscardPile);
+
+		// Add hand
+
 
 		// --------------------------------------------------------
 
