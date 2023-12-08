@@ -13,8 +13,8 @@ public partial class Level : Node2D
 	public Enemy Enemy { get; set; }
 	public Player Player { get; set; }
 	public deck Deck { get; set; }
-	public discard_pile DiscardPile { get; set; }
-	public hand_manager Hand { get; set; }
+	public DiscardPile DiscardPile { get; set; }
+	public Hand Hand { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -35,14 +35,14 @@ public partial class Level : Node2D
 		AddChild(Enemy);
 
 		// Connect death signals
-		Player.Death += () => EndLevel(false);
-		Enemy.Death += () => EndLevel(true);
+		//Player.Death += () => EndLevel(false);
+		//Enemy.Death += () => EndLevel(true);
 		// --------------------------------------------------------
 
 		// ------------ Loading Card Stuff ------------------------
 
 		PackedScene deckScene = GD.Load<PackedScene>("res://Game/Cards/deck.tscn");
-		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/hand_manager.tscn");
+		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/hand.tscn");
 		PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/discard_pile.tscn");
 		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/new_card.tscn");
 
@@ -59,7 +59,7 @@ public partial class Level : Node2D
 		AddChild(Deck);
 
 		// Add discard pile
-		DiscardPile = discardPileScene.Instantiate<discard_pile>();
+		DiscardPile = discardPileScene.Instantiate<DiscardPile>();
 		DiscardPile.Position = new Vector2(1180f, 600f);
 		DiscardPile.InitCardContainer();
 		AddChild(DiscardPile);

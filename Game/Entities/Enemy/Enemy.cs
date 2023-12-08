@@ -44,6 +44,6 @@ public partial class Enemy : Entity
 	public override void Die()
 	{
 		base.Die();
-		EmitSignal(SignalName.Death);
+		//EmitSignal(SignalName.Death);
 	}
 }

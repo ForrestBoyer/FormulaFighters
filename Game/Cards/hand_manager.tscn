@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdho0x7qy1wg0"]
-
-[ext_resource type="PackedScene" uid="uid://wecff4ah5tam" path="res://Game/Cards/card_container.tscn" id="1_ir0a3"]
-[ext_resource type="Script" path="res://Game/Cards/hand_manager.cs" id="2_1vxgh"]
-
-[node name="HandManager" instance=ExtResource("1_ir0a3")]
-script = ExtResource("2_1vxgh")

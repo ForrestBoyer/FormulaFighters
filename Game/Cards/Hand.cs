@@ -2,23 +2,23 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class hand_manager : card_container
+public partial class Hand : card_container
 {
 	private Vector2 leftmostCardPosition;
 	private PackedScene cardScene;
 	private List<Node> removedCards = new List<Node>();
-	private new_card tempCard;
+	private Card tempCard;
 
 	// Called whenever cards in hand are changed and need to be redrawn
 	public void UpdateHand()
 	{
-		PackedScene cardScene = GD.Load<PackedScene>("res://Game/Cards/new_card.tscn");
+		PackedScene cardScene = GD.Load<PackedScene>("res://Game/Cards/card.tscn");
 		leftmostCardPosition = new Vector2(408f, 600f);
 
 		// delete all current cards
 		removedCards = GetChildren().ToList();
 
-		foreach(new_card card in removedCards) 
+		foreach (Card card in removedCards) 
 		{
 			RemoveChild(card);
 			card.QueueFree();
@@ -27,16 +27,16 @@ public partial class hand_manager : card_container
 		// for each card in cardList
 		for(int i = 0; i < size; i++) 
 		{
-			if (Cards[i].cardType == new_card.CardType.Number) 
+			if (Cards[i].cardType == Card.CardType.Number) 
 			{
-				tempCard = cardScene.Instantiate<new_card>();
+				tempCard = cardScene.Instantiate<Card>();
 				tempCard.InitCard(Cards[i].intVal, i);
 				tempCard.SetPos(leftmostCardPosition);
 				AddChild(tempCard);
 			} 
-			else if (Cards[i].cardType == new_card.CardType.Operator) 
+			else if (Cards[i].cardType ==Card.CardType.Operator) 
 			{
-				tempCard = cardScene.Instantiate<new_card>();
+				tempCard = cardScene.Instantiate<Card>();
 				tempCard.InitCard(Cards[i].opVal, i);
 				tempCard.SetPos(leftmostCardPosition);
 				AddChild(tempCard);

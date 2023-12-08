@@ -5,7 +5,7 @@ using ExtensionMethods;
 
 public partial class card_container : Node2D
 {
-	public List<new_card> Cards = new List<new_card>();
+	public List<Card> Cards = new List<Card>();
 
 	protected int size;
 
@@ -16,30 +16,30 @@ public partial class card_container : Node2D
 	}
 
 	// Initializer for card container with list of cards
-	public void InitCardContainer(List<new_card> Cards)
+	public void InitCardContainer(List<Card> Cards)
 	{
 		this.Cards.AddRange(Cards);
         size = this.Cards.Count;
 	}
 
 	// Add Card to End
-	public void AddCard(new_card Card)
+	public void AddCard(Card Card)
 	{
 		Cards.Add(Card);
 		size = Cards.Count;
 	}
 
 	// Replace Cards
-	public void ReplaceCards(List<new_card> Cards){
+	public void ReplaceCards(List<Card> Cards){
 		this.Cards.Clear();
 		this.Cards = Cards;
         size = this.Cards.Count;
 	}
 
 	// Remove Card from end
-	public new_card RemoveCard()
+	public Card RemoveCard()
 	{		
-		new_card ret;
+		Card ret;
 		ret = Cards[Cards.Count - 1];
 		Cards.RemoveAt(Cards.Count - 1);
 		size = Cards.Count;
@@ -60,9 +60,9 @@ public partial class card_container : Node2D
 	}
 
 	// Draw
-	public List<new_card> DrawCards(int Num)
+	public List<Card> DrawCards(int Num)
 	{
-		List<new_card> ret;
+		List<Card> ret;
 
 		if (Cards.Count < Num) 
 		{

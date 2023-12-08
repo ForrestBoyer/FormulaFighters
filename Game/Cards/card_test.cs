@@ -11,31 +11,31 @@ public partial class card_test : Node2D
 		WinLevel,
 		LoseLevel
 	}
-	
+
 	private const int HandSize = 7;
 	private int DeckSize;
 	private deck newDeck;
-	private hand_manager newHand;
-	private discard_pile newDiscard;
+	private Hand newHand;
+	private DiscardPile newDiscard;
 	private State combat;
-	private List<new_card> testInventory = new List<new_card>();
-	private new_card testCard;
+	private List<Card> testInventory = new List<Card>();
+	private Card testCard;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		PackedScene cardScene = GD.Load<PackedScene>("res://Game/Cards/new_card.tscn");
+		PackedScene cardScene = GD.Load<PackedScene>("res://Game/Cards/card.tscn");
 		for (int i = 0; i < 21; i++) 
 		{
 			if (i % 2 == 0) 
 			{
-				testCard = cardScene.Instantiate<new_card>();
+				testCard = cardScene.Instantiate<Card>();
 				testCard.InitCard(2, i);
 				testInventory.Insert(i, testCard);
 			} 
 			else 
 			{
-				testCard = cardScene.Instantiate<new_card>();
+				testCard = cardScene.Instantiate<Card>();
 				testCard.InitCard("+", i);
 				testInventory.Insert(i, testCard);
 			}
@@ -44,7 +44,7 @@ public partial class card_test : Node2D
 		// ---------   Loading Card Deck, Hand, and Discard Pile ---------------
 		// Gets scenes for deck, hand, and discard pile
 		PackedScene deckScene = GD.Load<PackedScene>("res://Game/Cards/deck.tscn");
-		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/hand_manager.tscn");
+		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/hand.tscn");
 		PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/discard_pile.tscn");
 		// --------------------------------------------------------
 
@@ -55,10 +55,10 @@ public partial class card_test : Node2D
 		newDeck.InitCardContainer(testInventory);
 		AddChild(newDeck);
 
-		newHand = handScene.Instantiate<hand_manager>();
+		newHand = handScene.Instantiate<Hand>();
 		// newHand.Position = new Vector2(408f, 600f);
 
-		newDiscard = discardPileScene.Instantiate<discard_pile>();
+		newDiscard = discardPileScene.Instantiate<DiscardPile>();
 		newDiscard.Position = new Vector2(1180f, 600f);
 		newDiscard.InitCardContainer();
 		AddChild(newDiscard);

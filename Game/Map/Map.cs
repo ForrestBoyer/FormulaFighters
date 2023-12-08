@@ -17,14 +17,14 @@ public partial class Map : CanvasLayer
 	{
 		// ------------- Making Starting Inventory of Cards ------------------
 		PackedScene inventoryScene = GD.Load<PackedScene>("res://Game/Cards/inventory.tscn");
-		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/new_card.tscn");
+		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/card.tscn");
 		Inventory = inventoryScene.Instantiate<Inventory>();
 
 		Random rand = new Random();
 
 		for (int i = 0; i < STARTING_INVENTORY_SIZE; i++)
 		{
-			new_card card = cardScene.Instantiate<new_card>();
+			Card card = cardScene.Instantiate<Card>();
 
 			// Generate Number
 			if (rand.Next(2) == 0)

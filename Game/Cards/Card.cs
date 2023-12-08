@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class new_card : Node2D
+public partial class Card : Node2D
 {
 	// Card int value
 	public int intVal;
