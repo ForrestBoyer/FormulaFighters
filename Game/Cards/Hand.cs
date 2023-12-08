@@ -9,6 +9,8 @@ public partial class Hand : CardContainer
 	private List<Node> removedCards = new List<Node>();
 	private Card tempCard;
 
+	public int MaxHandSize { get; set; }
+
 	// Called whenever cards in hand are changed and need to be redrawn
 	public void UpdateHand()
 	{

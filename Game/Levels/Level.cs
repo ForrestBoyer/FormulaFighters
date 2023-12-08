@@ -1,3 +1,4 @@
+using System.Runtime.ExceptionServices;
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -5,6 +6,7 @@ using System.Collections.Generic;
 public partial class Level : Node2D
 {
 	private int HealthScale = 10;
+	private int HandSize = 7;
 	public Random rand = new Random();
 	public int Depth { get; set; }
 
@@ -65,7 +67,12 @@ public partial class Level : Node2D
 		AddChild(DiscardPile);
 
 		// Add hand
+		Hand = handScene.Instantiate<Hand>();
+		Hand.InitCardContainer(Deck.DrawCards(7, true));
+		Hand.UpdateHand();
+		AddChild(Hand);
 
+		// 
 
 		// --------------------------------------------------------
 

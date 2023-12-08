@@ -60,7 +60,7 @@ public partial class CardContainer : Node2D
 	}
 
 	// Draw
-	public List<Card> DrawCards(int Num)
+	public List<Card> DrawCards(int Num, bool removeCards = false)
 	{
 		List<Card> ret;
 
@@ -70,6 +70,14 @@ public partial class CardContainer : Node2D
 		}
 
 		ret = Cards.Take(Num).ToList();
+
+		if (removeCards)
+		{
+			foreach (Card card in ret)
+			{
+				Cards.Remove(card);
+			}
+		}
 		
 		return ret;
 	}
