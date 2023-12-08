@@ -52,7 +52,7 @@ public partial class card_test : Node2D
 		newDeck = deckScene.Instantiate<Deck>();
 		newDeck.Position = new Vector2(100f, 600f);
 		// Deck needs to get card list from inventory
-		newDeck.InitCardContainer(testInventory);
+		newDeck.SetCards(testInventory);
 		AddChild(newDeck);
 
 		newHand = handScene.Instantiate<Hand>();
@@ -60,7 +60,6 @@ public partial class card_test : Node2D
 
 		newDiscard = discardPileScene.Instantiate<DiscardPile>();
 		newDiscard.Position = new Vector2(1180f, 600f);
-		newDiscard.InitCardContainer();
 		AddChild(newDiscard);
 		// --------------------------------------------------------
 
@@ -68,7 +67,7 @@ public partial class card_test : Node2D
 		// Shuffle Deck
 		newDeck.ShuffleCards();
 		// Draw New Hand From Deck
-		newHand.InitCardContainer(newDeck.DrawCards(HandSize));
+		newHand.SetCards(newDeck.DrawCards(HandSize));
 		AddChild(newHand);
 		newHand.UpdateHand();
 		// combat = DuringTurn

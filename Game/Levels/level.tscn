@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmw7hwcd0gx2w"]
+[gd_scene load_steps=3 format=3 uid="uid://dmw7hwcd0gx2w"]
 
 [ext_resource type="Script" path="res://Game/Levels/Level.cs" id="1_ja7sf"]
+[ext_resource type="FontFile" uid="uid://clklrt3n85uto" path="res://Game/Resources/Fonts/rainyhearts.ttf" id="2_ewctg"]
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_ja7sf")
@@ -8,3 +9,23 @@ script = ExtResource("1_ja7sf")
 [node name="Background" type="TextureRect" parent="."]
 offset_right = 1280.0
 offset_bottom = 720.0
+
+[node name="ResultLabel" type="Label" parent="."]
+offset_left = 824.0
+offset_top = 432.0
+offset_right = 878.0
+offset_bottom = 480.0
+theme_override_fonts/font = ExtResource("2_ewctg")
+theme_override_font_sizes/font_size = 48
+text = "= 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubmitButton" type="Button" parent="."]
+offset_left = 904.0
+offset_top = 441.0
+offset_right = 976.0
+offset_bottom = 472.0
+text = "Submit"
+
+[connection signal="pressed" from="SubmitButton" to="." method="_on_submit_button_pressed"]

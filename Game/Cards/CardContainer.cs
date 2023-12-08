@@ -7,47 +7,41 @@ public partial class CardContainer : Node2D
 {
 	public List<Card> Cards = new List<Card>();
 
-	protected int size;
-
-	// Initializer for card container with empty card list
-	public void InitCardContainer()
-	{
-		size = Cards.Count;
-	}
+	public int size;
 
 	// Initializer for card container with list of cards
-	public void InitCardContainer(List<Card> Cards)
+	public void SetCards(List<Card> cards)
 	{
-		this.Cards.AddRange(Cards);
-        size = this.Cards.Count;
+		Cards = cards;
+        size = Cards.Count;
 	}
 
 	// Add Card to End
-	public void AddCard(Card Card)
+	public void AddCard(Card card)
 	{
-		Cards.Add(Card);
+		Cards.Add(card);
+		size = Cards.Count;
+	}
+
+	public void AddCards(List<Card> cards)
+	{
+		foreach (Card card in cards)
+		{
+			Cards.Add(card);
+		}
+
 		size = Cards.Count;
 	}
 
 	// Replace Cards
-	public void ReplaceCards(List<Card> Cards){
-		this.Cards.Clear();
-		this.Cards = Cards;
-        size = this.Cards.Count;
-	}
-
-	// Remove Card from end
-	public Card RemoveCard()
-	{		
-		Card ret;
-		ret = Cards[Cards.Count - 1];
-		Cards.RemoveAt(Cards.Count - 1);
-		size = Cards.Count;
-		return ret;
+	public void ReplaceCards(List<Card> cards){
+		Cards.Clear();
+		Cards = cards;
+        size = Cards.Count;
 	}
 
 	// Empty Container
-	public void EmptyContainer() 
+	public void Empty() 
 	{
 		Cards.Clear();
 		size = Cards.Count;
@@ -60,7 +54,7 @@ public partial class CardContainer : Node2D
 	}
 
 	// Draw
-	public List<Card> DrawCards(int Num, bool removeCards = false)
+	public List<Card> DrawCards(int Num)
 	{
 		List<Card> ret;
 
@@ -71,13 +65,12 @@ public partial class CardContainer : Node2D
 
 		ret = Cards.Take(Num).ToList();
 
-		if (removeCards)
+		foreach (Card card in ret)
 		{
-			foreach (Card card in ret)
-			{
-				Cards.Remove(card);
-			}
+			Cards.Remove(card);
 		}
+
+		size = Cards.Count;
 		
 		return ret;
 	}

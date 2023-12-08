@@ -41,8 +41,6 @@ label_settings = SubResource("LabelSettings_typsa")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="body_entered" from="Collider" to="." method="_on_collider_body_entered"]
-[connection signal="body_exited" from="Collider" to="." method="_on_collider_body_exited"]
 [connection signal="input_event" from="Collider" to="." method="_on_collider_input_event"]
 [connection signal="mouse_entered" from="Collider" to="." method="_on_collider_mouse_entered"]
 [connection signal="mouse_exited" from="Collider" to="." method="_on_collider_mouse_exited"]

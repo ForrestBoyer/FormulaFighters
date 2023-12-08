@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class Map : CanvasLayer
 {
-	private int STARTING_INVENTORY_SIZE = 10;
+	private int STARTING_INVENTORY_SIZE = 20;
 	private int MAX_STARTING_NUM = 10;
 	private int CHANCE_OF_STARTING_MULT_OP = 5;
 

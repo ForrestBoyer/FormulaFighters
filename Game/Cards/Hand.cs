@@ -1,13 +1,10 @@
 using Godot;
-using System.Collections.Generic;
-using System.Linq;
 
 public partial class Hand : CardContainer
 {
 	private Vector2 leftmostCardPosition;
 	private PackedScene cardScene;
-	private List<Node> removedCards = new List<Node>();
-	private Card tempCard;
+	private Card card;
 
 	public int MaxHandSize { get; set; }
 
@@ -17,10 +14,7 @@ public partial class Hand : CardContainer
 		PackedScene cardScene = GD.Load<PackedScene>("res://Game/Cards/card.tscn");
 		leftmostCardPosition = new Vector2(408f, 600f);
 
-		// delete all current cards
-		removedCards = GetChildren().ToList();
-
-		foreach (Card card in removedCards) 
+		foreach (Card card in GetChildren()) 
 		{
 			RemoveChild(card);
 			card.QueueFree();
@@ -29,19 +23,21 @@ public partial class Hand : CardContainer
 		// for each card in cardList
 		for(int i = 0; i < size; i++) 
 		{
-			if (Cards[i].cardType == Card.CardType.Number) 
+			if (Cards[i].CardType == CardType.Number) 
 			{
-				tempCard = cardScene.Instantiate<Card>();
-				tempCard.InitCard(Cards[i].intVal, i);
-				tempCard.SetPos(leftmostCardPosition);
-				AddChild(tempCard);
+				card = cardScene.Instantiate<Card>();
+				card.InitCard(Cards[i].IntVal, i);
+				card.HomePosition = leftmostCardPosition;
+				card.MoveTo(card.HomePosition);
+				AddChild(card);
 			} 
-			else if (Cards[i].cardType ==Card.CardType.Operator) 
+			else if (Cards[i].CardType == CardType.Operator) 
 			{
-				tempCard = cardScene.Instantiate<Card>();
-				tempCard.InitCard(Cards[i].opVal, i);
-				tempCard.SetPos(leftmostCardPosition);
-				AddChild(tempCard);
+				card = cardScene.Instantiate<Card>();
+				card.InitCard(Cards[i].OpVal, i);
+				card.HomePosition = leftmostCardPosition;
+				card.MoveTo(card.HomePosition);
+				AddChild(card);
 			}
 			leftmostCardPosition.X += 80f;
 		}

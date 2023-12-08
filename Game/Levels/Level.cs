@@ -2,6 +2,7 @@ using System.Runtime.ExceptionServices;
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 public partial class Level : Node2D
 {
@@ -59,19 +60,18 @@ public partial class Level : Node2D
 		Map map = (Map)GetParent();
 
 		// Initiate starting deck in level with what is in inventory
-		Deck.InitCardContainer(map.Inventory.Cards);
+		Deck.SetCards(map.Inventory.Cards);
 		Deck.ShuffleCards();
 		AddChild(Deck);
 
 		// Add discard pile
 		DiscardPile = discardPileScene.Instantiate<DiscardPile>();
 		DiscardPile.Position = new Vector2(1180f, 600f);
-		DiscardPile.InitCardContainer();
 		AddChild(DiscardPile);
 
 		// Add hand
 		Hand = handScene.Instantiate<Hand>();
-		Hand.InitCardContainer(Deck.DrawCards(7, true));
+		Hand.SetCards(Deck.DrawCards(7));
 		Hand.UpdateHand();
 		AddChild(Hand);
 
@@ -84,8 +84,15 @@ public partial class Level : Node2D
 			slot.Position = cardSlotPosition;
 			cardSlotPosition.X += 80f;
 			AddChild(slot);
-			GD.Print(slot.Name);
 		}
+
+		// Put result label in correct position
+		Label resultLabel = GetNode<Label>("ResultLabel");
+		resultLabel.Position = cardSlotPosition + new Vector2(-20f, -20f);
+
+		// Put submit button in correct position
+		Button submitButton = GetNode<Button>("SubmitButton");
+		submitButton.Position = resultLabel.Position + new Vector2(60f, 10f);
 
 		// --------------------------------------------------------
 
@@ -122,6 +129,39 @@ public partial class Level : Node2D
 		{
 			EndLevel(true);
 		}
+	}
+
+	public void _on_submit_button_pressed()
+	{
+		NewTurn();
+	}
+
+	public void NewTurn()
+	{
+		// Move cards from hand to discard pile
+		DiscardPile.AddCards(Hand.DrawCards(Hand.size));
+
+		// If not enough cards in deck to draw
+		if (Deck.size < HandSize)
+		{
+			int remainingCardsToDraw = HandSize - Deck.size;
+
+			// Move remaining cards in deck to hand
+			Hand.AddCards(Deck.DrawCards(Deck.size));
+
+			// Move discard pile to deck
+			Deck.AddCards(DiscardPile.DrawCards(DiscardPile.size));
+
+			Deck.ShuffleCards();
+
+			Hand.AddCards(Deck.DrawCards(remainingCardsToDraw));
+		}
+		else
+		{
+			Hand.AddCards(Deck.DrawCards(HandSize));
+		}
+
+		Hand.UpdateHand();
 	}
 
 	public void EndLevel(bool win)

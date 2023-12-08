@@ -1,18 +1,19 @@
 using Godot;
 using System;
 
-public partial class CardSlot : StaticBody2D
+public partial class CardSlot : Node2D
 { 
-	// private StaticBody2D cardSlot;
-	// private CollisionShape2D cardCollider;
+	public Card CardInSlot { get; set; }
+
+	public bool SlotOpen { get; set; } = true;
+
+	public bool _isHovered { get; set; } = false;
 
 	private ColorRect slotColor;
-	// Called when the node enters the scene tree for the first time.
 	
+	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		// cardSlot = GetNode<StaticBody2D>("/root/testLevel/CardSlot");
-		// cardCollider = GetNode<CollisionShape2D>("CollisionShape2D");
 		slotColor = GetNode<ColorRect>("ColorRect");
 		slotColor.Color = new Color("ORANGE");
 	}
@@ -22,19 +23,14 @@ public partial class CardSlot : StaticBody2D
 	{
 	}
 
-	// When card is inside card slot
-	public void _on_card_detector_area_entered(Area2D area) 
+	public void _on_card_detector_mouse_entered()
 	{
-		// cardSlot.Visible = false;
-		slotColor.Color = new Color("RED");
-		// cardCollider.Disabled = true;
+		_isHovered = true;
 	}
 
-	// When card has left card slot
-	public void _on_card_detector_area_exited(Area2D area) 
+	public void _on_card_detector_mouse_exited()
 	{
-		// cardSlot.Visible = true;
-		slotColor.Color = new Color("ORANGE");
-		// cardCollider.Disabled = false;
+		_isHovered = false;
 	}
+
 }
