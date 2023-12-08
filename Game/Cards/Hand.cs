@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class Hand : card_container
+public partial class Hand : CardContainer
 {
 	private Vector2 leftmostCardPosition;
 	private PackedScene cardScene;

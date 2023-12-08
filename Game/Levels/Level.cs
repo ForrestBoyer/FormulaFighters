@@ -12,7 +12,7 @@ public partial class Level : Node2D
 	public TextureRect Background { get; set; }
 	public Enemy Enemy { get; set; }
 	public Player Player { get; set; }
-	public deck Deck { get; set; }
+	public Deck Deck { get; set; }
 	public DiscardPile DiscardPile { get; set; }
 	public Hand Hand { get; set; }
 
@@ -47,7 +47,7 @@ public partial class Level : Node2D
 		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/card.tscn");
 
 		// Add Deck
-		Deck = deckScene.Instantiate<deck>();
+		Deck = deckScene.Instantiate<Deck>();
 		Deck.Position = new Vector2(100f, 600f);
 
 		// Get map because it holds the inventory

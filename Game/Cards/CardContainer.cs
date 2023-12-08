@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ExtensionMethods;
 
-public partial class card_container : Node2D
+public partial class CardContainer : Node2D
 {
 	public List<Card> Cards = new List<Card>();
 

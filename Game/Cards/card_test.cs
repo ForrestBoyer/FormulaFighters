@@ -14,7 +14,7 @@ public partial class card_test : Node2D
 
 	private const int HandSize = 7;
 	private int DeckSize;
-	private deck newDeck;
+	private Deck newDeck;
 	private Hand newHand;
 	private DiscardPile newDiscard;
 	private State combat;
@@ -49,7 +49,7 @@ public partial class card_test : Node2D
 		// --------------------------------------------------------
 
 		// --------- Create a deck, hand, and discard pile ---------
-		newDeck = deckScene.Instantiate<deck>();
+		newDeck = deckScene.Instantiate<Deck>();
 		newDeck.Position = new Vector2(100f, 600f);
 		// Deck needs to get card list from inventory
 		newDeck.InitCardContainer(testInventory);

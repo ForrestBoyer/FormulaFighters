@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bd4otfu4poeij"]
 
 [ext_resource type="PackedScene" uid="uid://wecff4ah5tam" path="res://Game/Cards/card_container.tscn" id="1_iiki7"]
-[ext_resource type="Script" path="res://Game/Cards/deck.cs" id="2_rcq16"]
+[ext_resource type="Script" path="res://Game/Cards/Deck.cs" id="2_edv6k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_f5hls"]
 font_size = 18
@@ -9,7 +9,7 @@ outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Deck" instance=ExtResource("1_iiki7")]
-script = ExtResource("2_rcq16")
+script = ExtResource("2_edv6k")
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
 anchors_preset = 8

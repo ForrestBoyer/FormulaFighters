@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Inventory : card_container
+public partial class Inventory : CardContainer
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
