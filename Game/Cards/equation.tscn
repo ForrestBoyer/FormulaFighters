@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://kp4v6v4mnyna"]
+
+[ext_resource type="Script" path="res://Game/Cards/Equation.cs" id="1_f85s7"]
+
+[node name="Equation" type="Node2D"]
+position = Vector2(450, 450)
+script = ExtResource("1_f85s7")

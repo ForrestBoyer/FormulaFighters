@@ -20,6 +20,8 @@ public partial class Card : Node2D
 	// Card Position Stuff
 	public Vector2 HomePosition { get; set; }
 	private bool _isDragging = false;
+	public bool _isInCardSlot = false;
+	private CardSlot CardSlot;
 
 	public void InitCard() 
 	{
@@ -46,7 +48,7 @@ public partial class Card : Node2D
 		Position = position;
 	}
 
-	public bool IsOverCardSlot()
+	public bool IsOverCardSlot(Card card)
 	{
 		Level level = (Level)GetParent().GetParent();
 
@@ -54,13 +56,18 @@ public partial class Card : Node2D
 		{
 			if (child is CardSlot cardSlot)
 			{
-				if (cardSlot._isHovered)
+				if (cardSlot._isHovered && cardSlot.SlotOpen)
 				{
+					if (card.CardSlot != null)
+					{
+						card.CardSlot.SlotOpen = true;
+						card.CardSlot = null;
+					}
+					cardSlot.SlotOpen = false;
+					cardSlot.CardInSlot = card;
+					card.Position = cardSlot.Position;
+					card.CardSlot = cardSlot;
 					return true;
-				}
-				else
-				{
-					return false;
 				}
 			}
 		}
@@ -111,13 +118,18 @@ public partial class Card : Node2D
 		if (@event.IsActionReleased("click"))
 		{
 			_isDragging = false;
-			if (IsOverCardSlot())
+			if (IsOverCardSlot(this))
 			{
-				GD.Print("Over slot");
+				_isInCardSlot = true;
 			}
 			else
 			{
 				MoveTo(HomePosition);
+				if (CardSlot != null)
+				{
+					CardSlot.SlotOpen = true;
+					CardSlot = null;
+				}
 			}
 		}
 	}

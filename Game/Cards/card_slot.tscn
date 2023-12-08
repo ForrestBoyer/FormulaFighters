@@ -14,7 +14,7 @@ offset_top = -24.0
 offset_right = 16.0
 offset_bottom = 24.0
 mouse_filter = 2
-color = Color(0.74902, 0.631373, 0.356863, 0.788235)
+color = Color(0.878431, 0.564706, 0.25098, 0.788235)
 
 [node name="CardDetector" type="Area2D" parent="."]
 

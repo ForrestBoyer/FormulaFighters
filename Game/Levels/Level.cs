@@ -19,7 +19,6 @@ public partial class Level : Node2D
 	public Deck Deck { get; set; }
 	public DiscardPile DiscardPile { get; set; }
 	public Hand Hand { get; set; }
-	public List<CardSlot> CardSlots = new List<CardSlot>();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
