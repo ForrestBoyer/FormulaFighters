@@ -44,7 +44,7 @@ public partial class Level : Node2D
 		PackedScene deckScene = GD.Load<PackedScene>("res://Game/Cards/deck.tscn");
 		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/hand.tscn");
 		PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/discard_pile.tscn");
-		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/new_card.tscn");
+		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/card.tscn");
 
 		// Add Deck
 		Deck = deckScene.Instantiate<deck>();
