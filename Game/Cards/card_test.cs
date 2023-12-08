@@ -11,6 +11,7 @@ public partial class card_test : Node2D
 		WinLevel,
 		LoseLevel
 	}
+	
 	private const int HandSize = 7;
 	private int DeckSize;
 	private deck newDeck;
@@ -69,7 +70,7 @@ public partial class card_test : Node2D
 		// Draw New Hand From Deck
 		newHand.InitCardContainer(newDeck.DrawCards(HandSize));
 		AddChild(newHand);
-		newHand.updateHand();
+		newHand.UpdateHand();
 		// combat = DuringTurn
 		combat = State.DuringTurn;
 		// --------------------------------------
@@ -96,7 +97,7 @@ public partial class card_test : Node2D
 			// Draw New Hand From Deck
 			newHand.ReplaceCards(newDeck.DrawCards(HandSize));
 			// Update Hand
-			newHand.updateHand();
+			newHand.UpdateHand();
 			// combat = DuringTurn
 			combat = State.DuringTurn;
 		} 

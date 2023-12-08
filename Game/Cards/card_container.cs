@@ -5,79 +5,58 @@ using ExtensionMethods;
 
 public partial class card_container : Node2D
 {
-	protected List<new_card> cardList = new List<new_card>();
+	public List<new_card> Cards = new List<new_card>();
+
 	protected int size;
 
 	// Initializer for card container with empty card list
 	public void InitCardContainer()
 	{
-		size = cardList.Count;
+		size = Cards.Count;
 	}
 
 	// Initializer for card container with list of cards
 	public void InitCardContainer(List<new_card> Cards)
 	{
-		cardList.AddRange(Cards);
-		size = cardList.Count;
+		this.Cards.AddRange(Cards);
+        size = this.Cards.Count;
 	}
 
 	// Add Card to End
 	public void AddCard(new_card Card)
 	{
-		cardList.Append(Card);
-		size = cardList.Count;
+		Cards.Add(Card);
+		size = Cards.Count;
 	}
 
 	// Replace Cards
 	public void ReplaceCards(List<new_card> Cards){
-		cardList.Clear();
-		cardList = Cards;
-		size = cardList.Count;
+		this.Cards.Clear();
+		this.Cards = Cards;
+        size = this.Cards.Count;
 	}
 
 	// Remove Card from end
 	public new_card RemoveCard()
 	{		
 		new_card ret;
-		ret = cardList[cardList.Count - 1];
-		cardList.RemoveAt(cardList.Count - 1);
-		size = cardList.Count;
+		ret = Cards[Cards.Count - 1];
+		Cards.RemoveAt(Cards.Count - 1);
+		size = Cards.Count;
 		return ret;
 	}
 
 	// Empty Container
 	public void EmptyContainer() 
 	{
-		cardList.Clear();
-		size = cardList.Count();
+		Cards.Clear();
+		size = Cards.Count;
 	}
 
 	// Shuffle
 	public void ShuffleCards()
 	{
-		foreach (var card in cardList)
-		{
-			if (card.cardType == new_card.CardType.Number)
-			{
-				GD.Print(card.intVal);
-			}
-			else
-			{
-				GD.Print(card.opVal);
-			}
-		}
-		cardList.Shuffle();
-		foreach (var card in cardList)
-		{
-			if (card.cardType == new_card.CardType.Number)
-			{
-				GD.Print(card.intVal);
-			}
-			else
-			{
-				GD.Print(card.opVal);
-			}
-		}
+		Cards.Shuffle();
 	}
 
 	// Draw
@@ -85,16 +64,15 @@ public partial class card_container : Node2D
 	{
 		List<new_card> ret;
 
-		if (cardList.Count < Num) 
+		if (Cards.Count < Num) 
 		{
 			return null;
 		}
 
-		ret = cardList.Take(Num).ToList();
+		ret = Cards.Take(Num).ToList();
 		
 		return ret;
 	}
-
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

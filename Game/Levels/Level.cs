@@ -9,6 +9,7 @@ public partial class Level : Node2D
 	public Random rand = new Random();
 	public Enemy Enemy { get; set; }
 	public Player Player { get; set; }
+	public deck Deck { get; set; }
 	public int Depth { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
@@ -41,13 +42,16 @@ public partial class Level : Node2D
 		PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/discard_pile.tscn");
 		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/new_card.tscn");
 
-		for (int i = 0; i < 5; i++)
-		{
-			new_card card = cardScene.Instantiate<new_card>();
-			card.InitCard(rand.Next(5), i);
-			card.Position = new Vector2(480f, 480 + (i * 100));
-			AddChild(card);
-		}
+		// Add Deck
+		Deck = deckScene.Instantiate<deck>();
+		Deck.Position = new Vector2(100f, 600f);
+
+		// Get map because it holds the inventory
+		Map map = (Map)GetParent();
+
+		// Initiate starting deck in level with what is in inventory
+		Deck.InitCardContainer(map.Inventory.Cards);
+		AddChild(Deck);
 
 		// --------------------------------------------------------
 

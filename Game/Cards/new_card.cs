@@ -21,7 +21,6 @@ public partial class new_card : Node2D
 
 	// ID number for card
 	private int cardID;
-
 	// Card display text
 	private Godot.Label displayText;
 	// Initial card position when clicked
