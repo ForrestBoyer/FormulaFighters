@@ -41,7 +41,7 @@ public partial class MapGenerator : Node
         for(int i = 0; i < NUM_LEVELS - 1; i++)
         {
             // If path branches
-            if(rng.Next(1, 4) == 1 && i != 0){
+            if(rng.Next(1, BRANCH_CHANCE) == 1 && i != 0){
                 // ------------- Create new markers on the map ----------------
                 // Bottom Marker
                 LevelMarker new_marker1 = (LevelMarker)marker.Duplicate();
