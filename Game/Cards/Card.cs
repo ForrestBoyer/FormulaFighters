@@ -81,6 +81,17 @@ public partial class Card : Node2D
         }
 	}
 
+    public void Refresh(){
+        if (CardType == CardType.Number) 
+		{
+			DisplayLabel.Text = IntVal.ToString();
+		} 
+		else if (CardType == CardType.Operator) 
+		{
+			DisplayLabel.Text = OpVal;
+		}
+    }
+
 	public void MoveTo(Vector2 position)
 	{
 		Position = position;
