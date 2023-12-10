@@ -1,16 +1,16 @@
-using System.Runtime.ExceptionServices;
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 public partial class Level : Node2D
 {
+	public Random rand = new Random();
+	public int Depth { get; set; }
+
+	// Settings
 	private int HealthScale = 10;
 	private int HandSize = 7;
 	private int NumCardSlots = 5;
-	public Random rand = new Random();
-	public int Depth { get; set; }
 
 	// Level Objects
 	public TextureRect Background { get; set; }
@@ -54,25 +54,21 @@ public partial class Level : Node2D
 		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/card.tscn");
 		PackedScene cardSlotScene = GD.Load<PackedScene>("res://Game/Cards/card_slot.tscn");
 
-		// Add Deck
-		Deck = deckScene.Instantiate<Deck>();
-		Deck.Position = new Vector2(100f, 600f);
-
 		// Get map because it holds the inventory
 		Map map = (Map)GetParent();
 
 		// Connect card signals
 		foreach (Card card in map.Inventory.Cards)
 		{
-			card.CardMovedToSlot += () => 
-			{
-				UpdateResult();
-				GD.Print("HI");
-			};
+			card.CardMovedToSlot += () => { UpdateResult(); };
 		}
 
 		// Initiate starting deck in level with what is in inventory
+		Deck = deckScene.Instantiate<Deck>();
+		Deck.Position = new Vector2(100f, 600f);
+		GD.Print(map.Inventory.Cards.Count + " 1");
 		Deck.SetCards(map.Inventory.Cards);
+		GD.Print(map.Inventory.Cards.Count + " 2");
 		Deck.ShuffleCards();
 		AddChild(Deck);
 
@@ -80,6 +76,8 @@ public partial class Level : Node2D
 		DiscardPile = discardPileScene.Instantiate<DiscardPile>();
 		DiscardPile.Position = new Vector2(1180f, 600f);
 		AddChild(DiscardPile);
+
+		GD.Print(map.Inventory.Cards.Count + " 3");
 
 		// Add hand
 		Hand = handScene.Instantiate<Hand>();
@@ -112,10 +110,7 @@ public partial class Level : Node2D
 		EquationLabel.Position = new Vector2(450f, 500f);
 
 		Timer timer = EquationLabel.GetChild<Timer>(0);
-		timer.Timeout += () => 
-		{
-			EquationLabel.Visible = false;
-		};
+		timer.Timeout += () => { EquationLabel.Visible = false; };
 
 		// --------------------------------------------------------
 
@@ -166,6 +161,7 @@ public partial class Level : Node2D
 		// When equation is invalid
 		else
 		{
+			// Display error message for short amount of time
 			EquationLabel.Text = equationInfo.Item2;
 			EquationLabel.Visible = true;
 			Timer timer = EquationLabel.GetChild<Timer>(0);
@@ -196,6 +192,19 @@ public partial class Level : Node2D
 			}
 		}
 
+		// Empty equation works, more or less passing a turn
+		if (equation.Count == 0)
+		{
+			return (true, "Empty Equation", equation);
+		}
+
+		// Can't start with operator
+		if (equation[0].Item1 == CardType.Operator)
+		{
+			return (false, "Invalid Equation: Equation cannot begin with an operator.", equation);
+		}
+
+		// Can't end with operator
 		if (equation[^1].Item1 == CardType.Operator)
 		{
 			return (false, "Invalid Equation: Equation cannot end with an operator.", equation);
@@ -295,7 +304,7 @@ public partial class Level : Node2D
 
 			map.Current_Depth++;
 			map.UpdateMarkers();
-			QueueFree();
+			FreeEverything();
 		}
 		else
 		{	
@@ -303,7 +312,17 @@ public partial class Level : Node2D
 			// TODO: Go back to main menu, possibly have a lose screen?
 
 			map.UpdateMarkers();
-			QueueFree();
+			FreeEverything();
 		}
+	}
+
+	public void FreeEverything()
+	{
+		Deck.QueueFree();
+		Hand.QueueFree();
+		DiscardPile.QueueFree();
+		Player.QueueFree();
+		Enemy.QueueFree();
+		QueueFree();
 	}
 }

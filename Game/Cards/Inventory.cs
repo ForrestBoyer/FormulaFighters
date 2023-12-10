@@ -6,10 +6,14 @@
 // Inventory.InitCard(int or string) will create a new card and add it
 
 using Godot;
-using System;
 
 public partial class Inventory : CardContainer
 {
+    // Initial generation parameters
+    private int STARTING_INVENTORY_SIZE = 20;
+	private int MAX_STARTING_NUM = 10;
+	private int CHANCE_OF_STARTING_MULT_OP = 5;
+
     // Positioning Variables
     private int leftSideOffset = 100;
     private int spaceHorizontal = 100;
@@ -47,10 +51,12 @@ public partial class Inventory : CardContainer
         AddChild(newCard);
     }
 
-    private void ShowCards(){
+    private void ShowCards()
+    {
         GetNode<ColorRect>("ColorRect").Visible = false;
         GetNode<Label>("CloseX").Visible = true;
-        foreach(Card c in Cards){
+        foreach(Card c in Cards)
+        {
             c.Visible = true;
         }
     }
@@ -58,7 +64,8 @@ public partial class Inventory : CardContainer
     private void HideCards(){
         GetNode<ColorRect>("ColorRect").Visible = true;
         GetNode<Label>("CloseX").Visible = false;
-        foreach(Card c in Cards){
+        foreach(Card c in Cards)
+        {
             c.Visible = false;
         }
     }
@@ -67,7 +74,8 @@ public partial class Inventory : CardContainer
 	public override void _Ready()
 	{
         // Create Starting Number Cards 1-9
-        for(int i = 1; i <= 9; i++){
+        for(int i = 1; i <= 9; i++)
+        {
             InitCard(i);
         }
         // Create Starting Operator Cards 2 +'s, 2 -'s, 1 x
@@ -84,13 +92,15 @@ public partial class Inventory : CardContainer
 	}
 
 	public void _on_color_rect_gui_input(InputEvent @event){
-        if (@event.IsActionPressed("click")){
+        if (@event.IsActionPressed("click"))
+        {
             ShowCards();
 		}
     }
 
     public void _on_close_x_input_event(Node viewport, InputEvent @event, int shape_idx){
-        if (@event.IsActionPressed("click")){
+        if (@event.IsActionPressed("click"))
+        {
             HideCards();
 		}
     }
