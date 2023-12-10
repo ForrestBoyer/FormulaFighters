@@ -1,7 +1,9 @@
 // IVENTORY
+// Initializes with cards 1-9, two +'s, two -'s, and one x
 // Displays an inventory icon that, when clicked, displays all of the cards in the inventory
 // Cards displayed in a 12 x N grid
-// X Button 
+// X Button hides cards
+// Inventory.InitCard(int or string) will create a new card and add it
 
 using Godot;
 using System;
