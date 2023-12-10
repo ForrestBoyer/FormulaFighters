@@ -27,3 +27,4 @@ text = "None"
 [connection signal="CardClicked" from="rewardCard1" to="." method="_on_reward_card_clicked" binds= [1]]
 [connection signal="CardClicked" from="rewardCard2" to="." method="_on_reward_card_clicked" binds= [2]]
 [connection signal="CardClicked" from="rewardCard3" to="." method="_on_reward_card_clicked" binds= [3]]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
