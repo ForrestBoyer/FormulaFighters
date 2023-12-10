@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd4otfu4poeij"]
+[gd_scene load_steps=7 format=3 uid="uid://bd4otfu4poeij"]
 
 [ext_resource type="PackedScene" uid="uid://wecff4ah5tam" path="res://Game/Cards/card_container.tscn" id="1_iiki7"]
 [ext_resource type="Script" path="res://Game/Cards/Deck.cs" id="2_edv6k"]
@@ -7,6 +7,18 @@
 font_size = 18
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ekvgw"]
+size = Vector2(46, 64)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3dc6m"]
+font_size = 30
+font_color = Color(1, 0, 0, 1)
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_400e7"]
+size = Vector2(26, 29)
 
 [node name="Deck" instance=ExtResource("1_iiki7")]
 script = ExtResource("2_edv6k")
@@ -25,8 +37,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.6, 0.596078, 0.262745, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="." index="1"]
+[node name="Label" type="Label" parent="ColorRect" index="0"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -42,3 +56,28 @@ text = "Deck"
 label_settings = SubResource("LabelSettings_f5hls")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="ColorRect" index="1"]
+position = Vector2(24, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/Area2D" index="0"]
+shape = SubResource("RectangleShape2D_ekvgw")
+
+[node name="CloseX" type="Label" parent="." index="1"]
+visible = false
+offset_left = -9.0
+offset_top = -22.0
+offset_right = 11.0
+offset_bottom = 23.0
+text = "X"
+label_settings = SubResource("LabelSettings_3dc6m")
+
+[node name="Area2D" type="Area2D" parent="CloseX" index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloseX/Area2D" index="0"]
+position = Vector2(9, 21.5)
+shape = SubResource("RectangleShape2D_400e7")
+
+[connection signal="input_event" from="ColorRect/Area2D" to="." method="_on_icon_input_event"]
+[connection signal="input_event" from="CloseX/Area2D" to="." method="_on_close_x_input_event"]

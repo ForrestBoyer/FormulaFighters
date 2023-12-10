@@ -21,25 +21,27 @@ size = Vector2(26, 29)
 script = ExtResource("1_6siq2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 72.0
-offset_bottom = 96.0
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 32.0
 color = Color(0.823529, 0.823529, 0.823529, 1)
 
 [node name="Label" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 36.5
-offset_right = 69.0
-offset_bottom = 59.5
+offset_left = -9.0
+offset_top = 21.5
+offset_right = 57.0
+offset_bottom = 44.5
 text = "Inventory"
 label_settings = SubResource("LabelSettings_25kuo")
 
 [node name="CloseX" type="Label" parent="."]
 visible = false
-offset_left = 26.0
-offset_top = 24.0
-offset_right = 66.0
-offset_bottom = 69.0
+offset_left = -9.0
+offset_top = -22.0
+offset_right = 11.0
+offset_bottom = 23.0
 text = "X"
 label_settings = SubResource("LabelSettings_rfho4")
 
@@ -49,5 +51,5 @@ label_settings = SubResource("LabelSettings_rfho4")
 position = Vector2(9, 21.5)
 shape = SubResource("RectangleShape2D_qmu87")
 
-[connection signal="gui_input" from="ColorRect" to="." method="_on_color_rect_gui_input"]
+[connection signal="gui_input" from="ColorRect" to="." method="_on_icon_input_event"]
 [connection signal="input_event" from="CloseX/Area2D" to="." method="_on_close_x_input_event"]

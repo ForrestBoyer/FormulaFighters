@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2lxpb6amif7n"]
+[gd_scene load_steps=6 format=3 uid="uid://d2lxpb6amif7n"]
 
 [ext_resource type="PackedScene" uid="uid://wecff4ah5tam" path="res://Game/Cards/card_container.tscn" id="1_ig2xu"]
 [ext_resource type="Script" path="res://Game/Cards/DiscardPile.cs" id="2_56ldj"]
@@ -7,6 +7,15 @@
 font_size = 18
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_q64g7"]
+font_size = 30
+font_color = Color(1, 0, 0, 1)
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sc5kd"]
+size = Vector2(26, 29)
 
 [node name="DiscardPile" instance=ExtResource("1_ig2xu")]
 script = ExtResource("2_56ldj")
@@ -25,7 +34,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.890196, 0.219608, 0.262745, 1)
 
-[node name="Label" type="Label" parent="." index="1"]
+[node name="Label" type="Label" parent="ColorRect" index="0"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -41,3 +51,21 @@ text = "Discard"
 label_settings = SubResource("LabelSettings_7x8r0")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CloseX" type="Label" parent="." index="1"]
+visible = false
+offset_left = -9.0
+offset_top = -22.0
+offset_right = 11.0
+offset_bottom = 23.0
+text = "X"
+label_settings = SubResource("LabelSettings_q64g7")
+
+[node name="Area2D" type="Area2D" parent="CloseX" index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloseX/Area2D" index="0"]
+position = Vector2(9, 21.5)
+shape = SubResource("RectangleShape2D_sc5kd")
+
+[connection signal="gui_input" from="ColorRect" to="." method="_on_icon_input_event"]
+[connection signal="input_event" from="CloseX/Area2D" to="." method="_on_close_x_input_event"]

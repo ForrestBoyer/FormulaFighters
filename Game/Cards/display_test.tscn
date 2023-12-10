@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://x6w2pjqorjvb"]
+
+[ext_resource type="PackedScene" uid="uid://ohwpqn4jliqq" path="res://Game/Cards/inventory.tscn" id="1_68e4g"]
+[ext_resource type="Script" path="res://Game/Cards/display_test.cs" id="1_ku11r"]
+[ext_resource type="PackedScene" uid="uid://bd4otfu4poeij" path="res://Game/Cards/deck.tscn" id="2_3pif7"]
+[ext_resource type="PackedScene" uid="uid://d2lxpb6amif7n" path="res://Game/Cards/discard_pile.tscn" id="3_dde7l"]
+
+[node name="display_test" type="Node2D"]
+script = ExtResource("1_ku11r")
+
+[node name="Inventory" parent="." instance=ExtResource("1_68e4g")]
+position = Vector2(23, 232)
+
+[node name="Deck" parent="." instance=ExtResource("2_3pif7")]
+position = Vector2(23, 152)
+
+[node name="DiscardPile" parent="." instance=ExtResource("3_dde7l")]
+position = Vector2(24, 76)
