@@ -94,7 +94,7 @@ public partial class card_test : Node2D
 			// Shuffle Deck
 			newDeck.ShuffleCards();
 			// Draw New Hand From Deck
-			newHand.ReplaceCards(newDeck.DrawCards(HandSize));
+			newHand.SetCards(newDeck.DrawCards(HandSize));
 			// Update Hand
 			newHand.UpdateHand();
 			// combat = DuringTurn
