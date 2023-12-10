@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://detm4uga0q0e3"]
+
+[ext_resource type="Script" path="res://Game/Menus/game_over.cs" id="1_bh0g2"]
+[ext_resource type="FontFile" uid="uid://bhsc24e44yf06" path="res://Game/Resources/Fonts/dogicapixelbold.ttf" id="1_btvxb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_l100h"]
+font = ExtResource("1_btvxb")
+font_size = 42
+font_color = Color(1, 0, 0, 1)
+
+[node name="GameOver" type="Node2D"]
+script = ExtResource("1_bh0g2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_l100h")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

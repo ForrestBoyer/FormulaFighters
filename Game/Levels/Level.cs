@@ -16,12 +16,15 @@ public partial class Level : Node2D
 	public TextureRect Background { get; set; }
 	public Enemy Enemy { get; set; }
 	public Player Player { get; set; }
-	public Deck Deck { get; set; }
+	public deck Deck { get; set; }
 	public DiscardPile DiscardPile { get; set; }
 	public Hand Hand { get; set; }
 	public List<CardSlot> CardSlots { get; set; } = new List<CardSlot>();
 	public Label ResultLabel { get; set; }
 	public Label EquationLabel { get; set; }
+
+	// Win/Lose Scene
+	public PackedScene gameOverScreen;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -64,7 +67,7 @@ public partial class Level : Node2D
 		}
 
 		// Initiate starting deck in level with what is in inventory
-		Deck = deckScene.Instantiate<Deck>();
+		Deck = deckScene.Instantiate<deck>();
 		Deck.Position = new Vector2(100f, 600f);
 		GD.Print(map.Inventory.Cards.Count + " 1");
 		Deck.SetCards(map.Inventory.Cards);
@@ -135,9 +138,14 @@ public partial class Level : Node2D
 		}
 		else
 		{
-			GD.Print("Faied to load Level texture");
+			GD.Print("Failed to load Level texture");
 		}
 		// ----------------------------------------------------------
+		// ----------------- Win/Lose Screens -------------------
+		gameOverScreen = GD.Load<PackedScene>("res://Game/Menus/game_over.tscn");
+		// TO DO: Reward Screen
+		// PackedScene rewardScreen GD.Load<PackedScene>("res://Game/Menus/reward.tscn");
+		// ------------------------------------------------------
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -309,10 +317,10 @@ public partial class Level : Node2D
 		else
 		{	
 			GD.Print("Player Died");
-			// TODO: Go back to main menu, possibly have a lose screen?
 
 			map.UpdateMarkers();
 			FreeEverything();
+			GetTree().ChangeSceneToPacked(gameOverScreen);
 		}
 	}
 
