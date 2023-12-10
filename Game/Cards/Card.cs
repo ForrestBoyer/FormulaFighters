@@ -32,9 +32,13 @@ public partial class Card : Node2D
 	public bool _isInCardSlot = false;
 	private CardSlot CardSlot;
     public Vector2 defaultScale;
+
     // Clicked Signal
     [Signal]
     public delegate void CardClickedEventHandler();
+
+	[Signal]
+	public delegate void CardMovedToSlotEventHandler();
 
 	public void InitCard() 
 	{
@@ -62,26 +66,35 @@ public partial class Card : Node2D
         Random rng = new Random();
 
         // If Generating Operator
-        if(rng.Next(1, OPERATOR_CHANCE) == 1) {
+        if (rng.Next(1, OPERATOR_CHANCE) == 1) 
+		{
 		    CardType = CardType.Operator;
-            if(rng.Next(1, MULT_CHANCE) == 1){
+            if (rng.Next(1, MULT_CHANCE) == 1)
+			{
                 // TODO: Edit to match current implementation
                 OpVal = "x";
-            } else if(rng.Next(1, 2) == 1){
+            } 
+			else if(rng.Next(1, 2) == 1)
+			{
                 // TODO: Edit to match current implementation
                 OpVal = "+";
-            } else {
+            } 
+			else 
+			{
                 // TODO: Edit to match current implementation
                 OpVal = "-";
             }
         // If Generating Number
-        } else {
+        } 
+		else 
+		{
             CardType = CardType.Number;
             IntVal = rng.Next(1, MAX_NUM);
         }
 	}
 
-    public void Refresh(){
+    public void Refresh()
+	{
         if (CardType == CardType.Number) 
 		{
 			DisplayLabel.Text = IntVal.ToString();
@@ -172,6 +185,7 @@ public partial class Card : Node2D
 			if (IsOverCardSlot(this))
 			{
 				_isInCardSlot = true;
+				EmitSignal(SignalName.CardMovedToSlot);
 			}
 			else
 			{

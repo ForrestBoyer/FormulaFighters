@@ -19,6 +19,9 @@ public partial class Level : Node2D
 	public Deck Deck { get; set; }
 	public DiscardPile DiscardPile { get; set; }
 	public Hand Hand { get; set; }
+	public List<CardSlot> CardSlots { get; set; } = new List<CardSlot>();
+	public Label ResultLabel { get; set; }
+	public Label EquationLabel { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -49,7 +52,7 @@ public partial class Level : Node2D
 		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/hand.tscn");
 		PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/discard_pile.tscn");
 		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/card.tscn");
-		PackedScene cardSlotScene = GD.Load<PackedScene>("res://Game//Cards/card_slot.tscn");
+		PackedScene cardSlotScene = GD.Load<PackedScene>("res://Game/Cards/card_slot.tscn");
 
 		// Add Deck
 		Deck = deckScene.Instantiate<Deck>();
@@ -57,6 +60,16 @@ public partial class Level : Node2D
 
 		// Get map because it holds the inventory
 		Map map = (Map)GetParent();
+
+		// Connect card signals
+		foreach (Card card in map.Inventory.Cards)
+		{
+			card.CardMovedToSlot += () => 
+			{
+				UpdateResult();
+				GD.Print("HI");
+			};
+		}
 
 		// Initiate starting deck in level with what is in inventory
 		Deck.SetCards(map.Inventory.Cards);
@@ -82,16 +95,27 @@ public partial class Level : Node2D
 			CardSlot slot = cardSlotScene.Instantiate<CardSlot>();
 			slot.Position = cardSlotPosition;
 			cardSlotPosition.X += 80f;
+			CardSlots.Add(slot);
 			AddChild(slot);
 		}
 
 		// Put result label in correct position
-		Label resultLabel = GetNode<Label>("ResultLabel");
-		resultLabel.Position = cardSlotPosition + new Vector2(-20f, -20f);
+		ResultLabel = GetNode<Label>("ResultLabel");
+		ResultLabel.Position = cardSlotPosition + new Vector2(-20f, -20f);
 
 		// Put submit button in correct position
 		Button submitButton = GetNode<Button>("SubmitButton");
-		submitButton.Position = resultLabel.Position + new Vector2(60f, 10f);
+		submitButton.Position = ResultLabel.Position + new Vector2(60f, 10f);
+
+		// Put Equation Label in correct position and set its timer up
+		EquationLabel = GetNode<Label>("EquationLabel");
+		EquationLabel.Position = new Vector2(450f, 500f);
+
+		Timer timer = EquationLabel.GetChild<Timer>(0);
+		timer.Timeout += () => 
+		{
+			EquationLabel.Visible = false;
+		};
 
 		// --------------------------------------------------------
 
@@ -126,17 +150,114 @@ public partial class Level : Node2D
 	{
 		if (Input.IsActionJustPressed("right_click")) 
 		{
-			EndLevel(true);
+			Enemy.TakeDamage(1000);
 		}
 	}
 
 	public void _on_submit_button_pressed()
 	{
-		NewTurn();
+		var equationInfo = ValidEquation();
+
+		// When equation is valid
+		if (equationInfo.Item1)
+		{
+			NewTurn();
+		}
+		// When equation is invalid
+		else
+		{
+			EquationLabel.Text = equationInfo.Item2;
+			EquationLabel.Visible = true;
+			Timer timer = EquationLabel.GetChild<Timer>(0);
+			timer.Start();
+		}
+	}
+
+	/// <summary>
+	/// Checks Validity of the equation
+	/// </summary>
+	/// <returns>Returns a tuple that contains whether or not it was a valid equation, and a string describing why if invalid</returns>
+	public (bool, string, List<(CardType, string)>) ValidEquation()
+	{
+		// Fills equation with cards in slots
+		var equation = new List<(CardType, string)>();
+		foreach (CardSlot slot in CardSlots)
+		{
+			if (!slot.SlotOpen)
+			{
+				if (slot.CardInSlot.CardType == CardType.Number)
+				{
+					equation.Add((CardType.Number, slot.CardInSlot.IntVal.ToString()));
+				}
+				else
+				{
+					equation.Add((CardType.Operator, slot.CardInSlot.OpVal));
+				}
+			}
+		}
+
+		if (equation[^1].Item1 == CardType.Operator)
+		{
+			return (false, "Invalid Equation: Equation cannot end with an operator.", equation);
+		}
+
+		// This loop makes sure there isn't two of the same type of cards in a row
+		CardType previous = CardType.Number; // Not relevant will be overriten immediatly
+		for (int i = 0; i < equation.Count; i++)
+		{
+			if (i == 0)
+			{
+				previous = equation[i].Item1;
+			}
+			else
+			{
+				if (equation[i].Item1 == previous)
+				{
+					return (false, "Invalid Equation: Cannot have two of the same type in a row.", equation);
+				}
+				else
+				{
+					previous = equation[i].Item1;
+				}
+			}
+		}
+
+		return (true, "Valid Equation", equation);
+	}
+
+	/// <summary>
+	/// Updates the label on the level to show the new equations value, does nothing if equation is invalid
+	/// </summary>
+	public void UpdateResult()
+	{
+		GD.Print("IN UPDATE RESULT");
+
+		var equationInfo = ValidEquation();
+
+		if (equationInfo.Item1)
+		{
+			ResultLabel.Text = EvaluateEquation(equationInfo.Item3).ToString();
+		}
+	}
+
+	/// <summary>
+	/// Evaluates the equation
+	/// </summary>
+	/// <param name="equation"></param>
+	/// <returns>The integer value of the equation</returns>
+	public int EvaluateEquation(List<(CardType, string)> equation)
+	{
+		return 5;
 	}
 
 	public void NewTurn()
 	{
+		foreach (CardSlot slot in CardSlots)
+		{
+			slot.SlotOpen = true;
+			slot.CardInSlot = null;
+		}
+
 		// Move cards from hand to discard pile
 		DiscardPile.AddCards(Hand.DrawCards(Hand.size));
 
