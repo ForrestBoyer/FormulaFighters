@@ -1,3 +1,8 @@
+// IVENTORY
+// Displays an inventory icon that, when clicked, displays all of the cards in the inventory
+// Cards displayed in a 12 x N grid
+// X Button 
+
 using Godot;
 using System;
 
