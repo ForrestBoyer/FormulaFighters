@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Reflection.Metadata;
 using System;
 using Godot;
+using System.Security.Cryptography;
 
 public enum CardType
 {
@@ -30,6 +31,10 @@ public partial class Card : Node2D
 	private bool _isDragging = false;
 	public bool _isInCardSlot = false;
 	private CardSlot CardSlot;
+    public Vector2 defaultScale;
+    // Clicked Signal
+    [Signal]
+    public delegate void CardClickedEventHandler();
 
 	public void InitCard() 
 	{
@@ -146,6 +151,7 @@ public partial class Card : Node2D
 		if (@event.IsActionPressed("click"))
 		{
 			_isDragging = true;
+            EmitSignal(SignalName.CardClicked);
 		}
 
 		if (@event.IsActionReleased("click"))
