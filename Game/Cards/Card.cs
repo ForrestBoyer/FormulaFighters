@@ -129,7 +129,7 @@ public partial class Card : Node2D
 	public override void _Ready()
 	{
         defaultScale = Scale;
-		DisplayLabel = (Godot.Label)FindChild("Label");
+		DisplayLabel = (Label)FindChild("Label");
 		if (CardType == CardType.Number) 
 		{
 			DisplayLabel.Text = IntVal.ToString();

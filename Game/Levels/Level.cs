@@ -58,12 +58,6 @@ public partial class Level : Node2D
 		// Get map because it holds the inventory
 		Map = (Map)GetParent();
 
-		// Connect card signals
-		foreach (Card card in Map.Inventory.Cards)
-		{
-			card.CardMovedToSlot += () => { UpdateResult(); };
-		}
-
 		// Initiate starting deck in level with what is in inventory
 		Deck = deckScene.Instantiate<Deck>();
 		Deck.Position = new Vector2(100f, 600f);
