@@ -116,6 +116,7 @@ public partial class Card : Node2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+        defaultScale = Scale;
 		DisplayLabel = (Godot.Label)FindChild("Label");
 		if (CardType == CardType.Number) 
 		{
@@ -138,12 +139,12 @@ public partial class Card : Node2D
 
 	public void _on_collider_mouse_entered()
 	{
-		Scale = new Vector2(1.1f, 1.1f);
+		Scale = new Vector2(defaultScale.X * 1.1f, defaultScale.Y * 1.1f);
 	}
 
 	public void _on_collider_mouse_exited()
 	{
-		Scale = new Vector2(1, 1);
+		Scale = defaultScale;
 	}
 
 	public void _on_collider_input_event(Node viewport, InputEvent @event, int shape_idx)
