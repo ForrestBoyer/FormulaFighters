@@ -4,7 +4,6 @@ public partial class Hand : CardContainer
 {
 	private Vector2 leftmostCardPosition;
 	private PackedScene cardScene;
-	private Card card;
 
 	public int MaxHandSize { get; set; }
 
@@ -17,7 +16,6 @@ public partial class Hand : CardContainer
 		foreach (Card card in GetChildren()) 
 		{
 			RemoveChild(card);
-			card.QueueFree();
 		}
 		
 		// for each card in cardList
@@ -25,16 +23,16 @@ public partial class Hand : CardContainer
 		{
 			if (Cards[i].CardType == CardType.Number) 
 			{
-				card = cardScene.Instantiate<Card>();
-				card.InitCard(Cards[i].IntVal, i);
+				Card card = cardScene.Instantiate<Card>();
+				card.InitCard(Cards[i].IntVal);
 				card.HomePosition = leftmostCardPosition;
 				card.MoveTo(card.HomePosition);
 				AddChild(card);
 			} 
 			else if (Cards[i].CardType == CardType.Operator) 
 			{
-				card = cardScene.Instantiate<Card>();
-				card.InitCard(Cards[i].OpVal, i);
+				Card card = cardScene.Instantiate<Card>();
+				card.InitCard(Cards[i].OpVal);
 				card.HomePosition = leftmostCardPosition;
 				card.MoveTo(card.HomePosition);
 				AddChild(card);

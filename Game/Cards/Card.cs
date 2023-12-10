@@ -19,7 +19,6 @@ public partial class Card : Node2D
 	public int IntVal { get; set; }
 	public string OpVal { get; set; }
 	public CardType CardType { get; set; }
-	private int cardID;
 	private Label DisplayLabel { get; set; }
 
 	// Card Position Stuff
@@ -37,24 +36,16 @@ public partial class Card : Node2D
 	[Signal]
 	public delegate void CardMovedToSlotEventHandler();
 
-	public void InitCard() 
-	{
-		IntVal = -1;
-		cardID = -1;
-	}
-
-	public void InitCard(int val, int id) 
+	public void InitCard(int val) 
 	{
 		IntVal = val;
 		CardType = CardType.Number;
-		cardID = id;
 	}
 
-	public void InitCard(string val, int id) 
+	public void InitCard(string val) 
 	{
 		OpVal = val;
 		CardType = CardType.Operator;
-		cardID = id;
 	}
 
     public void InitCardRandom() 

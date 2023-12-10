@@ -22,6 +22,7 @@ public partial class Level : Node2D
 	public List<CardSlot> CardSlots { get; set; } = new List<CardSlot>();
 	public Label ResultLabel { get; set; }
 	public Label EquationLabel { get; set; }
+	public Map Map { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -55,10 +56,10 @@ public partial class Level : Node2D
 		PackedScene cardSlotScene = GD.Load<PackedScene>("res://Game/Cards/card_slot.tscn");
 
 		// Get map because it holds the inventory
-		Map map = (Map)GetParent();
+		Map = (Map)GetParent();
 
 		// Connect card signals
-		foreach (Card card in map.Inventory.Cards)
+		foreach (Card card in Map.Inventory.Cards)
 		{
 			card.CardMovedToSlot += () => { UpdateResult(); };
 		}
@@ -66,9 +67,10 @@ public partial class Level : Node2D
 		// Initiate starting deck in level with what is in inventory
 		Deck = deckScene.Instantiate<Deck>();
 		Deck.Position = new Vector2(100f, 600f);
-		GD.Print(map.Inventory.Cards.Count + " 1");
-		Deck.SetCards(map.Inventory.Cards);
-		GD.Print(map.Inventory.Cards.Count + " 2");
+		Deck.SetCards(Map.Inventory.Cards);
+
+		GD.Print(Map.Inventory.Cards.Count);
+
 		Deck.ShuffleCards();
 		AddChild(Deck);
 
@@ -76,8 +78,6 @@ public partial class Level : Node2D
 		DiscardPile = discardPileScene.Instantiate<DiscardPile>();
 		DiscardPile.Position = new Vector2(1180f, 600f);
 		AddChild(DiscardPile);
-
-		GD.Print(map.Inventory.Cards.Count + " 3");
 
 		// Add hand
 		Hand = handScene.Instantiate<Hand>();

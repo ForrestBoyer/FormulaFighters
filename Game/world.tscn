@@ -23,6 +23,4 @@ script = ExtResource("2_yjj8d")
 [node name="MapGenerator" type="Node" parent="."]
 script = ExtResource("3_07owp")
 
-[node name="Inventory" type="Node" parent="."]
-
 [connection signal="pressed" from="Map/LevelMarker" to="Map/LevelMarker" method="_on_level_marker_pressed"]

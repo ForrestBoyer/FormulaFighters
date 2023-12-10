@@ -30,13 +30,13 @@ public partial class card_test : Node2D
 			if (i % 2 == 0) 
 			{
 				testCard = cardScene.Instantiate<Card>();
-				testCard.InitCard(2, i);
+				testCard.InitCard(2);
 				testInventory.Insert(i, testCard);
 			} 
 			else 
 			{
 				testCard = cardScene.Instantiate<Card>();
-				testCard.InitCard("+", i);
+				testCard.InitCard("+");
 				testInventory.Insert(i, testCard);
 			}
 		}
