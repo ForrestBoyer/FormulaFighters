@@ -84,17 +84,24 @@ public partial class rewards : Node2D
 
     // The player chose a card
     public void ChooseReward(Card card){
+        Map map = GetNode<Map>("/root/World/Map");
         // Add card to inventory
         Inventory inventory = GetNode<Inventory>("/root/World/Inventory");
         inventory.AddCard(card);
         // Change scene to level select
         FreeEverything();
+        map.Visible = true;
+        inventory.Visible = true;
     }
 
     // Player did not choose a card
     public void NoReward(){
+        Map map = GetNode<Map>("/root/World/Map");
+        Inventory inventory = GetNode<Inventory>("/root/World/Inventory");
         // Change scene to level select
         FreeEverything();
+        map.Visible = true;
+        inventory.Visible = true;
     }
     public void FreeEverything()
 	{

@@ -304,17 +304,17 @@ public partial class Level : Node2D
 	public void EndLevel(bool win)
 	{
 		Map map = GetNode<Map>("/root/World/Map");
-
+		Inventory inventory = GetNode<Inventory>("/root/World/Inventory");
 		if (win)
 		{
 			GD.Print("Enemy Died");
-			// TODO: Open rewards screen
-
 			map.Current_Depth++;
 			map.UpdateMarkers();
 			FreeEverything();
 			rewards Rewards = rewardScreen.Instantiate<rewards>();
 			GetNode("/root/World").AddChild(Rewards);
+			map.Visible = false;
+			inventory.Visible = false;
 		}
 		else
 		{	
