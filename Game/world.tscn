@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Game/Map/Map.cs" id="1_uc35v"]
 [ext_resource type="Script" path="res://Game/Map/LevelMarker.cs" id="2_yjj8d"]
 [ext_resource type="Script" path="res://Game/Map/MapGenerator.cs" id="3_07owp"]
-[ext_resource type="PackedScene" uid="uid://ohwpqn4jliqq" path="res://Game/Cards/inventory.tscn" id="4_uwvh7"]
+[ext_resource type="PackedScene" uid="uid://ohwpqn4jliqq" path="res://Game/Cards/CardContainers/Inventory/inventory.tscn" id="4_uwvh7"]
 
 [node name="World" type="Node2D"]
 position = Vector2(74, 14)

@@ -12,4 +12,18 @@ public partial class Deck : CardContainer
 	public override void _Process(double delta)
 	{
 	}
+
+    public void _on_icon_input_event(Node viewport, InputEvent @event, int shape_idx){
+        if (@event.IsActionPressed("click"))
+        {
+            ShowCards();
+		}
+    }
+
+    public void _on_close_x_input_event(Node viewport, InputEvent @event, int shape_idx){
+        if (@event.IsActionPressed("click"))
+        {
+            HideCards();
+		}
+    }
 }

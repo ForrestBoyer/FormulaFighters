@@ -9,6 +9,12 @@ public partial class CardContainer : Node2D
 
 	public int size;
 
+    public Vector2 centerScreen = new Vector2(640, 360);
+    protected int leftSideOffset = 100;
+    protected int spaceHorizontal = 100;
+    protected int spaceVertical = 75;
+    protected int rowSize = 12;
+
     protected Card CopyCard(Card c)
     {
         PackedScene cardScene = GD.Load<PackedScene>("res://Game/Cards/card.tscn");
@@ -93,6 +99,32 @@ public partial class CardContainer : Node2D
 		
 		return ret;
 	}
+
+    protected void ShowCards()
+    {
+
+        GetNode<ColorRect>("ColorRect").Visible = false;
+        GetNode<Label>("CloseX").Visible = true;
+        int i = 0;
+        foreach(Card c in Cards)
+        {
+            c.MoveTo(new Vector2(i % rowSize * spaceHorizontal + leftSideOffset, 
+                                 i / rowSize * spaceHorizontal + leftSideOffset));
+            i++;
+            c.Visible = true;
+        }
+    }
+
+    protected void HideCards()
+    {
+        GetNode<ColorRect>("ColorRect").Visible = true;
+        GetNode<Label>("CloseX").Visible = false;
+        foreach(Card c in Cards)
+        {
+            c.Visible = false;
+        }
+    }
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

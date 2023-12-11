@@ -15,56 +15,6 @@ public partial class Inventory : CardContainer
 	private int MAX_STARTING_NUM = 10;
 	private int CHANCE_OF_STARTING_MULT_OP = 5;
 
-    // Positioning Variables
-    private int leftSideOffset = 100;
-    private int spaceHorizontal = 100;
-    private int spaceVertical = 75;
-    private int rowSize = 12;
-
-    private void ShowCards()
-    {
-        GetNode<ColorRect>("ColorRect").Visible = false;
-        GetNode<Label>("CloseX").Visible = true;
-
-        PackedScene cardScene = GD.Load<PackedScene>("res://Game/Cards/card.tscn");
-
-        for(int i = 0; i < Cards.Count; i++) 
-		{
-			if (Cards[i].CardType == CardType.Number) 
-			{
-				Card card = cardScene.Instantiate<Card>();
-				card.InitCard(Cards[i].IntVal);
-				card.HomePosition = new Vector2(i % rowSize * spaceHorizontal + leftSideOffset,
-                                                i / rowSize * spaceHorizontal + leftSideOffset );
-				card.MoveTo(card.HomePosition);
-				AddChild(card);
-			} 
-			else if (Cards[i].CardType == CardType.Operator) 
-			{
-				Card card = cardScene.Instantiate<Card>();
-				card.InitCard(Cards[i].OpVal);
-				card.HomePosition = new Vector2(i % rowSize * spaceHorizontal + leftSideOffset, 
-                                                i / rowSize * spaceHorizontal + leftSideOffset);
-				card.MoveTo(card.HomePosition);
-				AddChild(card);
-			}
-		}
-    }
-
-    private void HideCards()
-    {
-        GetNode<ColorRect>("ColorRect").Visible = true;
-        GetNode<Label>("CloseX").Visible = false;
-
-        foreach (var child in GetChildren())
-        {
-            if (child is Card card)
-            {
-                RemoveChild(card);
-            }
-        }
-    }
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -81,7 +31,7 @@ public partial class Inventory : CardContainer
 			if (rng.Next(2) == 0)
 			{
 				card.InitCard(rng.Next(1, MAX_STARTING_NUM));
-				Cards.Add(card);
+				AddCard(card);
 			}
 			// Generate Operator
 			else
@@ -95,7 +45,7 @@ public partial class Inventory : CardContainer
 				{
 					card.InitCard("+");
 				}
-				Cards.Add(card);
+				AddCard(card);
 			}
 		}
 	}
@@ -105,7 +55,7 @@ public partial class Inventory : CardContainer
 	{
 	}
 
-	public void _on_color_rect_gui_input(InputEvent @event)
+	public void _on_icon_input_event(InputEvent @event)
 	{
         if (@event.IsActionPressed("click"))
         {
