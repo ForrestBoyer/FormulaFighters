@@ -5,6 +5,7 @@ public partial class Enemy : Entity
 {
 	[Signal]
 	public delegate void DeathEventHandler();
+    public Texture2D Texture;
 
 	private Random rand = new Random();
 
@@ -22,12 +23,12 @@ public partial class Enemy : Entity
 
 		// Loads random texture
 		int index = rand.Next(texturePaths.Length);
-		var texture = (Texture2D)GD.Load(texturePaths[index]);
+		Texture = (Texture2D)GD.Load(texturePaths[index]);
 
-		if (texture != null)
+		if (Texture != null)
 		{
 			var sprite = GetNode<Sprite2D>("Sprite2D");
-			sprite.Texture = texture;
+			sprite.Texture = Texture;
 		}
 		else
 		{

@@ -9,9 +9,18 @@ public partial class LevelMarker : TextureButton
 
     public bool IsBoss { get; set; } = false;
 
+    public Level Level;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+        PackedScene levelScene = GD.Load<PackedScene>("res://Game/Levels/level.tscn");
+        Level = levelScene.Instantiate<Level>();
+        GetNode("/root/World/Map").AddChild(Level);
+        GetNode("/root/World/Map").RemoveChild(Level);
+        Sprite2D Preview = GetNode<Sprite2D>("Sprite2D");
+        Preview.Texture = Level.Enemy.Texture;
+        Preview.Position = new Vector2(15, 0);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,10 +34,7 @@ public partial class LevelMarker : TextureButton
         GD.Print("Node Depth: " + Depth + " Map Depth: " + map.Current_Depth);
         if (Depth == map.Current_Depth)
         {
-            PackedScene levelScene = GD.Load<PackedScene>("res://Game/Levels/level.tscn");
-            Level level = levelScene.Instantiate<Level>();
-
-            GetNode("/root/World/Map").AddChild(level);
+            GetNode("/root/World/Map").AddChild(Level);
         }
     }
 }
