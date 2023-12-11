@@ -172,7 +172,9 @@ public partial class Card : Node2D
 	{
 		if (@event.IsActionPressed("click"))
 		{
-			_isDragging = true;
+			if(_isDraggable){
+                _isDragging = true;
+            }
             EmitSignal(SignalName.CardClicked);
 		}
 
