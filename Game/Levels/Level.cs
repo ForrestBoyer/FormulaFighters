@@ -394,9 +394,9 @@ public partial class Level : Node2D
 
         // Add hand
         Hand = handScene.Instantiate<Hand>();
-        Hand.SetCards(Deck.DrawCards(7));
+        AddChild(Hand);
+        Hand.AddCards(Deck.DrawCards(7));
         Hand.UpdateHand();
         LinkCardSignals(Hand);
-        AddChild(Hand);
     }
 }
