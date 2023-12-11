@@ -9,17 +9,38 @@ public partial class CardContainer : Node2D
 
 	public int size;
 
+    protected Card CopyCard(Card c)
+    {
+        PackedScene cardScene = GD.Load<PackedScene>("res://Game/Cards/card.tscn");
+        Card newCard = cardScene.Instantiate<Card>();
+        newCard.CardType = c.CardType;
+        newCard.IntVal = c.IntVal;
+        newCard.OpVal = c.OpVal;
+        AddChild(newCard);
+        return newCard;
+    }
+
 	// Initializer for card container with list of cards
 	public void SetCards(List<Card> cards)
 	{
-		Cards = cards;
-        size = Cards.Count;
+		Empty();
+
+		Cards = new List<Card>();
+        foreach(Card c in cards){
+            Card newCard = CopyCard(c);
+            newCard.Visible = false;
+            newCard._isDraggable = false;
+            Cards.Add(newCard);
+        }
 	}
 
 	// Add Card to End
 	public void AddCard(Card card)
 	{
-		Cards.Add(card);
+		Card newCard = CopyCard(card);
+        newCard.Visible = false;
+        newCard._isDraggable = false;
+		Cards.Add(newCard);
 		size = Cards.Count;
 	}
 
@@ -27,23 +48,21 @@ public partial class CardContainer : Node2D
 	{
 		foreach (Card card in cards)
 		{
-			Cards.Add(card);
+			Card newCard = CopyCard(card);
+            newCard.Visible = false;
+            newCard._isDraggable = false;
+            Cards.Add(newCard);
 		}
 
 		size = Cards.Count;
 	}
 
-	// Replace Cards
-	public void ReplaceCards(List<Card> cards){
-		Cards.Clear();
-		Cards = cards;
-        size = Cards.Count;
-	}
-
 	// Empty Container
 	public void Empty() 
 	{
-		Cards.Clear();
+		foreach (Card card in Cards){
+            card.QueueFree();
+        }
 		size = Cards.Count;
 	}
 
