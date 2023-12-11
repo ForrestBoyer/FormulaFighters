@@ -35,7 +35,7 @@ public partial class LevelMarker : TextureButton
         Map map = GetNode<Map>("/root/World/Map");
         if (Depth == map.Current_Depth)
         {
-            GetNode("/root/World/Map").AddChild(Level);
+            map.AddChild(Level);
         }
     }
 }

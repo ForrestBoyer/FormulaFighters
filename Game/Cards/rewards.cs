@@ -57,6 +57,9 @@ public partial class Rewards : Node2D
         // Connect reward signals
         CardChosen += (Card) => ChooseReward(Card);
         NoCardChosen += () => NoReward();
+
+        // Hide the map
+        GetNode<Map>("/root/World/Map").Visible = false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -91,6 +94,8 @@ public partial class Rewards : Node2D
         // Add card to inventory
         Inventory inventory = GetNode<Inventory>("/root/World/Inventory");
         inventory.AddCard(card);
+        // Show Map
+        GetNode<Map>("/root/World/Map").Visible = true;
         // Change scene to level select
         FreeEverything();
     }
@@ -98,6 +103,8 @@ public partial class Rewards : Node2D
     // Player did not choose a card
     public void NoReward()
     {
+        // Show Map
+        GetNode<Map>("/root/World/Map").Visible = true;
         // Change scene to level select
         FreeEverything();
     }
