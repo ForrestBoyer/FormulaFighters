@@ -4,6 +4,7 @@ using System;
 public partial class Entity : Node2D
 {
 	protected ProgressBar _healthBar;
+	protected Label _healthLabel;
 
 	protected bool _alive { get; set; } = true;
 
@@ -17,6 +18,7 @@ public partial class Entity : Node2D
 	public override void _Ready()
 	{
 		_healthBar = GetNode<ProgressBar>("HealthBar");
+		_healthLabel = GetNode<Label>("HealthBar/HealthLabel");
 		UpdateHealthBar();
 	}
 
@@ -44,6 +46,7 @@ public partial class Entity : Node2D
 
 	public void UpdateHealthBar()
 	{
+		_healthLabel.Text = CurrentHealth.ToString();
 		_healthBar.Value = GetHealthAsAPercentage();
 	}
 

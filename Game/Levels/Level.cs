@@ -51,8 +51,8 @@ public partial class Level : Node2D
 		AddChild(Enemy);
 
 		// Connect death signals
-		Player.Death += () => EndLevel(false);
-		Enemy.Death += () => EndLevel(true);
+		Player.Death += () => BeginDeathTimer(false);
+		Enemy.Death += () => BeginDeathTimer(true);
 		// --------------------------------------------------------
 
 		// ------------ Loading Card Stuff ------------------------
@@ -110,8 +110,8 @@ public partial class Level : Node2D
 		EquationLabel = GetNode<Label>("EquationLabel");
 		EquationLabel.Position = new Vector2(450f, 500f);
 
-		Timer timer = EquationLabel.GetChild<Timer>(0);
-		timer.Timeout += () => { EquationLabel.Visible = false; };
+		Timer equationErrorTimer = EquationLabel.GetChild<Timer>(0);
+		equationErrorTimer.Timeout += () => { EquationLabel.Visible = false; };
 
 		// --------------------------------------------------------
 
@@ -337,6 +337,14 @@ public partial class Level : Node2D
 		Hand.UpdateHand();
 		LinkCardSignals(Hand);
 		UpdateResult();
+	}
+
+	public void BeginDeathTimer(bool win)
+	{
+		SubmitButton.Visible = false;
+		Timer deathTimer = GetNode<Timer>("DeathTimer");
+		deathTimer.Timeout += () => EndLevel(win);
+		deathTimer.Start();
 	}
 
 	public void EndLevel(bool win)
