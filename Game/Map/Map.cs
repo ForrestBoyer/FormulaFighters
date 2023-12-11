@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class Map : CanvasLayer
 {
@@ -9,9 +10,6 @@ public partial class Map : CanvasLayer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		PackedScene inventoryScene = GD.Load<PackedScene>("res://Game/Cards/CardContainers/Inventory/inventory.tscn");
-		Inventory = inventoryScene.Instantiate<Inventory>();
-		AddChild(Inventory);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame. 
@@ -51,4 +49,25 @@ public partial class Map : CanvasLayer
 			}
 		}
 	}
+
+    public void _on_menu_opened(){
+        GD.Print("do");
+        foreach (Node child in GetChildren())
+		{
+			if (child is LevelMarker levelMarker) {
+                levelMarker.Disabled = true;
+            }
+        }
+    }
+
+    public void _on_menu_closed(){
+        GD.Print("dc");
+        foreach (Node child in GetChildren())
+		{
+			if (child is LevelMarker levelMarker) {
+                if(levelMarker.Depth != Current_Depth - 1)
+                levelMarker.Disabled = false;
+            }
+        }
+    }
 }

@@ -28,3 +28,5 @@ script = ExtResource("3_07owp")
 position = Vector2(-74, -14)
 
 [connection signal="pressed" from="Map/LevelMarker" to="Map/LevelMarker" method="_on_level_marker_pressed"]
+[connection signal="MenuClosed" from="Inventory" to="Map" method="_on_menu_closed"]
+[connection signal="MenuOpened" from="Inventory" to="Map" method="_on_menu_opened"]
