@@ -52,11 +52,12 @@ public partial class Level : Node2D
 
 		// Create an enemy and set its position
 		Enemy = enemyScene.Instantiate<Enemy>();
-		Enemy.Position = new Vector2(1040f, 450f);
+		Enemy.Position = new Vector2(1100f, 450f);
         if(Depth == 9){
-            Enemy.Position += new Vector2(0, 50f);
+            Enemy.Position += new Vector2(0, -50f);
         }
 		AddChild(Enemy);
+        Enemy.UpdateIntention();
 
 		// Connect death signals
 		Player.Death += () => BeginDeathTimer(false);
@@ -83,6 +84,7 @@ public partial class Level : Node2D
 		// Put submit button in correct position
 		SubmitButton = GetNode<Button>("SubmitButton");
 		SubmitButton.Position = ResultLabel.Position + new Vector2(100f, 10f);
+        SubmitButton.Text = "Attack!";
 
 		// Put Equation Label in correct position and set its timer up
 		EquationLabel = GetNode<Label>("EquationLabel");
@@ -151,10 +153,12 @@ public partial class Level : Node2D
 			    int damage = EvaluateEquation(equationInfo.Item3) - Enemy.Defense;
 			    Enemy.TakeDamage(damage);
                 CurrentPhase = Phases.Defense;
+                SubmitButton.Text = "Defend!";
             } else {
                 int damage = Enemy.Attack - EvaluateEquation(equationInfo.Item3);
                 Player.TakeDamage(damage);
                 CurrentPhase = Phases.Attack;
+                SubmitButton.Text = "Attack!";
             }
 			NewTurn();
 		}
@@ -326,6 +330,7 @@ public partial class Level : Node2D
 
 		Hand.UpdateHand();
 		LinkCardSignals(Hand);
+        Enemy.UpdateIntention();
 		UpdateResult();
 	}
 

@@ -32,6 +32,19 @@ public partial class Enemy : Entity
 	private Random rand;
     private List<EnemyStats> GenerationStats = new List<EnemyStats>();
 
+    public void UpdateIntention(){
+        Level Level = GetParent<Level>();
+        Sprite2D IntentionSprite = GetNode<Sprite2D>("IntentionSprite");
+        Label ValueLabel = GetNode<Label>("IntentionSprite/ValueLabel");
+        if(Level.CurrentPhase == Phases.Attack){
+            ValueLabel.Text = Defense.ToString();
+            // TODO: IntentionSprite.Texture = DefenseTexture;
+        } else {
+            ValueLabel.Text = Attack.ToString();
+            // TODO: IntentionSprite.Texture = AttackTexture;
+        }
+    }
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -71,6 +84,7 @@ public partial class Enemy : Entity
             if(depth == 9){
                 sprite.Scale = new Vector2(5, 5);
                 _healthBar.Position = _healthBar.Position + new Vector2(0, -40);
+                GetNode<Sprite2D>("IntentionSprite").Position = new Vector2(-125, -90);
             }
 		}
 		else

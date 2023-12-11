@@ -13,3 +13,11 @@ scale = Vector2(2.625, 2.75)
 offset_top = -96.0
 offset_bottom = -88.0
 metadata/_edit_use_anchors_ = true
+
+[node name="IntentionSprite" type="Sprite2D" parent="." index="2"]
+position = Vector2(-80, -90)
+
+[node name="ValueLabel" type="Label" parent="IntentionSprite" index="0"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "7"
