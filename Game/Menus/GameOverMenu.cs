@@ -4,6 +4,7 @@ using System;
 public partial class GameOverMenu : Node2D
 {
 	public PackedScene mainMenu;
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -15,7 +16,8 @@ public partial class GameOverMenu : Node2D
 	{
 	}
 
-	public void _on_timer_timeout(){
+	public void _on_timer_timeout()
+	{
 		GetTree().ChangeSceneToPacked(mainMenu);
 	}
 }

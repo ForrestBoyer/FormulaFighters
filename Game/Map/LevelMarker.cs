@@ -22,7 +22,6 @@ public partial class LevelMarker : TextureButton
     public void _on_level_marker_pressed()
     {
         Map map = GetNode<Map>("/root/World/Map");
-        GD.Print("Node Depth: " + Depth + " Map Depth: " + map.Current_Depth);
         if (Depth == map.Current_Depth)
         {
             PackedScene levelScene = GD.Load<PackedScene>("res://Game/Levels/level.tscn");

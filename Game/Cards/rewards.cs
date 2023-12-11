@@ -16,7 +16,7 @@ public partial class Rewards : Node2D
     public delegate void NoCardChosenEventHandler();
 
     // Center of Screen
-    private Vector2 center = new Vector2(640, 360);
+    private Vector2 center = new Vector2(560, 360);
     // Reward Cards
     private Card card1;
     private Card card2;
@@ -66,7 +66,6 @@ public partial class Rewards : Node2D
 
     // When a card is chosen, emit a signal containing selected card
     public void _on_reward_card_clicked(int cardNum){
-        GD.Print(cardNum);
         switch (cardNum)
         {
             case 1:
@@ -110,4 +109,5 @@ public partial class Rewards : Node2D
         card3.QueueFree();
 		QueueFree();
 	}
+
 }

@@ -361,18 +361,14 @@ public partial class Level : Node2D
 
 		if (win)
 		{
-			GD.Print("Enemy Died");
-			// TODO: Open rewards screen
-
 			map.Current_Depth++;
 			map.UpdateMarkers();
-			FreeEverything();
 			Rewards Rewards = rewardScreen.Instantiate<Rewards>();
 			GetNode("/root/World").AddChild(Rewards);
+			FreeEverything();
 		}
 		else
 		{	
-			GD.Print("Player Died");
 			map.UpdateMarkers();
 			FreeEverything();
 			GetTree().ChangeSceneToPacked(gameOverScreen);
