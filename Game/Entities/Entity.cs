@@ -35,6 +35,10 @@ public partial class Entity : Node2D
 
 	public void TakeDamage(int damage)
 	{
+        if(damage < 0){
+            damage = 0;
+        }
+        
 		CurrentHealth -= damage;
 		if (CurrentHealth <= 0 && _alive)
 		{

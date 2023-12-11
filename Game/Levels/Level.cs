@@ -53,6 +53,9 @@ public partial class Level : Node2D
 		// Create an enemy and set its position
 		Enemy = enemyScene.Instantiate<Enemy>();
 		Enemy.Position = new Vector2(1040f, 450f);
+        if(Depth == 9){
+            Enemy.Position += new Vector2(0, 50f);
+        }
 		AddChild(Enemy);
 
 		// Connect death signals
@@ -144,8 +147,15 @@ public partial class Level : Node2D
 		// When equation is valid
 		if (equationInfo.Item1)
 		{
-			int damage = EvaluateEquation(equationInfo.Item3);
-			Enemy.TakeDamage(damage);
+            if(CurrentPhase == Phases.Attack){
+			    int damage = EvaluateEquation(equationInfo.Item3) - Enemy.Defense;
+			    Enemy.TakeDamage(damage);
+                CurrentPhase = Phases.Defense;
+            } else {
+                int damage = Enemy.Attack - EvaluateEquation(equationInfo.Item3);
+                Player.TakeDamage(damage);
+                CurrentPhase = Phases.Attack;
+            }
 			NewTurn();
 		}
 		// When equation is invalid

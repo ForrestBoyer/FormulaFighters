@@ -16,6 +16,7 @@ public partial class LevelMarker : TextureButton
 	{
         PackedScene levelScene = GD.Load<PackedScene>("res://Game/Levels/level.tscn");
         Level = levelScene.Instantiate<Level>();
+        Level.Depth = Depth;
         GetNode("/root/World/Map").AddChild(Level);
         Level.LevelMarker = this;
         Connect("pressed", new Callable(Level, nameof(Level._on_level_selected)));
