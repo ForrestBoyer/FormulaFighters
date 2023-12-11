@@ -5,6 +5,11 @@ using ExtensionMethods;
 
 public partial class CardContainer : Node2D
 {
+    [Signal]
+    public delegate void MenuOpenedEventHandler();
+    [Signal]
+    public delegate void MenuClosedEventHandler();
+
 	public List<Card> Cards = new List<Card>();
 
 	public int size;
@@ -100,7 +105,7 @@ public partial class CardContainer : Node2D
 
     protected void ShowCards()
     {
-        
+        EmitSignal(SignalName.MenuOpened);
         GetNode<ColorRect>("ColorRect").Visible = false;
         GetNode<Label>("CloseX").Visible = true;
         int i = 0;
@@ -115,6 +120,7 @@ public partial class CardContainer : Node2D
 
     protected void HideCards()
     {
+        EmitSignal(SignalName.MenuClosed);
         GetNode<ColorRect>("ColorRect").Visible = true;
         GetNode<Label>("CloseX").Visible = false;
         foreach(Card c in Cards)

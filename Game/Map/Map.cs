@@ -8,6 +8,8 @@ public partial class Map : CanvasLayer
 	private int MAX_STARTING_NUM = 10;
 	private int CHANCE_OF_STARTING_MULT_OP = 5;
 
+    public bool Menu_Open = false;
+
     // Index of current level in Levels array
     public int Current_Depth = 0;
 	public Inventory Inventory { get; set; }
@@ -87,4 +89,25 @@ public partial class Map : CanvasLayer
 			}
 		}
 	}
+
+    public void _on_menu_opened(){
+        Menu_Open = true;
+        foreach (Node child in GetChildren())
+		{
+			if (child is LevelMarker levelMarker) {
+                levelMarker.Disabled = true;
+            }
+        }
+    }
+
+    public void _on_menu_closed(){
+        Menu_Open = false;
+        foreach (Node child in GetChildren())
+		{
+			if (child is LevelMarker levelMarker) {
+                if(levelMarker.Depth != Current_Depth - 1)
+                levelMarker.Disabled = false;
+            }
+        }
+    }
 }

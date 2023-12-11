@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvqp5pfetn1x4"]
+[gd_scene load_steps=5 format=3 uid="uid://cvqp5pfetn1x4"]
 
 [ext_resource type="Script" path="res://Game/Map/Map.cs" id="1_uc35v"]
 [ext_resource type="Script" path="res://Game/Map/LevelMarker.cs" id="2_yjj8d"]
 [ext_resource type="Script" path="res://Game/Map/MapGenerator.cs" id="3_07owp"]
+[ext_resource type="PackedScene" uid="uid://ohwpqn4jliqq" path="res://Game/Cards/inventory.tscn" id="4_6q4xd"]
 
 [node name="World" type="Node2D"]
 position = Vector2(74, 14)
@@ -23,6 +24,8 @@ script = ExtResource("2_yjj8d")
 [node name="MapGenerator" type="Node" parent="."]
 script = ExtResource("3_07owp")
 
-[node name="Inventory" type="Node" parent="."]
+[node name="Inventory" parent="." instance=ExtResource("4_6q4xd")]
 
 [connection signal="pressed" from="Map/LevelMarker" to="Map/LevelMarker" method="_on_level_marker_pressed"]
+[connection signal="MenuClosed" from="Inventory" to="Map" method="_on_menu_closed"]
+[connection signal="MenuOpened" from="Inventory" to="Map" method="_on_menu_opened"]

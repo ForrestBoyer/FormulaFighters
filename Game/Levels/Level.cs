@@ -70,11 +70,15 @@ public partial class Level : Node2D
 		Deck.SetCards(map.Inventory.Cards);
 		GD.Print(map.Inventory.Cards.Count + " 2");
 		Deck.ShuffleCards();
+        Deck.Connect("MenuOpened", new Callable(this, nameof(_on_menu_opened)));
+        Deck.Connect("MenuClosed", new Callable(this, nameof(_on_menu_closed)));
 		AddChild(Deck);
 
 		// Add discard pile
 		DiscardPile = discardPileScene.Instantiate<DiscardPile>();
 		DiscardPile.Position = new Vector2(1180f, 600f);
+        DiscardPile.Connect("MenuOpened", new Callable(this, nameof(_on_menu_opened)));
+        DiscardPile.Connect("MenuClosed", new Callable(this, nameof(_on_menu_closed)));
 		AddChild(DiscardPile);
 
 		GD.Print(map.Inventory.Cards.Count + " 3");
@@ -325,4 +329,13 @@ public partial class Level : Node2D
 		Enemy.QueueFree();
 		QueueFree();
 	}
+
+    public void _on_menu_opened(){
+        GetNode<Button>("SubmitButton").Disabled = true;
+        Hand.Visible = false;
+    }
+    public void _on_menu_closed(){
+        GetNode<Button>("SubmitButton").Disabled = false;
+        Hand.Visible = true;
+    }
 }
