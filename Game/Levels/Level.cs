@@ -24,6 +24,7 @@ public partial class Level : Node2D
 	public Label EquationLabel { get; set; }
 
 	// Win/Lose Scene
+	public PackedScene rewardScreen;
 	public PackedScene gameOverScreen;
 
 	// Called when the node enters the scene tree for the first time.
@@ -143,8 +144,7 @@ public partial class Level : Node2D
 		// ----------------------------------------------------------
 		// ----------------- Win/Lose Screens -------------------
 		gameOverScreen = GD.Load<PackedScene>("res://Game/Menus/game_over.tscn");
-		// TO DO: Reward Screen
-		// PackedScene rewardScreen GD.Load<PackedScene>("res://Game/Menus/reward.tscn");
+		rewardScreen = GD.Load<PackedScene>("res://Game/Cards/rewards.tscn");
 		// ------------------------------------------------------
 	}
 
@@ -313,11 +313,12 @@ public partial class Level : Node2D
 			map.Current_Depth++;
 			map.UpdateMarkers();
 			FreeEverything();
+			rewards Rewards = rewardScreen.Instantiate<rewards>();
+			GetNode("/root/World").AddChild(Rewards);
 		}
 		else
 		{	
 			GD.Print("Player Died");
-
 			map.UpdateMarkers();
 			FreeEverything();
 			GetTree().ChangeSceneToPacked(gameOverScreen);
