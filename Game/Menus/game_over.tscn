@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://detm4uga0q0e3"]
 
-[ext_resource type="Script" path="res://Game/Menus/game_over.cs" id="1_bh0g2"]
+[ext_resource type="Script" path="res://Game/Menus/GameOverMenu.cs" id="1_bh0g2"]
 [ext_resource type="FontFile" uid="uid://bhsc24e44yf06" path="res://Game/Resources/Fonts/dogicapixelbold.ttf" id="1_btvxb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_l100h"]

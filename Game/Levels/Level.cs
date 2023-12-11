@@ -23,7 +23,7 @@ public partial class Level : Node2D
 	public TextureRect Background { get; set; }
 	public Enemy Enemy { get; set; }
 	public Player Player { get; set; }
-	public deck Deck { get; set; }
+	public Deck Deck { get; set; }
 	public DiscardPile DiscardPile { get; set; }
 	public Hand Hand { get; set; }
 	public List<CardSlot> CardSlots { get; set; } = new List<CardSlot>();
@@ -71,7 +71,7 @@ public partial class Level : Node2D
 		Map = (Map)GetParent();
 
 		// Initiate starting deck in level with what is in inventory
-		Deck = deckScene.Instantiate<deck>();
+		Deck = deckScene.Instantiate<Deck>();
 		Deck.Position = new Vector2(100f, 600f);
 		Deck.SetCards(Map.Inventory.Cards);
 
@@ -367,7 +367,7 @@ public partial class Level : Node2D
 			map.Current_Depth++;
 			map.UpdateMarkers();
 			FreeEverything();
-			rewards Rewards = rewardScreen.Instantiate<rewards>();
+			Rewards Rewards = rewardScreen.Instantiate<Rewards>();
 			GetNode("/root/World").AddChild(Rewards);
 		}
 		else

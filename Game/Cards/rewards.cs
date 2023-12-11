@@ -5,8 +5,8 @@
 // NOTE: COPY THE CARD FROM THE SIGNAL OR CHANGE ITS PARENT BEFORE UNLOADING REWARD SCREEN
 using Godot;
 using System;
-
-public partial class rewards : Node2D
+                
+public partial class Rewards : Node2D
 {
     // Signal for when a card is chosen
     [Signal]
@@ -35,11 +35,13 @@ public partial class rewards : Node2D
         card2.InitCardRandom();
         card3.InitCardRandom();
         // Ensure None are the Same
-        while(card1.CardType == card2.CardType && card1.OpVal == card2.OpVal && card1.IntVal == card2.IntVal){
+        while (card1.CardType == card2.CardType && card1.OpVal == card2.OpVal && card1.IntVal == card2.IntVal)
+        {
             card2.InitCardRandom();
         }
-        while((card1.CardType == card3.CardType && card1.OpVal == card3.OpVal && card1.IntVal == card3.IntVal) ||
-              (card2.CardType == card3.CardType && card2.OpVal == card3.OpVal && card2.IntVal == card3.IntVal)){
+        while ((card1.CardType == card3.CardType && card1.OpVal == card3.OpVal && card1.IntVal == card3.IntVal) ||
+              (card2.CardType == card3.CardType && card2.OpVal == card3.OpVal && card2.IntVal == card3.IntVal))
+        {
             card3.InitCardRandom();
         }
         // Refresh Card Graphic
@@ -65,25 +67,28 @@ public partial class rewards : Node2D
     // When a card is chosen, emit a signal containing selected card
     public void _on_reward_card_clicked(int cardNum){
         GD.Print(cardNum);
-        switch(cardNum){
-        case 1:
-            EmitSignal(SignalName.CardChosen, card1);
-            break;
-        case 2:
-            EmitSignal(SignalName.CardChosen, card2);
-            break;
-        case 3:
-            EmitSignal(SignalName.CardChosen, card3);
-            break;
+        switch (cardNum)
+        {
+            case 1:
+                EmitSignal(SignalName.CardChosen, card1);
+                break;
+            case 2:
+                EmitSignal(SignalName.CardChosen, card2);
+                break;
+            case 3:
+                EmitSignal(SignalName.CardChosen, card3);
+                break;
         }
     }
 
-    public void _on_button_pressed(){
+    public void _on_button_pressed()
+    {
         EmitSignal(SignalName.NoCardChosen);
     }
 
     // The player chose a card
-    public void ChooseReward(Card card){
+    public void ChooseReward(Card card)
+    {
         // Add card to inventory
         Inventory inventory = GetNode<Inventory>("/root/World/Inventory");
         inventory.AddCard(card);
@@ -92,10 +97,12 @@ public partial class rewards : Node2D
     }
 
     // Player did not choose a card
-    public void NoReward(){
+    public void NoReward()
+    {
         // Change scene to level select
         FreeEverything();
     }
+
     public void FreeEverything()
 	{
 		card1.QueueFree();
@@ -103,6 +110,4 @@ public partial class rewards : Node2D
         card3.QueueFree();
 		QueueFree();
 	}
-
-    
 }

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class game_over : Node2D
+public partial class GameOverMenu : Node2D
 {
 	public PackedScene mainMenu;
 	// Called when the node enters the scene tree for the first time.
