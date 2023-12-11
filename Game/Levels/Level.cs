@@ -23,7 +23,7 @@ public partial class Level : Node2D
 	public TextureRect Background { get; set; }
 	public Enemy Enemy { get; set; }
 	public Player Player { get; set; }
-	public Deck Deck { get; set; }
+	public Deck Deck { get; set; } = null;
 	public DiscardPile DiscardPile { get; set; }
 	public Hand Hand { get; set; }
 	public List<CardSlot> CardSlots { get; set; } = new List<CardSlot>();
@@ -31,6 +31,7 @@ public partial class Level : Node2D
 	public Label EquationLabel { get; set; }
 	public Button SubmitButton { get; set; }
 	public Map Map { get; set; }
+    public LevelMarker LevelMarker { get; set; }
 
 	// Win/Lose Scene
 	public PackedScene rewardScreen;
@@ -58,41 +59,7 @@ public partial class Level : Node2D
 		Player.Death += () => BeginDeathTimer(false);
 		Enemy.Death += () => BeginDeathTimer(true);
 		// --------------------------------------------------------
-
-		// ------------ Loading Card Stuff ------------------------
-
-		PackedScene deckScene = GD.Load<PackedScene>("res://Game/Cards/CardContainers/Deck/deck.tscn");
-		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/CardContainers/Hand/hand.tscn");
-		PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/CardContainers/DiscardPile/discard_pile.tscn");
-		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/card.tscn");
 		PackedScene cardSlotScene = GD.Load<PackedScene>("res://Game/Cards/card_slot.tscn");
-
-		// Get map because it holds the inventory
-		Map = (Map)GetParent();
-
-		// Initiate starting deck in level with what is in inventory
-		Deck = deckScene.Instantiate<Deck>();
-		Deck.Position = new Vector2(100f, 600f);
-		Deck.SetCards(Map.Inventory.Cards);
-
-		Deck.ShuffleCards();
-        Deck.Connect("MenuOpened", new Callable(this, nameof(_on_menu_opened)));
-        Deck.Connect("MenuClosed", new Callable(this, nameof(_on_menu_closed)));
-		AddChild(Deck);
-
-		// Add discard pile
-		DiscardPile = discardPileScene.Instantiate<DiscardPile>();
-		DiscardPile.Position = new Vector2(1180f, 600f);
-        DiscardPile.Connect("MenuOpened", new Callable(this, nameof(_on_menu_opened)));
-        DiscardPile.Connect("MenuClosed", new Callable(this, nameof(_on_menu_closed)));
-		AddChild(DiscardPile);
-
-		// Add hand
-		Hand = handScene.Instantiate<Hand>();
-		Hand.SetCards(Deck.DrawCards(7));
-		Hand.UpdateHand();
-		LinkCardSignals(Hand);
-		AddChild(Hand);
 
 		Vector2 cardSlotPosition = new Vector2(430f, 450f);
 
@@ -317,7 +284,7 @@ public partial class Level : Node2D
 
 	public void NewTurn()
 	{
-		foreach (CardSlot slot in CardSlots)
+        foreach (CardSlot slot in CardSlots)
 		{
 			slot.SlotOpen = true;
 			slot.CardInSlot = null;
@@ -396,5 +363,40 @@ public partial class Level : Node2D
     public void _on_menu_closed(){
         GetNode<Button>("SubmitButton").Disabled = false;
         Hand.Dragging_On();
+    }
+
+    public void _on_level_selected(){
+        // ------------ Loading Card Stuff ------------------------
+        PackedScene deckScene = GD.Load<PackedScene>("res://Game/Cards/CardContainers/Deck/deck.tscn");
+        PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/CardContainers/Hand/hand.tscn");
+        PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/CardContainers/DiscardPile/discard_pile.tscn");
+        PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/card.tscn");
+
+        // Get map because it holds the inventory
+        Map = (Map)GetParent();
+
+        
+        Deck = deckScene.Instantiate<Deck>();
+        Deck.Position = new Vector2(100f, 600f);
+        Deck.SetCards(Map.Inventory.Cards);
+
+        Deck.ShuffleCards();
+        Deck.Connect("MenuOpened", new Callable(this, nameof(_on_menu_opened)));
+        Deck.Connect("MenuClosed", new Callable(this, nameof(_on_menu_closed)));
+        AddChild(Deck);
+
+        // Add discard pile
+        DiscardPile = discardPileScene.Instantiate<DiscardPile>();
+        DiscardPile.Position = new Vector2(1180f, 600f);
+        DiscardPile.Connect("MenuOpened", new Callable(this, nameof(_on_menu_opened)));
+        DiscardPile.Connect("MenuClosed", new Callable(this, nameof(_on_menu_closed)));
+        AddChild(DiscardPile);
+
+        // Add hand
+        Hand = handScene.Instantiate<Hand>();
+        Hand.SetCards(Deck.DrawCards(7));
+        Hand.UpdateHand();
+        LinkCardSignals(Hand);
+        AddChild(Hand);
     }
 }
