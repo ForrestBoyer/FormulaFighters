@@ -10,6 +10,7 @@ public partial class Map : CanvasLayer
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+        Inventory = GetNode<Inventory>("/root/World/Inventory");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame. 
@@ -51,7 +52,6 @@ public partial class Map : CanvasLayer
 	}
 
     public void _on_menu_opened(){
-        GD.Print("do");
         foreach (Node child in GetChildren())
 		{
 			if (child is LevelMarker levelMarker) {
@@ -61,7 +61,6 @@ public partial class Map : CanvasLayer
     }
 
     public void _on_menu_closed(){
-        GD.Print("dc");
         foreach (Node child in GetChildren())
 		{
 			if (child is LevelMarker levelMarker) {

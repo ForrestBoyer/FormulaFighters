@@ -391,10 +391,10 @@ public partial class Level : Node2D
 
     public void _on_menu_opened(){
         GetNode<Button>("SubmitButton").Disabled = true;
-        Hand.Visible = false;
+        Hand.Dragging_Off();
     }
     public void _on_menu_closed(){
         GetNode<Button>("SubmitButton").Disabled = false;
-        Hand.Visible = true;
+        Hand.Dragging_On();
     }
 }

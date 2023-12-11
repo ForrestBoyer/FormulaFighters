@@ -41,6 +41,22 @@ public partial class Hand : CardContainer
 		}
 	}
 
+    public void Dragging_On(){
+        foreach (Node child in GetChildren()){
+            if(child is Card c){
+                c._isDraggable = true;
+            }
+        }
+    }
+
+    public void Dragging_Off(){
+        foreach (Node child in GetChildren()){
+            if(child is Card c){
+                c._isDraggable = false;
+            }
+        }
+    }
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
