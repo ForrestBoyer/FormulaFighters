@@ -23,7 +23,7 @@ public partial class Level : Node2D
 	public TextureRect Background { get; set; }
 	public Enemy Enemy { get; set; }
 	public Player Player { get; set; }
-	public Deck Deck { get; set; }
+	public deck Deck { get; set; }
 	public DiscardPile DiscardPile { get; set; }
 	public Hand Hand { get; set; }
 	public List<CardSlot> CardSlots { get; set; } = new List<CardSlot>();
@@ -31,6 +31,10 @@ public partial class Level : Node2D
 	public Label EquationLabel { get; set; }
 	public Button SubmitButton { get; set; }
 	public Map Map { get; set; }
+
+	// Win/Lose Scene
+	public PackedScene rewardScreen;
+	public PackedScene gameOverScreen;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -67,7 +71,7 @@ public partial class Level : Node2D
 		Map = (Map)GetParent();
 
 		// Initiate starting deck in level with what is in inventory
-		Deck = deckScene.Instantiate<Deck>();
+		Deck = deckScene.Instantiate<deck>();
 		Deck.Position = new Vector2(100f, 600f);
 		Deck.SetCards(Map.Inventory.Cards);
 
@@ -136,9 +140,13 @@ public partial class Level : Node2D
 		}
 		else
 		{
-			GD.Print("Faied to load Level texture");
+			GD.Print("Failed to load Level texture");
 		}
 		// ----------------------------------------------------------
+		// ----------------- Win/Lose Screens -------------------
+		gameOverScreen = GD.Load<PackedScene>("res://Game/Menus/game_over.tscn");
+		rewardScreen = GD.Load<PackedScene>("res://Game/Cards/rewards.tscn");
+		// ------------------------------------------------------
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -359,14 +367,15 @@ public partial class Level : Node2D
 			map.Current_Depth++;
 			map.UpdateMarkers();
 			FreeEverything();
+			rewards Rewards = rewardScreen.Instantiate<rewards>();
+			GetNode("/root/World").AddChild(Rewards);
 		}
 		else
 		{	
 			GD.Print("Player Died");
-			// TODO: Go back to main menu, possibly have a lose screen?
-
 			map.UpdateMarkers();
 			FreeEverything();
+			GetTree().ChangeSceneToPacked(gameOverScreen);
 		}
 	}
 

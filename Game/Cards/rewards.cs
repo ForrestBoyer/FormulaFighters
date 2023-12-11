@@ -14,6 +14,7 @@ public partial class rewards : Node2D
     // Signal for when the player chooses not to take a card
     [Signal]
     public delegate void NoCardChosenEventHandler();
+
     // Center of Screen
     private Vector2 center = new Vector2(640, 360);
     // Reward Cards
@@ -50,6 +51,10 @@ public partial class rewards : Node2D
         card1._isDraggable = false;
         card2._isDraggable = false;
         card3._isDraggable = false;
+
+        // Connect reward signals
+        CardChosen += (Card) => ChooseReward(Card);
+        NoCardChosen += () => NoReward();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -76,4 +81,28 @@ public partial class rewards : Node2D
     public void _on_button_pressed(){
         EmitSignal(SignalName.NoCardChosen);
     }
+
+    // The player chose a card
+    public void ChooseReward(Card card){
+        // Add card to inventory
+        Inventory inventory = GetNode<Inventory>("/root/World/Inventory");
+        inventory.AddCard(card);
+        // Change scene to level select
+        FreeEverything();
+    }
+
+    // Player did not choose a card
+    public void NoReward(){
+        // Change scene to level select
+        FreeEverything();
+    }
+    public void FreeEverything()
+	{
+		card1.QueueFree();
+        card2.QueueFree();
+        card3.QueueFree();
+		QueueFree();
+	}
+
+    
 }

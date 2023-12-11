@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=3 uid="uid://b3lyns1c3f6ho"]
+
+[ext_resource type="Script" path="res://Game/Menus/main_menu.cs" id="1_2d7p5"]
+[ext_resource type="Texture2D" uid="uid://3jxixrng0dvm" path="res://Game/Menus/titleScreen.png" id="1_f4rhv"]
+[ext_resource type="Texture2D" uid="uid://bwiyqk31w65dq" path="res://Game/Menus/button.png" id="2_epvc7"]
+[ext_resource type="FontFile" uid="uid://t3xlfh56t1wb" path="res://Game/Resources/Fonts/dogicapixel.ttf" id="2_w714u"]
+[ext_resource type="Texture2D" uid="uid://dsodgu0vlsk23" path="res://Game/Menus/buttonPressed.png" id="3_hi0wu"]
+[ext_resource type="Texture2D" uid="uid://dans6qfya8hgb" path="res://Game/Menus/buttonHover.png" id="4_em24s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rsyx3"]
+line_spacing = 5.0
+font = ExtResource("2_w714u")
+font_size = 54
+font_color = Color(0.752941, 0.682353, 1, 1)
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8n3gv"]
+font = ExtResource("2_w714u")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fi8x6"]
+font = ExtResource("2_w714u")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_2d7p5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_f4rhv")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 80.0
+offset_right = 1283.0
+offset_bottom = 685.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Formula Fighters"
+label_settings = SubResource("LabelSettings_rsyx3")
+horizontal_alignment = 1
+
+[node name="StartButton" type="TextureButton" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 560.0
+offset_top = 191.0
+offset_right = 624.0
+offset_bottom = 223.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.5, 2.5)
+texture_normal = ExtResource("2_epvc7")
+texture_pressed = ExtResource("3_hi0wu")
+texture_hover = ExtResource("4_em24s")
+
+[node name="Label" type="Label" parent="StartButton"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 6.0
+offset_right = 65.0
+offset_bottom = 30.0
+text = "Start"
+label_settings = SubResource("LabelSettings_8n3gv")
+horizontal_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="."]
+offset_left = 560.0
+offset_top = 293.0
+offset_right = 624.0
+offset_bottom = 333.0
+scale = Vector2(2.5, 2.5)
+texture_normal = ExtResource("2_epvc7")
+texture_pressed = ExtResource("3_hi0wu")
+texture_hover = ExtResource("4_em24s")
+
+[node name="Label" type="Label" parent="QuitButton"]
+layout_mode = 0
+offset_top = 6.0
+offset_right = 64.0
+offset_bottom = 33.0
+text = "Quit"
+label_settings = SubResource("LabelSettings_fi8x6")
+horizontal_alignment = 1
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]

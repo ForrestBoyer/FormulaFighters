@@ -1,7 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://wihpv1nucrro"]
+[gd_scene load_steps=9 format=3 uid="uid://wihpv1nucrro"]
 
 [ext_resource type="Script" path="res://Game/Cards/rewards.cs" id="1_kfdoo"]
 [ext_resource type="PackedScene" uid="uid://cwiwx25o8iuia" path="res://Game/Cards/card.tscn" id="1_owmnk"]
+[ext_resource type="FontFile" uid="uid://t3xlfh56t1wb" path="res://Game/Resources/Fonts/dogicapixel.ttf" id="3_rjqsc"]
+[ext_resource type="Texture2D" uid="uid://bwiyqk31w65dq" path="res://Game/Menus/button.png" id="4_u68yj"]
+[ext_resource type="Texture2D" uid="uid://dsodgu0vlsk23" path="res://Game/Menus/buttonPressed.png" id="5_878j8"]
+[ext_resource type="Texture2D" uid="uid://dans6qfya8hgb" path="res://Game/Menus/buttonHover.png" id="6_7x2dd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_20dtd"]
+font = ExtResource("3_rjqsc")
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p36ph"]
+font = ExtResource("3_rjqsc")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="rewards" type="Node2D"]
 script = ExtResource("1_kfdoo")
@@ -17,12 +32,32 @@ scale = Vector2(5, 5)
 position = Vector2(450, 0)
 scale = Vector2(5, 5)
 
-[node name="Button" type="Button" parent="."]
-offset_left = -25.0
-offset_top = 200.0
-offset_right = 25.0
-offset_bottom = 231.0
+[node name="Label" type="Label" parent="."]
+offset_left = -635.0
+offset_top = -302.0
+offset_right = 645.0
+offset_bottom = 349.0
+text = "Choose A Reward!"
+label_settings = SubResource("LabelSettings_20dtd")
+horizontal_alignment = 1
+
+[node name="Button" type="TextureButton" parent="."]
+offset_left = -64.0
+offset_top = 232.0
+offset_bottom = 272.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("4_u68yj")
+texture_pressed = ExtResource("5_878j8")
+texture_hover = ExtResource("6_7x2dd")
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 25.0
 text = "None"
+label_settings = SubResource("LabelSettings_p36ph")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="CardClicked" from="rewardCard1" to="." method="_on_reward_card_clicked" binds= [1]]
 [connection signal="CardClicked" from="rewardCard2" to="." method="_on_reward_card_clicked" binds= [2]]
