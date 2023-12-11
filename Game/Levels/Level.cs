@@ -57,9 +57,9 @@ public partial class Level : Node2D
 
 		// ------------ Loading Card Stuff ------------------------
 
-		PackedScene deckScene = GD.Load<PackedScene>("res://Game/Cards/deck.tscn");
-		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/hand.tscn");
-		PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/discard_pile.tscn");
+		PackedScene deckScene = GD.Load<PackedScene>("res://Game/Cards/CardContainers/Deck/deck.tscn");
+		PackedScene handScene = GD.Load<PackedScene>("res://Game/Cards/CardContainers/Hand/hand.tscn");
+		PackedScene discardPileScene = GD.Load<PackedScene>("res://Game/Cards/CardContainers/DiscardPile/discard_pile.tscn");
 		PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/card.tscn");
 		PackedScene cardSlotScene = GD.Load<PackedScene>("res://Game/Cards/card_slot.tscn");
 
