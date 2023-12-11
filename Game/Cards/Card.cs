@@ -51,7 +51,7 @@ public partial class Card : Node2D
     public void InitCardRandom() 
 	{
         // RNG for generating a random card
-        Random rng = new Random();
+        Random rng = GetNode<World>("/root/World").RNG;
 
         // If Generating Operator
         if (rng.Next(1, OPERATOR_CHANCE) == 1) 

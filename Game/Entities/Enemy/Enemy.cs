@@ -8,7 +8,7 @@ public partial class Enemy : Entity
 
     public Texture2D Texture;
 
-	private Random rand = new Random();
+	private Random rand;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -23,6 +23,7 @@ public partial class Enemy : Entity
 		};
 
 		// Loads random texture
+        rand = GetNode<World>("/root/World").RNG;
 		int index = rand.Next(texturePaths.Length);
 		Texture = (Texture2D)GD.Load(texturePaths[index]);
 

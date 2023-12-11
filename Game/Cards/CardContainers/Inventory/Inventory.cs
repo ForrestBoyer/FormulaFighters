@@ -21,7 +21,7 @@ public partial class Inventory : CardContainer
         base._Ready();
 
         PackedScene cardScene = GD.Load<PackedScene>("res://Game//Cards/card.tscn");
-        Random rng = new Random();
+        Random rng = GetParent<World>().RNG;
 
         for (int i = 0; i < STARTING_INVENTORY_SIZE; i++)
 		{

@@ -10,7 +10,7 @@ public enum Phases
 
 public partial class Level : Node2D
 {
-	public Random rand = new Random();
+	public Random rand;
 	public int Depth { get; set; }
 	public Phases CurrentPhase { get; set; } = Phases.Attack;
 
@@ -102,6 +102,7 @@ public partial class Level : Node2D
 		};
 
 		// Loads random texture
+        rand = GetNode<World>("/root/World").RNG;
 		int index = rand.Next(texturePaths.Length);
 		var texture = (Texture2D)GD.Load(texturePaths[index]);
 

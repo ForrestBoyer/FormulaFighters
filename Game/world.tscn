@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvqp5pfetn1x4"]
+[gd_scene load_steps=6 format=3 uid="uid://cvqp5pfetn1x4"]
 
+[ext_resource type="Script" path="res://Game/World.cs" id="1_rus2s"]
 [ext_resource type="Script" path="res://Game/Map/Map.cs" id="1_uc35v"]
 [ext_resource type="Script" path="res://Game/Map/LevelMarker.cs" id="2_yjj8d"]
 [ext_resource type="Script" path="res://Game/Map/MapGenerator.cs" id="3_07owp"]
@@ -7,6 +8,7 @@
 
 [node name="World" type="Node2D"]
 position = Vector2(74, 14)
+script = ExtResource("1_rus2s")
 
 [node name="Map" type="CanvasLayer" parent="."]
 script = ExtResource("1_uc35v")
