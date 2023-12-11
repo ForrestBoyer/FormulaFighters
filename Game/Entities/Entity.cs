@@ -8,10 +8,10 @@ public partial class Entity : Node2D
 	protected bool _alive { get; set; } = true;
 
 	[Export]
-	public int MaxHealth { get; set; } = 10;
+	public int MaxHealth { get; set; } = 50;
 
 	[Export]
-	public int CurrentHealth { get; set; } = 10;
+	public int CurrentHealth { get; set; } = 50;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()

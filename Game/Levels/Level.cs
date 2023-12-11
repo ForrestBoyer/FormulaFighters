@@ -2,10 +2,17 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+public enum Phases
+{
+	Attack,
+	Defense
+};
+
 public partial class Level : Node2D
 {
 	public Random rand = new Random();
 	public int Depth { get; set; }
+	public Phases CurrentPhase { get; set; } = Phases.Attack;
 
 	// Settings
 	private int HealthScale = 10;
@@ -63,8 +70,6 @@ public partial class Level : Node2D
 		Deck = deckScene.Instantiate<Deck>();
 		Deck.Position = new Vector2(100f, 600f);
 		Deck.SetCards(Map.Inventory.Cards);
-
-		GD.Print(Map.Inventory.Cards.Count);
 
 		Deck.ShuffleCards();
 		AddChild(Deck);
