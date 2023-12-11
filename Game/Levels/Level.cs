@@ -22,6 +22,7 @@ public partial class Level : Node2D
 	public List<CardSlot> CardSlots { get; set; } = new List<CardSlot>();
 	public Label ResultLabel { get; set; }
 	public Label EquationLabel { get; set; }
+	public Button SubmitButton { get; set; }
 	public Map Map { get; set; }
 
 	// Called when the node enters the scene tree for the first time.
@@ -77,9 +78,10 @@ public partial class Level : Node2D
 		Hand = handScene.Instantiate<Hand>();
 		Hand.SetCards(Deck.DrawCards(7));
 		Hand.UpdateHand();
+		LinkCardSignals(Hand);
 		AddChild(Hand);
 
-		Vector2 cardSlotPosition = new Vector2(450f, 450f);
+		Vector2 cardSlotPosition = new Vector2(430f, 450f);
 
 		// Create Card Slots
 		for (int i = 0; i < NumCardSlots; i++)
@@ -93,11 +95,11 @@ public partial class Level : Node2D
 
 		// Put result label in correct position
 		ResultLabel = GetNode<Label>("ResultLabel");
-		ResultLabel.Position = cardSlotPosition + new Vector2(-20f, -20f);
+		ResultLabel.Position = cardSlotPosition + new Vector2(-40f, -20f);
 
 		// Put submit button in correct position
-		Button submitButton = GetNode<Button>("SubmitButton");
-		submitButton.Position = ResultLabel.Position + new Vector2(60f, 10f);
+		SubmitButton = GetNode<Button>("SubmitButton");
+		SubmitButton.Position = ResultLabel.Position + new Vector2(100f, 10f);
 
 		// Put Equation Label in correct position and set its timer up
 		EquationLabel = GetNode<Label>("EquationLabel");
@@ -137,9 +139,16 @@ public partial class Level : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("right_click")) 
+	}
+
+	public void LinkCardSignals(CardContainer container)
+	{
+		foreach (var child in container.GetChildren())
 		{
-			Enemy.TakeDamage(1000);
+			if (child is Card card)
+			{
+				card.CardMovedToSlot += UpdateResult;
+			}
 		}
 	}
 
@@ -150,6 +159,8 @@ public partial class Level : Node2D
 		// When equation is valid
 		if (equationInfo.Item1)
 		{
+			int damage = EvaluateEquation(equationInfo.Item3);
+			Enemy.TakeDamage(damage);
 			NewTurn();
 		}
 		// When equation is invalid
@@ -233,13 +244,17 @@ public partial class Level : Node2D
 	/// </summary>
 	public void UpdateResult()
 	{
-		GD.Print("IN UPDATE RESULT");
-
 		var equationInfo = ValidEquation();
 
 		if (equationInfo.Item1)
 		{
-			ResultLabel.Text = EvaluateEquation(equationInfo.Item3).ToString();
+			ResultLabel.Text = "= " + EvaluateEquation(equationInfo.Item3).ToString();
+			SubmitButton.Disabled = false;
+		}
+		else
+		{
+			ResultLabel.Text = "= ";
+			SubmitButton.Disabled = true;
 		}
 	}
 
@@ -250,7 +265,37 @@ public partial class Level : Node2D
 	/// <returns>The integer value of the equation</returns>
 	public int EvaluateEquation(List<(CardType, string)> equation)
 	{
-		return 5;
+		while (equation.Contains((CardType.Operator, "x")))
+		{
+			int index = equation.IndexOf((CardType.Operator, "x"));
+			int result = equation[index + 1].Item2.ToInt() * equation[index - 1].Item2.ToInt();
+			equation.RemoveAt(index + 1);
+			equation[index] = (CardType.Number, result.ToString());
+			equation.RemoveAt(index - 1);
+		}
+
+		while (equation.Contains((CardType.Operator, "+")))
+		{
+			int index = equation.IndexOf((CardType.Operator, "+"));
+			int result = equation[index + 1].Item2.ToInt() + equation[index - 1].Item2.ToInt();
+			equation.RemoveAt(index + 1);
+			equation[index] = (CardType.Number, result.ToString());
+			equation.RemoveAt(index - 1);
+		}
+
+		if (equation.Count == 1)
+		{
+			return equation[0].Item2.ToInt();
+		}
+		else if (equation.Count == 0)
+		{
+			return 0;
+		}
+		else
+		{
+			GD.Print("Something broke with evaluating equations");
+			return -1;
+		}
 	}
 
 	public void NewTurn()
@@ -285,6 +330,8 @@ public partial class Level : Node2D
 		}
 
 		Hand.UpdateHand();
+		LinkCardSignals(Hand);
+		UpdateResult();
 	}
 
 	public void EndLevel(bool win)

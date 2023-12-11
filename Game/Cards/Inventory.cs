@@ -89,7 +89,7 @@ public partial class Inventory : CardContainer
 				// 1 in CHANCE_OF_STARTING_MULT_OP chance of each operator being a * instead of a +
 				if (rng.Next(CHANCE_OF_STARTING_MULT_OP) == 0)
 				{
-					card.InitCard("*");
+					card.InitCard("x");
 				}
 				else
 				{
