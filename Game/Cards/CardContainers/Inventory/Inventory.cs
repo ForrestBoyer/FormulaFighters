@@ -105,14 +105,16 @@ public partial class Inventory : CardContainer
 	{
 	}
 
-	public void _on_color_rect_gui_input(InputEvent @event){
+	public void _on_color_rect_gui_input(InputEvent @event)
+	{
         if (@event.IsActionPressed("click"))
         {
             ShowCards();
 		}
     }
 
-    public void _on_close_x_input_event(Node viewport, InputEvent @event, int shape_idx){
+    public void _on_close_x_input_event(Node viewport, InputEvent @event, int shape_idx)
+	{
         if (@event.IsActionPressed("click"))
         {
             HideCards();
