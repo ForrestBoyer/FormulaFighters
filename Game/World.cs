@@ -1,8 +1,10 @@
 using Godot;
 using System;
 
-public partial class Deck : CardContainer
+public partial class World : Node2D
 {
+    public Random RNG = new Random();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

@@ -1,28 +1,67 @@
-[gd_scene load_steps=3 format=3 uid="uid://wihpv1nucrro"]
+[gd_scene load_steps=9 format=3 uid="uid://wihpv1nucrro"]
 
-[ext_resource type="Script" path="res://Game/Cards/rewards.cs" id="1_kfdoo"]
-[ext_resource type="PackedScene" uid="uid://cwiwx25o8iuia" path="res://Game/Cards/card.tscn" id="1_owmnk"]
+[ext_resource type="Script" path="res://Game/Cards/Rewards.cs" id="1_u5ohg"]
+[ext_resource type="PackedScene" uid="uid://cwiwx25o8iuia" path="res://Game/Cards/card.tscn" id="2_mh8o6"]
+[ext_resource type="FontFile" uid="uid://t3xlfh56t1wb" path="res://Game/Resources/Fonts/dogicapixel.ttf" id="3_6klg4"]
+[ext_resource type="Texture2D" uid="uid://bwiyqk31w65dq" path="res://Game/Menus/button.png" id="4_vk7ar"]
+[ext_resource type="Texture2D" uid="uid://dsodgu0vlsk23" path="res://Game/Menus/buttonPressed.png" id="5_q27n5"]
+[ext_resource type="Texture2D" uid="uid://dans6qfya8hgb" path="res://Game/Menus/buttonHover.png" id="6_gcne4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_20dtd"]
+font = ExtResource("3_6klg4")
+font_size = 32
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_p36ph"]
+font = ExtResource("3_6klg4")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="rewards" type="Node2D"]
-script = ExtResource("1_kfdoo")
+position = Vector2(632, 336)
+script = ExtResource("1_u5ohg")
 
-[node name="rewardCard1" parent="." instance=ExtResource("1_owmnk")]
+[node name="rewardCard1" parent="." instance=ExtResource("2_mh8o6")]
 position = Vector2(-450, 0)
 scale = Vector2(5, 5)
 
-[node name="rewardCard2" parent="." instance=ExtResource("1_owmnk")]
+[node name="rewardCard2" parent="." instance=ExtResource("2_mh8o6")]
 scale = Vector2(5, 5)
 
-[node name="rewardCard3" parent="." instance=ExtResource("1_owmnk")]
+[node name="rewardCard3" parent="." instance=ExtResource("2_mh8o6")]
 position = Vector2(450, 0)
 scale = Vector2(5, 5)
 
-[node name="Button" type="Button" parent="."]
-offset_left = -25.0
-offset_top = 200.0
-offset_right = 25.0
-offset_bottom = 231.0
+[node name="Label" type="Label" parent="."]
+offset_left = -635.0
+offset_top = -302.0
+offset_right = 645.0
+offset_bottom = 349.0
+text = "Choose A Reward!"
+label_settings = SubResource("LabelSettings_20dtd")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="TextureButton" parent="."]
+offset_left = -64.0
+offset_top = 232.0
+offset_bottom = 272.0
+scale = Vector2(2, 2)
+texture_normal = ExtResource("4_vk7ar")
+texture_pressed = ExtResource("5_q27n5")
+texture_hover = ExtResource("6_gcne4")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 25.0
 text = "None"
+label_settings = SubResource("LabelSettings_p36ph")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="CardClicked" from="rewardCard1" to="." method="_on_reward_card_clicked" binds= [1]]
 [connection signal="CardClicked" from="rewardCard2" to="." method="_on_reward_card_clicked" binds= [2]]

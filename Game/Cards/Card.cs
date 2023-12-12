@@ -51,7 +51,7 @@ public partial class Card : Node2D
     public void InitCardRandom() 
 	{
         // RNG for generating a random card
-        Random rng = new Random();
+        Random rng = GetNode<World>("/root/World").RNG;
 
         // If Generating Operator
         if (rng.Next(1, OPERATOR_CHANCE) == 1) 
@@ -129,7 +129,7 @@ public partial class Card : Node2D
 	public override void _Ready()
 	{
         defaultScale = Scale;
-		DisplayLabel = (Godot.Label)FindChild("Label");
+		DisplayLabel = (Label)FindChild("Label");
 		if (CardType == CardType.Number) 
 		{
 			DisplayLabel.Text = IntVal.ToString();
@@ -163,7 +163,9 @@ public partial class Card : Node2D
 	{
 		if (@event.IsActionPressed("click"))
 		{
-			_isDragging = true;
+            if(_isDraggable){
+			    _isDragging = true;
+            }
             EmitSignal(SignalName.CardClicked);
 		}
 

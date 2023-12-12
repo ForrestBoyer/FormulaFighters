@@ -5,8 +5,8 @@
 // NOTE: COPY THE CARD FROM THE SIGNAL OR CHANGE ITS PARENT BEFORE UNLOADING REWARD SCREEN
 using Godot;
 using System;
-
-public partial class rewards : Node2D
+                
+public partial class Rewards : Node2D
 {
     // Signal for when a card is chosen
     [Signal]
@@ -14,8 +14,9 @@ public partial class rewards : Node2D
     // Signal for when the player chooses not to take a card
     [Signal]
     public delegate void NoCardChosenEventHandler();
+
     // Center of Screen
-    private Vector2 center = new Vector2(640, 360);
+    private Vector2 center = new Vector2(560, 360);
     // Reward Cards
     private Card card1;
     private Card card2;
@@ -34,11 +35,13 @@ public partial class rewards : Node2D
         card2.InitCardRandom();
         card3.InitCardRandom();
         // Ensure None are the Same
-        while(card1.CardType == card2.CardType && card1.OpVal == card2.OpVal && card1.IntVal == card2.IntVal){
+        while (card1.CardType == card2.CardType && card1.OpVal == card2.OpVal && card1.IntVal == card2.IntVal)
+        {
             card2.InitCardRandom();
         }
-        while((card1.CardType == card3.CardType && card1.OpVal == card3.OpVal && card1.IntVal == card3.IntVal) ||
-              (card2.CardType == card3.CardType && card2.OpVal == card3.OpVal && card2.IntVal == card3.IntVal)){
+        while ((card1.CardType == card3.CardType && card1.OpVal == card3.OpVal && card1.IntVal == card3.IntVal) ||
+              (card2.CardType == card3.CardType && card2.OpVal == card3.OpVal && card2.IntVal == card3.IntVal))
+        {
             card3.InitCardRandom();
         }
         // Refresh Card Graphic
@@ -50,6 +53,13 @@ public partial class rewards : Node2D
         card1._isDraggable = false;
         card2._isDraggable = false;
         card3._isDraggable = false;
+
+        // Connect reward signals
+        CardChosen += (Card) => ChooseReward(Card);
+        NoCardChosen += () => NoReward();
+
+        // Hide the map
+        GetNode<Map>("/root/World/Map").Visible = false;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,21 +69,52 @@ public partial class rewards : Node2D
 
     // When a card is chosen, emit a signal containing selected card
     public void _on_reward_card_clicked(int cardNum){
-        GD.Print(cardNum);
-        switch(cardNum){
-        case 1:
-            EmitSignal(SignalName.CardChosen, card1);
-            break;
-        case 2:
-            EmitSignal(SignalName.CardChosen, card2);
-            break;
-        case 3:
-            EmitSignal(SignalName.CardChosen, card3);
-            break;
+        switch (cardNum)
+        {
+            case 1:
+                EmitSignal(SignalName.CardChosen, card1);
+                break;
+            case 2:
+                EmitSignal(SignalName.CardChosen, card2);
+                break;
+            case 3:
+                EmitSignal(SignalName.CardChosen, card3);
+                break;
         }
     }
 
-    public void _on_button_pressed(){
+    public void _on_button_pressed()
+    {
         EmitSignal(SignalName.NoCardChosen);
     }
+
+    // The player chose a card
+    public void ChooseReward(Card card)
+    {
+        // Add card to inventory
+        Inventory inventory = GetNode<Inventory>("/root/World/Inventory");
+        inventory.AddCard(card);
+        // Show Map
+        GetNode<Map>("/root/World/Map").Visible = true;
+        // Change scene to level select
+        FreeEverything();
+    }
+
+    // Player did not choose a card
+    public void NoReward()
+    {
+        // Show Map
+        GetNode<Map>("/root/World/Map").Visible = true;
+        // Change scene to level select
+        FreeEverything();
+    }
+
+    public void FreeEverything()
+	{
+		card1.QueueFree();
+        card2.QueueFree();
+        card3.QueueFree();
+		QueueFree();
+	}
+
 }
