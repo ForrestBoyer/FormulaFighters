@@ -29,7 +29,8 @@ public partial class Level : Node2D
 	public List<CardSlot> CardSlots { get; set; } = new List<CardSlot>();
 	public Label ResultLabel { get; set; }
 	public Label EquationLabel { get; set; }
-	public Button SubmitButton { get; set; }
+	public TextureButton SubmitButton { get; set; }
+	public Label SubmitButtonText { get; set; }
 	public Map Map { get; set; }
     public LevelMarker LevelMarker { get; set; }
 
@@ -83,9 +84,10 @@ public partial class Level : Node2D
 		ResultLabel.Position = cardSlotPosition + new Vector2(-40f, -20f);
 
 		// Put submit button in correct position
-		SubmitButton = GetNode<Button>("SubmitButton");
+		SubmitButton = GetNode<TextureButton>("SubmitButton");
+		SubmitButtonText = GetNode<Label>("SubmitButton/Label");
 		SubmitButton.Position = ResultLabel.Position + new Vector2(100f, 10f);
-        SubmitButton.Text = "Attack!";
+        SubmitButtonText.Text = "Attack!";
 
 		// Put Equation Label in correct position and set its timer up
 		EquationLabel = GetNode<Label>("EquationLabel");
@@ -155,12 +157,12 @@ public partial class Level : Node2D
 			    int damage = EvaluateEquation(equationInfo.Item3) - Enemy.Defense;
 			    Enemy.TakeDamage(damage);
                 CurrentPhase = Phases.Defense;
-                SubmitButton.Text = "Defend!";
+                SubmitButtonText.Text = "Defend!";
             } else {
                 int damage = Enemy.Attack - EvaluateEquation(equationInfo.Item3);
                 Player.TakeDamage(damage);
                 CurrentPhase = Phases.Attack;
-                SubmitButton.Text = "Attack!";
+                SubmitButtonText.Text = "Attack!";
             }
 			NewTurn();
 		}

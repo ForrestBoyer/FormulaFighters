@@ -1,7 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmw7hwcd0gx2w"]
+[gd_scene load_steps=9 format=3 uid="uid://dmw7hwcd0gx2w"]
 
 [ext_resource type="Script" path="res://Game/Levels/Level.cs" id="1_ja7sf"]
 [ext_resource type="FontFile" uid="uid://clklrt3n85uto" path="res://Game/Resources/Fonts/rainyhearts.ttf" id="2_ewctg"]
+[ext_resource type="FontFile" uid="uid://t3xlfh56t1wb" path="res://Game/Resources/Fonts/dogicapixel.ttf" id="3_u1jj7"]
+[ext_resource type="Texture2D" uid="uid://bwiyqk31w65dq" path="res://Game/Menus/button.png" id="4_yyq03"]
+[ext_resource type="Texture2D" uid="uid://dsodgu0vlsk23" path="res://Game/Menus/buttonPressed.png" id="5_e1108"]
+[ext_resource type="Texture2D" uid="uid://dans6qfya8hgb" path="res://Game/Menus/buttonHover.png" id="6_ais8v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ejlg8"]
+font = ExtResource("3_u1jj7")
+font_size = 24
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x5xdb"]
+font = ExtResource("3_u1jj7")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Level2" type="Node2D"]
 script = ExtResource("1_ja7sf")
@@ -18,15 +33,28 @@ offset_bottom = 480.0
 theme_override_fonts/font = ExtResource("2_ewctg")
 theme_override_font_sizes/font_size = 48
 text = "= 0"
+label_settings = SubResource("LabelSettings_ejlg8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SubmitButton" type="Button" parent="."]
-offset_left = 904.0
-offset_top = 441.0
-offset_right = 976.0
-offset_bottom = 472.0
+[node name="SubmitButton" type="TextureButton" parent="."]
+offset_left = 897.0
+offset_top = 436.0
+offset_right = 961.0
+offset_bottom = 476.0
+scale = Vector2(1.5, 1.5)
+texture_normal = ExtResource("4_yyq03")
+texture_pressed = ExtResource("5_e1108")
+texture_hover = ExtResource("6_ais8v")
+
+[node name="Label" type="Label" parent="SubmitButton"]
+offset_right = 127.0
+offset_bottom = 49.0
+scale = Vector2(0.5, 0.5)
 text = "Submit"
+label_settings = SubResource("LabelSettings_x5xdb")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="EquationLabel" type="Label" parent="."]
 visible = false
