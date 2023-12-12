@@ -36,6 +36,7 @@ public partial class Level : Node2D
 	// Win/Lose Scene
 	public PackedScene rewardScreen;
 	public PackedScene gameOverScreen;
+	public PackedScene winScreen;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -122,7 +123,8 @@ public partial class Level : Node2D
 		// ----------------------------------------------------------
 		// ----------------- Win/Lose Screens -------------------
 		gameOverScreen = GD.Load<PackedScene>("res://Game/Menus/game_over.tscn");
-		rewardScreen = GD.Load<PackedScene>("res://Game/Cards/rewards.tscn");
+		rewardScreen = GD.Load<PackedScene>("res://Game/Cards/Rewards.tscn");
+		winScreen = GD.Load<PackedScene>("res://Game/Menus/win_screen.tscn");
 		// ------------------------------------------------------
 	}
 
@@ -346,16 +348,16 @@ public partial class Level : Node2D
 	{
 		Map map = GetNode<Map>("/root/World/Map");
 
-		if (win)
-		{
+		if (Depth >= 9) {
+			FreeEverything();
+			GetTree().ChangeSceneToPacked(winScreen);
+		} else if (win) {
 			map.Current_Depth++;
 			map.UpdateMarkers();
 			Rewards Rewards = rewardScreen.Instantiate<Rewards>();
 			GetNode("/root/World").AddChild(Rewards);
 			FreeEverything();
-		}
-		else
-		{	
+		} else {	
 			map.UpdateMarkers();
 			FreeEverything();
 			GetTree().ChangeSceneToPacked(gameOverScreen);
