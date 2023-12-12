@@ -25,6 +25,8 @@ public partial class Enemy : Entity
 	public delegate void DeathEventHandler();
 
     public Texture2D Texture;
+    public Texture2D DefenseTexture;
+    public Texture2D AttackTexture;
     
     public int Attack;
     public int Defense;
@@ -38,10 +40,10 @@ public partial class Enemy : Entity
         Label ValueLabel = GetNode<Label>("IntentionSprite/ValueLabel");
         if(Level.CurrentPhase == Phases.Attack){
             ValueLabel.Text = Defense.ToString();
-            // TODO: IntentionSprite.Texture = DefenseTexture;
+            IntentionSprite.Texture = DefenseTexture;
         } else {
             ValueLabel.Text = Attack.ToString();
-            // TODO: IntentionSprite.Texture = AttackTexture;
+            IntentionSprite.Texture = AttackTexture;
         }
     }
 
@@ -59,6 +61,9 @@ public partial class Enemy : Entity
 		int index = rand.Next(GenerationStats.Count);
 		Texture = (Texture2D)GD.Load(GenerationStats[index].TexturePath);
 
+        // Load enemy intention textures
+        DefenseTexture = (Texture2D)GD.Load("res://Game/Entities/Enemy/shield.png");
+        AttackTexture = (Texture2D)GD.Load("res://Game/Entities/Enemy/sword.png");
         // Get level depth
         int depth = GetParent<Level>().Depth;
         
