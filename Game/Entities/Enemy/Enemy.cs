@@ -102,6 +102,8 @@ public partial class Enemy : Entity
 	public override void Die()
 	{
 		base.Die();
+        GetNode<Sprite2D>("IntentionSprite").Visible = false;
+        _healthBar.Visible = false;
 		EmitSignal(SignalName.Death);
 	}
 }
