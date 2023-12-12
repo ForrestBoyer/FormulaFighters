@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtra2s8s5cyn1"]
+
+[ext_resource type="Script" path="res://Game/Menus/win_screen.cs" id="1_p7nr7"]
+[ext_resource type="FontFile" uid="uid://bhsc24e44yf06" path="res://Game/Resources/Fonts/dogicapixelbold.ttf" id="2_lhf0o"]
+[ext_resource type="Texture2D" uid="uid://ud3ts8r5iipo" path="res://Game/Menus/redConfetti.png" id="3_6ee4t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rwgje"]
+font = ExtResource("2_lhf0o")
+font_size = 64
+outline_size = 12
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6rdxw"]
+particle_flag_disable_z = true
+direction = Vector3(1, 1, 0)
+spread = 179.53
+gravity = Vector3(0, 98, 0)
+initial_velocity_min = 136.84
+initial_velocity_max = 600.0
+angular_velocity_min = 363.79
+angular_velocity_max = 516.52
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+linear_accel_min = 5.95
+linear_accel_max = 5.95
+radial_accel_min = 34.04
+radial_accel_max = 56.84
+tangential_accel_min = 35.79
+tangential_accel_max = 35.79
+scale_min = 0.75
+scale_max = 1.5
+color = Color(1, 0, 1, 1)
+hue_variation_min = -0.3
+hue_variation_max = 1.0
+
+[node name="WinScreen" type="Node2D"]
+script = ExtResource("1_p7nr7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1281.0
+offset_bottom = 720.0
+color = Color(0.494118, 0.556863, 0.984314, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+text = "You Win!!!"
+label_settings = SubResource("LabelSettings_rwgje")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(276, 215)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_6rdxw")
+texture = ExtResource("3_6ee4t")
+lifetime = 2.0
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(1004, 497)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_6rdxw")
+texture = ExtResource("3_6ee4t")
+lifetime = 2.0
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

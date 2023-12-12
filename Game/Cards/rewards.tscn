@@ -1,35 +1,35 @@
 [gd_scene load_steps=9 format=3 uid="uid://wihpv1nucrro"]
 
-[ext_resource type="PackedScene" uid="uid://cwiwx25o8iuia" path="res://Game/Cards/card.tscn" id="1_owmnk"]
-[ext_resource type="Script" path="res://Game/Cards/Rewards.cs" id="1_rcwql"]
-[ext_resource type="FontFile" uid="uid://t3xlfh56t1wb" path="res://Game/Resources/Fonts/dogicapixel.ttf" id="3_rjqsc"]
-[ext_resource type="Texture2D" uid="uid://bwiyqk31w65dq" path="res://Game/Menus/button.png" id="4_u68yj"]
-[ext_resource type="Texture2D" uid="uid://dsodgu0vlsk23" path="res://Game/Menus/buttonPressed.png" id="5_878j8"]
-[ext_resource type="Texture2D" uid="uid://dans6qfya8hgb" path="res://Game/Menus/buttonHover.png" id="6_7x2dd"]
+[ext_resource type="Script" path="res://Game/Cards/Rewards.cs" id="1_u5ohg"]
+[ext_resource type="PackedScene" uid="uid://cwiwx25o8iuia" path="res://Game/Cards/card.tscn" id="2_mh8o6"]
+[ext_resource type="FontFile" uid="uid://t3xlfh56t1wb" path="res://Game/Resources/Fonts/dogicapixel.ttf" id="3_6klg4"]
+[ext_resource type="Texture2D" uid="uid://bwiyqk31w65dq" path="res://Game/Menus/button.png" id="4_vk7ar"]
+[ext_resource type="Texture2D" uid="uid://dsodgu0vlsk23" path="res://Game/Menus/buttonPressed.png" id="5_q27n5"]
+[ext_resource type="Texture2D" uid="uid://dans6qfya8hgb" path="res://Game/Menus/buttonHover.png" id="6_gcne4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_20dtd"]
-font = ExtResource("3_rjqsc")
+font = ExtResource("3_6klg4")
 font_size = 32
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_p36ph"]
-font = ExtResource("3_rjqsc")
+font = ExtResource("3_6klg4")
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [node name="rewards" type="Node2D"]
 position = Vector2(632, 336)
-script = ExtResource("1_rcwql")
+script = ExtResource("1_u5ohg")
 
-[node name="rewardCard1" parent="." instance=ExtResource("1_owmnk")]
+[node name="rewardCard1" parent="." instance=ExtResource("2_mh8o6")]
 position = Vector2(-450, 0)
 scale = Vector2(5, 5)
 
-[node name="rewardCard2" parent="." instance=ExtResource("1_owmnk")]
+[node name="rewardCard2" parent="." instance=ExtResource("2_mh8o6")]
 scale = Vector2(5, 5)
 
-[node name="rewardCard3" parent="." instance=ExtResource("1_owmnk")]
+[node name="rewardCard3" parent="." instance=ExtResource("2_mh8o6")]
 position = Vector2(450, 0)
 scale = Vector2(5, 5)
 
@@ -48,9 +48,9 @@ offset_left = -64.0
 offset_top = 232.0
 offset_bottom = 272.0
 scale = Vector2(2, 2)
-texture_normal = ExtResource("4_u68yj")
-texture_pressed = ExtResource("5_878j8")
-texture_hover = ExtResource("6_7x2dd")
+texture_normal = ExtResource("4_vk7ar")
+texture_pressed = ExtResource("5_q27n5")
+texture_hover = ExtResource("6_gcne4")
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Button"]
