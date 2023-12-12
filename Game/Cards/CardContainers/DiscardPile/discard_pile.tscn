@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d2lxpb6amif7n"]
 
-[ext_resource type="PackedScene" uid="uid://wecff4ah5tam" path="res://Game/Cards/CardContainers/card_container.tscn" id="1_ig2xu"]
+[ext_resource type="PackedScene" uid="uid://bu4c643hd0vn4" path="res://Game/Cards/CardContainers/card_container.tscn" id="1_ig2xu"]
 [ext_resource type="Script" path="res://Game/Cards/CardContainers/DiscardPile/DiscardPile.cs" id="2_56ldj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7x8r0"]

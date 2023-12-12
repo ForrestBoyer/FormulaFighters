@@ -18,7 +18,7 @@ font = ExtResource("3_6klg4")
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="rewards" type="Node2D"]
+[node name="Rewards" type="Node2D"]
 position = Vector2(632, 336)
 script = ExtResource("1_u5ohg")
 

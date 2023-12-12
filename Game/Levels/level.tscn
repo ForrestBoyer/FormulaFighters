@@ -48,6 +48,7 @@ texture_pressed = ExtResource("5_e1108")
 texture_hover = ExtResource("6_ais8v")
 
 [node name="Label" type="Label" parent="SubmitButton"]
+layout_mode = 0
 offset_right = 127.0
 offset_bottom = 49.0
 scale = Vector2(0.5, 0.5)
