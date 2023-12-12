@@ -13,11 +13,12 @@ public partial class CardContainer : Node2D
 
 	public int size;
 
-    public Vector2 centerScreen = new Vector2(640, 360);
+    public Vector2 origin;
     protected int leftSideOffset = 100;
     protected int spaceHorizontal = 100;
     protected int spaceVertical = 75;
     protected int rowSize = 12;
+    protected int margin = 100;
 
     protected Card CopyCard(Card c)
     {
@@ -106,17 +107,22 @@ public partial class CardContainer : Node2D
 
     protected void ShowCards()
     {
+        origin = new Vector2(0, 0) - GlobalPosition;
         EmitSignal(SignalName.MenuOpened);
         GetNode<ColorRect>("ColorRect").Visible = false;
         GetNode<Label>("CloseX").Visible = true;
         int i = 0;
         foreach(Card c in Cards)
         {
-            c.MoveTo(new Vector2(i % rowSize * spaceHorizontal + leftSideOffset, 
-                                 i / rowSize * spaceHorizontal + leftSideOffset));
+            Vector2 cardPosition = new Vector2(i % rowSize * spaceHorizontal + margin, 
+                                                   i / rowSize * spaceHorizontal + margin);
+            c.MoveTo(origin + cardPosition);
             i++;
             c.Visible = true;
         }
+        Node parent = GetParent();
+        parent.RemoveChild(this);
+        parent.AddChild(this);
     }
 
     protected void HideCards()

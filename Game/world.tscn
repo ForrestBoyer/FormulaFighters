@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://4in5ccm6lt2q" path="res://Game/Cards/CardContainers/Inventory/inventory.tscn" id="4_uwvh7"]
 
 [node name="World" type="Node2D"]
-position = Vector2(74, 14)
 script = ExtResource("1_rus2s")
 
 [node name="Map" type="CanvasLayer" parent="."]
@@ -29,7 +28,7 @@ script = ExtResource("2_yjj8d")
 script = ExtResource("3_07owp")
 
 [node name="Inventory" parent="." instance=ExtResource("4_uwvh7")]
-position = Vector2(-74, -14)
+position = Vector2(50, 50)
 
 [connection signal="pressed" from="Map/LevelMarker" to="Map/LevelMarker" method="_on_level_marker_pressed"]
 [connection signal="MenuClosed" from="Inventory" to="Map" method="_on_menu_closed"]

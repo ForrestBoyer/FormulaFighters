@@ -60,6 +60,8 @@ public partial class Rewards : Node2D
 
         // Hide the map
         GetNode<Map>("/root/World/Map").Visible = false;
+
+        Position += new Vector2(90, 0);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
